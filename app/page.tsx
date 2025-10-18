@@ -1427,7 +1427,8 @@ Happy exploring! 🐧`}
         <Trash2 className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
         <p className="text-card-foreground">Trash is empty</p>
       </div>
-      )
+    </div>
+  )
 
   const CalculatorWindow = () => {
     const [display, setDisplay] = useState("0")
