@@ -48,9 +48,9 @@ const UbuntuLoadingScreen = ({ onLoadingComplete }: { onLoadingComplete: () => v
         setLoadingText(step.text)
         currentStep++
       } else {
-          clearInterval(progressTimer)
+        clearInterval(progressTimer)
         setTimeout(() => onLoadingComplete(), 800)
-        }
+      }
     }, 300)
 
     return () => {
@@ -86,7 +86,7 @@ const UbuntuLoadingScreen = ({ onLoadingComplete }: { onLoadingComplete: () => v
           className="h-full bg-gradient-to-r from-[#E95420] to-[#F7A072] transition-all duration-300 ease-out"
           style={{ width: `${loadingProgress}%` }}
         />
-        </div>
+      </div>
 
       {/* Loading text */}
       <p className="text-white text-lg font-light mb-2">{loadingText}</p>
@@ -136,7 +136,7 @@ export default function UbuntuPortfolio() {
   const [currentTime, setCurrentTime] = useState("")
   const [isClient, setIsClient] = useState(false)
   const [currentWallpaper, setCurrentWallpaper] = useState("ubuntu-wallpaper.jpg")
-  const [notifications, setNotifications] = useState<Array<{id: string, message: string, type: 'info' | 'success' | 'warning' | 'error'}>>([])
+  const [notifications, setNotifications] = useState<Array<{ id: string, message: string, type: 'info' | 'success' | 'warning' | 'error' }>>([])
 
   // Ubuntu-style sound effects (visual feedback)
   const playClickSound = () => {
@@ -612,13 +612,13 @@ export default function UbuntuPortfolio() {
       prev.map((w) =>
         w.id === id
           ? {
-              ...w,
-              isMaximized: !w.isMaximized,
-              position: w.isMaximized ? { x: 50, y: 50 } : { x: 0, y: 48 },
-              size: w.isMaximized
-                ? { width: 640, height: 400 }
-                : { width: window.innerWidth, height: window.innerHeight - 96 },
-            }
+            ...w,
+            isMaximized: !w.isMaximized,
+            position: w.isMaximized ? { x: 50, y: 50 } : { x: 0, y: 48 },
+            size: w.isMaximized
+              ? { width: 640, height: 400 }
+              : { width: window.innerWidth, height: window.innerHeight - 96 },
+          }
           : w,
       ),
     )
@@ -1025,9 +1025,9 @@ export default function UbuntuPortfolio() {
             <div className="mt-4">
               <span
                 className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${project.status === "Completed" || project.status === "Live"
-                    ? "bg-chart-3/20 text-chart-3"
-                    : "bg-chart-5/20 text-chart-5"
-                }`}
+                  ? "bg-chart-3/20 text-chart-3"
+                  : "bg-chart-5/20 text-chart-5"
+                  }`}
               >
                 {project.status}
               </span>
@@ -1224,7 +1224,7 @@ Happy exploring! 🐧`}
                     </div>
                     <span className="text-xs text-card-foreground text-center leading-tight">
                       {skill.name}
-                  </span>
+                    </span>
                   </div>
                 ))}
               </div>
@@ -1307,8 +1307,8 @@ Happy exploring! 🐧`}
     }
 
     return (
-    <div className="h-full bg-card p-6 overflow-y-auto">
-      <h2 className="text-2xl font-bold text-foreground mb-6">System Settings</h2>
+      <div className="h-full bg-card p-6 overflow-y-auto">
+        <h2 className="text-2xl font-bold text-foreground mb-6">System Settings</h2>
         <div className="space-y-6">
           <div>
             <h3 className="text-lg font-semibold text-foreground mb-3">Wallpaper</h3>
@@ -1336,20 +1336,20 @@ Happy exploring! 🐧`}
               ))}
             </div>
           </div>
-        <div className="border border-border rounded-lg p-4">
-          <h3 className="font-semibold text-foreground mb-2">Display</h3>
-          <p className="text-card-foreground text-sm">Resolution: 1920x1080</p>
-          <p className="text-card-foreground text-sm">Theme: Ubuntu Default</p>
-        </div>
-        <div className="border border-border rounded-lg p-4">
-          <h3 className="font-semibold text-foreground mb-2">System Info</h3>
-          <p className="text-card-foreground text-sm">OS: Ubuntu 22.04 LTS</p>
-          <p className="text-card-foreground text-sm">Kernel: 5.15.0-generic</p>
-          <p className="text-card-foreground text-sm">Desktop: Portfolio Desktop</p>
+          <div className="border border-border rounded-lg p-4">
+            <h3 className="font-semibold text-foreground mb-2">Display</h3>
+            <p className="text-card-foreground text-sm">Resolution: 1920x1080</p>
+            <p className="text-card-foreground text-sm">Theme: Ubuntu Default</p>
+          </div>
+          <div className="border border-border rounded-lg p-4">
+            <h3 className="font-semibold text-foreground mb-2">System Info</h3>
+            <p className="text-card-foreground text-sm">OS: Ubuntu 22.04 LTS</p>
+            <p className="text-card-foreground text-sm">Kernel: 5.15.0-generic</p>
+            <p className="text-card-foreground text-sm">Desktop: Portfolio Desktop</p>
+          </div>
         </div>
       </div>
-    </div>
-  )
+    )
   }
 
   const SoftwareCenterWindow = () => (
@@ -1426,14 +1426,14 @@ Happy exploring! 🐧`}
       <div className="text-center py-12">
         <Trash2 className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
         <p className="text-card-foreground">Trash is empty</p>
-    </div>
-  )
+      </div>
+      )
 
   const CalculatorWindow = () => {
     const [display, setDisplay] = useState("0")
-    const [previousValue, setPreviousValue] = useState<number | null>(null)
-    const [operation, setOperation] = useState<string | null>(null)
-    const [waitingForOperand, setWaitingForOperand] = useState(false)
+      const [previousValue, setPreviousValue] = useState<number | null>(null)
+      const [operation, setOperation] = useState<string | null>(null)
+      const [waitingForOperand, setWaitingForOperand] = useState(false)
 
     const inputNumber = (num: string) => {
       if (waitingForOperand) {
@@ -1451,10 +1451,10 @@ Happy exploring! 🐧`}
         setPreviousValue(inputValue)
       } else if (operation) {
         const currentValue = previousValue || 0
-        const newValue = calculate(currentValue, inputValue, operation)
+      const newValue = calculate(currentValue, inputValue, operation)
 
-        setDisplay(String(newValue))
-        setPreviousValue(newValue)
+      setDisplay(String(newValue))
+      setPreviousValue(newValue)
       }
 
       setWaitingForOperand(true)
@@ -1464,11 +1464,11 @@ Happy exploring! 🐧`}
     const calculate = (firstValue: number, secondValue: number, operation: string): number => {
       switch (operation) {
         case "+": return firstValue + secondValue
-        case "-": return firstValue - secondValue
-        case "×": return firstValue * secondValue
-        case "÷": return firstValue / secondValue
-        case "=": return secondValue
-        default: return secondValue
+      case "-": return firstValue - secondValue
+      case "×": return firstValue * secondValue
+      case "÷": return firstValue / secondValue
+      case "=": return secondValue
+      default: return secondValue
       }
     }
 
@@ -1477,21 +1477,21 @@ Happy exploring! 🐧`}
 
       if (previousValue !== null && operation) {
         const newValue = calculate(previousValue, inputValue, operation)
-        setDisplay(String(newValue))
-        setPreviousValue(null)
-        setOperation(null)
-        setWaitingForOperand(true)
+      setDisplay(String(newValue))
+      setPreviousValue(null)
+      setOperation(null)
+      setWaitingForOperand(true)
       }
     }
 
     const clear = () => {
-      setDisplay("0")
+        setDisplay("0")
       setPreviousValue(null)
       setOperation(null)
       setWaitingForOperand(false)
     }
 
-    return (
+      return (
       <div className="w-full h-full bg-gray-100 p-4">
         <div className="bg-white rounded-lg shadow-lg p-4 max-w-sm mx-auto">
           <div className="mb-4">
@@ -1509,38 +1509,38 @@ Happy exploring! 🐧`}
             <button onClick={() => inputOperation("×")} className="bg-orange-500 text-white p-3 rounded hover:bg-orange-600">
               ×
             </button>
-            
+
             <button onClick={() => inputNumber("7")} className="bg-gray-300 p-3 rounded hover:bg-gray-400">7</button>
             <button onClick={() => inputNumber("8")} className="bg-gray-300 p-3 rounded hover:bg-gray-400">8</button>
             <button onClick={() => inputNumber("9")} className="bg-gray-300 p-3 rounded hover:bg-gray-400">9</button>
             <button onClick={() => inputOperation("-")} className="bg-orange-500 text-white p-3 rounded hover:bg-orange-600">-</button>
-            
+
             <button onClick={() => inputNumber("4")} className="bg-gray-300 p-3 rounded hover:bg-gray-400">4</button>
             <button onClick={() => inputNumber("5")} className="bg-gray-300 p-3 rounded hover:bg-gray-400">5</button>
             <button onClick={() => inputNumber("6")} className="bg-gray-300 p-3 rounded hover:bg-gray-400">6</button>
             <button onClick={() => inputOperation("+")} className="bg-orange-500 text-white p-3 rounded hover:bg-orange-600">+</button>
-            
+
             <button onClick={() => inputNumber("1")} className="bg-gray-300 p-3 rounded hover:bg-gray-400">1</button>
             <button onClick={() => inputNumber("2")} className="bg-gray-300 p-3 rounded hover:bg-gray-400">2</button>
             <button onClick={() => inputNumber("3")} className="bg-gray-300 p-3 rounded hover:bg-gray-400">3</button>
             <button onClick={performCalculation} className="row-span-2 bg-orange-500 text-white p-3 rounded hover:bg-orange-600">
               =
             </button>
-            
+
             <button onClick={() => inputNumber("0")} className="col-span-2 bg-gray-300 p-3 rounded hover:bg-gray-400">0</button>
             <button onClick={() => inputNumber(".")} className="bg-gray-300 p-3 rounded hover:bg-gray-400">.</button>
           </div>
         </div>
       </div>
-    )
+      )
   }
 
   const MusicPlayerWindow = () => {
     const [isPlaying, setIsPlaying] = useState(false)
-    const [currentTrack, setCurrentTrack] = useState("Ubuntu Theme Music")
-    const [volume, setVolume] = useState(50)
+      const [currentTrack, setCurrentTrack] = useState("Ubuntu Theme Music")
+      const [volume, setVolume] = useState(50)
 
-    return (
+      return (
       <div className="w-full h-full bg-gradient-to-br from-purple-900 to-blue-900 p-4">
         <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 max-w-md mx-auto">
           <h3 className="text-white text-xl font-bold mb-4">Music Player</h3>
@@ -1557,7 +1557,7 @@ Happy exploring! 🐧`}
               <button className="bg-white/20 text-white p-3 rounded-full hover:bg-white/30">
                 ⏮
               </button>
-              <button 
+              <button
                 onClick={() => setIsPlaying(!isPlaying)}
                 className="bg-orange-500 text-white p-4 rounded-full hover:bg-orange-600 text-xl"
               >
@@ -1593,25 +1593,25 @@ Happy exploring! 🐧`}
           </div>
         </div>
       </div>
-    )
+      )
   }
 
   const ImageViewerWindow = () => {
     const [currentImage, setCurrentImage] = useState(0)
-    const images = [
+      const images = [
       "/ubuntu-wallpaper.jpg",
       "/assets/wallpapers/clouds.jpg",
       "/assets/wallpapers/valley.jpg",
       "/assets/wallpapers/south-france.jpg"
-    ]
+      ]
 
-    return (
+      return (
       <div className="w-full h-full bg-gray-900 p-4">
         <div className="h-full flex flex-col">
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-white text-lg font-semibold">Image Viewer</h3>
             <div className="flex space-x-2">
-              <button 
+              <button
                 onClick={() => setCurrentImage(Math.max(0, currentImage - 1))}
                 className="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-600"
               >
@@ -1620,7 +1620,7 @@ Happy exploring! 🐧`}
               <span className="text-white text-sm px-2 py-1">
                 {currentImage + 1} / {images.length}
               </span>
-              <button 
+              <button
                 onClick={() => setCurrentImage(Math.min(images.length - 1, currentImage + 1))}
                 className="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-600"
               >
@@ -1629,8 +1629,8 @@ Happy exploring! 🐧`}
             </div>
           </div>
           <div className="flex-1 bg-black rounded-lg overflow-hidden">
-            <img 
-              src={images[currentImage]} 
+            <img
+              src={images[currentImage]}
               alt={`Image ${currentImage + 1}`}
               className="w-full h-full object-contain"
             />
@@ -1639,80 +1639,82 @@ Happy exploring! 🐧`}
       </div>
     )
   }
+
+  const ProjectDetailWindow = ({ project }: { project: string }) => {
     const projectDetails = {
-      ecommerce: {
+        ecommerce: {
         title: "E-commerce Platform",
-        description: "A full-featured e-commerce solution built with modern web technologies",
-        features: [
-          "User authentication and authorization",
-          "Product catalog with search and filtering",
-          "Shopping cart and checkout process",
-          "Payment integration with Stripe",
-          "Admin dashboard for inventory management",
-          "Order tracking and history",
-          "Responsive design for all devices",
-        ],
-        tech: ["React", "Node.js", "MongoDB", "Stripe API", "JWT", "Express.js"],
-        status: "Production Ready",
-        github: "https://github.com/ubuntu-developer/ecommerce-platform",
-        demo: "https://ecommerce-demo.ubuntu-portfolio.dev",
+      description: "A full-featured e-commerce solution built with modern web technologies",
+      features: [
+      "User authentication and authorization",
+      "Product catalog with search and filtering",
+      "Shopping cart and checkout process",
+      "Payment integration with Stripe",
+      "Admin dashboard for inventory management",
+      "Order tracking and history",
+      "Responsive design for all devices",
+      ],
+      tech: ["React", "Node.js", "MongoDB", "Stripe API", "JWT", "Express.js"],
+      status: "Production Ready",
+      github: "https://github.com/ubuntu-developer/ecommerce-platform",
+      demo: "https://ecommerce-demo.ubuntu-portfolio.dev",
       },
       taskmanager: {
         title: "Task Management App",
-        description: "Collaborative task management application with real-time updates",
-        features: [
-          "Real-time collaboration with Socket.io",
-          "Project and task organization",
-          "Team member assignment",
-          "Progress tracking and analytics",
-          "File attachments and comments",
-          "Deadline notifications",
-          "Kanban board interface",
-        ],
-        tech: ["Next.js", "Socket.io", "PostgreSQL", "Prisma", "TypeScript"],
-        status: "In Development",
-        github: "https://github.com/ubuntu-developer/task-manager",
-        demo: "https://tasks-demo.ubuntu-portfolio.dev",
+      description: "Collaborative task management application with real-time updates",
+      features: [
+      "Real-time collaboration with Socket.io",
+      "Project and task organization",
+      "Team member assignment",
+      "Progress tracking and analytics",
+      "File attachments and comments",
+      "Deadline notifications",
+      "Kanban board interface",
+      ],
+      tech: ["Next.js", "Socket.io", "PostgreSQL", "Prisma", "TypeScript"],
+      status: "In Development",
+      github: "https://github.com/ubuntu-developer/task-manager",
+      demo: "https://tasks-demo.ubuntu-portfolio.dev",
       },
       apigateway: {
         title: "API Gateway",
-        description: "Microservices API gateway with advanced features",
-        features: [
-          "Request routing and load balancing",
-          "Authentication and authorization",
-          "Rate limiting and throttling",
-          "Request/response transformation",
-          "Monitoring and analytics",
-          "Circuit breaker pattern",
-          "Docker containerization",
-        ],
-        tech: ["Express.js", "Redis", "JWT", "Docker", "Nginx", "Prometheus"],
-        status: "Production Ready",
-        github: "https://github.com/ubuntu-developer/api-gateway",
-        demo: "https://api-gateway-demo.ubuntu-portfolio.dev",
+      description: "Microservices API gateway with advanced features",
+      features: [
+      "Request routing and load balancing",
+      "Authentication and authorization",
+      "Rate limiting and throttling",
+      "Request/response transformation",
+      "Monitoring and analytics",
+      "Circuit breaker pattern",
+      "Docker containerization",
+      ],
+      tech: ["Express.js", "Redis", "JWT", "Docker", "Nginx", "Prometheus"],
+      status: "Production Ready",
+      github: "https://github.com/ubuntu-developer/api-gateway",
+      demo: "https://api-gateway-demo.ubuntu-portfolio.dev",
       },
       portfolio: {
         title: "Ubuntu Portfolio Website",
-        description: "Interactive Ubuntu desktop simulation as a portfolio website",
-        features: [
-          "Full Ubuntu desktop simulation",
-          "Draggable windows and icons",
-          "Working terminal with commands",
-          "Responsive design",
-          "Project showcases",
-          "Contact integration",
-          "Loading screen animation",
-        ],
-        tech: ["Next.js", "TypeScript", "Tailwind CSS", "Lucide Icons"],
-        status: "Live",
-        github: "https://github.com/ubuntu-developer/portfolio",
-        demo: "https://ubuntu-portfolio.dev",
+      description: "Interactive Ubuntu desktop simulation as a portfolio website",
+      features: [
+      "Full Ubuntu desktop simulation",
+      "Draggable windows and icons",
+      "Working terminal with commands",
+      "Responsive design",
+      "Project showcases",
+      "Contact integration",
+      "Loading screen animation",
+      ],
+      tech: ["Next.js", "TypeScript", "Tailwind CSS", "Lucide Icons"],
+      status: "Live",
+      github: "https://github.com/ubuntu-developer/portfolio",
+      demo: "https://ubuntu-portfolio.dev",
       },
     }
 
-    const details = projectDetails[project as keyof typeof projectDetails]
+      const details = projectDetails[project as keyof typeof projectDetails]
 
-    return (
+      return (
       <div className="h-full bg-card p-6 overflow-y-auto">
         <div className="max-w-4xl mx-auto">
           <div className="mb-6">
@@ -1721,9 +1723,9 @@ Happy exploring! 🐧`}
             <div className="mt-4">
               <span
                 className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${details.status === "Production Ready" || details.status === "Live"
-                    ? "bg-chart-3/20 text-chart-3"
-                    : "bg-chart-5/20 text-chart-5"
-                }`}
+                  ? "bg-chart-3/20 text-chart-3"
+                  : "bg-chart-5/20 text-chart-5"
+                  }`}
               >
                 {details.status}
               </span>
@@ -1767,10 +1769,10 @@ Happy exploring! 🐧`}
           </div>
         </div>
       </div>
-    )
+      )
   }
 
-  if (hasError) {
+      if (hasError) {
     return (
       <div className="h-screen w-screen bg-gradient-to-br from-red-900 to-red-800 flex items-center justify-center">
         <div className="text-center text-white">
@@ -1787,253 +1789,251 @@ Happy exploring! 🐧`}
           </Button>
         </div>
       </div>
-    )
+      )
   }
 
-  return (
-    <div className="h-screen w-screen overflow-hidden relative bg-gradient-to-br from-purple-900 via-purple-800 to-orange-600">
-      {/* Desktop Wallpaper */}
-      <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(/${currentWallpaper})` }} />
+      return (
+      <div className="h-screen w-screen overflow-hidden relative bg-gradient-to-br from-purple-900 via-purple-800 to-orange-600">
+        {/* Desktop Wallpaper */}
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(/${currentWallpaper})` }} />
 
-      {/* Ubuntu Top Panel - Authentic Ubuntu Style */}
-      <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-[#2C2C2C] to-[#1A1A1A] backdrop-blur-md text-white px-4 py-2 flex items-center justify-between z-50 h-12 border-b border-gray-600/30">
-        <div className="flex items-center space-x-4">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="text-white hover:bg-white/10 h-8 px-3 rounded-md transition-all duration-200"
-          >
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-white rounded-full"></div>
-              <span className="text-sm font-medium">Activities</span>
-            </div>
-          </Button>
-          <div className="h-6 w-px bg-gray-600"></div>
-          <div className="text-sm font-medium text-gray-200">Portfolio Desktop</div>
-        </div>
-
-        <div className="flex items-center space-x-4">
-          {/* System indicators */}
-          <div className="flex items-center space-x-2">
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-            <span className="text-xs text-gray-300">Online</span>
-          </div>
-
-          {/* Time display */}
-          <div className="text-sm text-white font-mono bg-black/20 px-3 py-1 rounded-md">
-            {isClient ? currentTime : "--:--:--"}
-          </div>
-
-          {/* System menu */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="text-white hover:bg-white/10 h-8 w-8 rounded-md transition-all duration-200"
-          >
-            <Settings className="w-4 h-4" />
-          </Button>
-        </div>
-      </div>
-
-      {/* Ubuntu Sidebar - Authentic Ubuntu Dock */}
-      <div className="absolute left-0 top-12 bottom-12 w-20 bg-gradient-to-b from-gray-800/90 to-gray-900/90 backdrop-blur-xl border-r border-gray-600/30 z-40 shadow-2xl">
-        <div className="flex flex-col items-center py-4 space-y-3">
-          {sidebarIcons.map((icon, index) => (
-            <div
-              key={icon.id}
-              className="w-14 h-14 flex items-center justify-center rounded-2xl hover:bg-white/10 transition-all duration-300 cursor-pointer group hover:scale-105 relative"
-              onClick={() => {
-                playClickSound()
-                icon.action()
-              }}
-              title={icon.name}
-            >
-              {/* Active indicator */}
-              <div className="absolute -left-1 w-1 h-10 bg-white rounded-r-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              
-              {/* Icon with glow effect */}
-              <div className="group-hover:drop-shadow-xl transition-all duration-300 group-hover:brightness-125">
-                {icon.icon}
-              </div>
-              
-              {/* Tooltip */}
-              <div className="absolute left-20 bg-gray-900/95 text-white text-sm px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap shadow-lg border border-gray-700">
-                {icon.name}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Desktop Icons */}
-      <div className="absolute inset-0 p-4" style={{ paddingTop: "64px", paddingBottom: "64px", paddingLeft: "100px" }}>
-        {memoizedDesktopIcons.map((icon) => (
-          <div
-            key={icon.id}
-            className={`absolute cursor-pointer select-none ${draggedIcon === icon.id ? "opacity-50" : ""}`}
-            style={{
-              left: icon.position.x,
-              top: icon.position.y,
-            }}
-            onMouseDown={(e) => {
-              playClickSound()
-              handleIconMouseDown(e, icon.id)
-            }}
-            onDoubleClick={icon.action}
-          >
-            <div className={`flex flex-col items-center space-y-2 p-3 rounded-lg transition-all duration-300 ${draggedIcon === icon.id
-              ? "bg-white/20 scale-110 shadow-2xl backdrop-blur-sm"
-              : "hover:bg-white/10 hover:scale-105 hover:shadow-lg"
-              }`}>
-              <div className="drop-shadow-lg">
-              {icon.icon}
-              </div>
-              <span className="text-white text-xs text-center max-w-16 truncate font-medium drop-shadow-md">{icon.name}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Windows */}
-      {memoizedWindows
-        .filter((w) => !w.isMinimized)
-        .map((window) => (
-          <div
-            key={window.id}
-            className="absolute bg-white rounded-lg shadow-2xl border border-gray-200 overflow-hidden"
-            style={{
-              left: window.isMaximized ? 0 : window.position.x,
-              top: window.isMaximized ? 48 : window.position.y,
-              width: window.size.width,
-              height: window.size.height,
-              zIndex: window.zIndex,
-            }}
-            onClick={() => bringToFront(window.id)}
-          >
-            <div
-              className="bg-gradient-to-r from-gray-200 to-gray-300 border-b border-gray-400 px-4 py-3 flex items-center justify-between cursor-move select-none shadow-sm"
-              onMouseDown={(e) => handleWindowMouseDown(e, window.id)}
-            >
-              <div className="flex items-center space-x-3">
-                <div className="flex space-x-2">
-                  <div className="w-4 h-4 bg-red-500 rounded-full hover:bg-red-600 transition-colors cursor-pointer"></div>
-                  <div className="w-4 h-4 bg-yellow-500 rounded-full hover:bg-yellow-600 transition-colors cursor-pointer"></div>
-                  <div className="w-4 h-4 bg-green-500 rounded-full hover:bg-green-600 transition-colors cursor-pointer"></div>
-                </div>
-                <span className="text-sm font-semibold text-gray-800 ml-2">{window.title}</span>
-              </div>
-              <div className="flex space-x-2">
-                <button
-                  className="w-4 h-4 bg-destructive rounded-full hover:bg-destructive/80 transition-colors flex items-center justify-center"
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    closeWindow(window.id)
-                  }}
-                  title="Close"
-                  aria-label="Close window"
-                >
-                  <X className="w-3 h-3 text-destructive-foreground" />
-                </button>
-                <button
-                  className="w-4 h-4 bg-chart-5 rounded-full hover:bg-chart-5/80 transition-colors flex items-center justify-center"
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    minimizeWindow(window.id)
-                  }}
-                  title="Minimize"
-                  aria-label="Minimize window"
-                >
-                  <Minus className="w-3 h-3 text-foreground" />
-                </button>
-                <button
-                  className="w-4 h-4 bg-chart-3 rounded-full hover:bg-chart-3/80 transition-colors flex items-center justify-center"
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    maximizeWindow(window.id)
-                  }}
-                  title="Maximize"
-                  aria-label="Maximize window"
-                >
-                  <Square className="w-3 h-3 text-foreground" />
-                </button>
-              </div>
-            </div>
-
-            {/* Window Content */}
-            <div className="h-full bg-white" style={{ height: "calc(100% - 40px)" }}>
-              {window.component}
-            </div>
-          </div>
-        ))}
-
-      {/* Ubuntu Bottom Taskbar */}
-      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-[#2C2C2C] to-[#1A1A1A] backdrop-blur-lg text-white px-4 py-2 flex items-center justify-between z-50 h-12 border-t border-gray-600/30 shadow-2xl">
-        <div className="flex items-center space-x-3">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="text-white hover:bg-white/10 px-3 py-2 rounded-md transition-all duration-200"
-          >
-        <div className="flex items-center space-x-2">
-              <div className="w-6 h-6 bg-gradient-to-br from-[#E95420] to-[#F7A072] rounded-md flex items-center justify-center">
-                <span className="text-xs font-bold text-white">U</span>
-            </div>
-              <span className="text-sm font-medium">Show Applications</span>
-            </div>
-          </Button>
-
-          <div className="w-px h-6 bg-gray-600"></div>
-
-          {/* Window buttons */}
-          <div className="flex items-center space-x-1">
-            {memoizedWindows.map((window) => (
+        {/* Ubuntu Top Panel - Authentic Ubuntu Style */}
+        <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-[#2C2C2C] to-[#1A1A1A] backdrop-blur-md text-white px-4 py-2 flex items-center justify-between z-50 h-12 border-b border-gray-600/30">
+          <div className="flex items-center space-x-4">
             <Button
-              key={window.id}
               variant="ghost"
               size="sm"
-                className={`text-white hover:bg-white/10 px-3 py-2 rounded-md transition-all duration-200 ${window.isMinimized
-                  ? "opacity-60 bg-white/5"
-                  : "bg-white/10 shadow-md"
-                  }`}
-              onClick={() => (window.isMinimized ? restoreWindow(window.id) : bringToFront(window.id))}
+              className="text-white hover:bg-white/10 h-8 px-3 rounded-md transition-all duration-200"
             >
-                <span className="text-sm font-medium">{window.title}</span>
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 bg-white rounded-full"></div>
+                <span className="text-sm font-medium">Activities</span>
+              </div>
             </Button>
+            <div className="h-6 w-px bg-gray-600"></div>
+            <div className="text-sm font-medium text-gray-200">Portfolio Desktop</div>
+          </div>
+
+          <div className="flex items-center space-x-4">
+            {/* System indicators */}
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+              <span className="text-xs text-gray-300">Online</span>
+            </div>
+
+            {/* Time display */}
+            <div className="text-sm text-white font-mono bg-black/20 px-3 py-1 rounded-md">
+              {isClient ? currentTime : "--:--:--"}
+            </div>
+
+            {/* System menu */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-white hover:bg-white/10 h-8 w-8 rounded-md transition-all duration-200"
+            >
+              <Settings className="w-4 h-4" />
+            </Button>
+          </div>
+        </div>
+
+        {/* Ubuntu Sidebar - Authentic Ubuntu Dock */}
+        <div className="absolute left-0 top-12 bottom-12 w-20 bg-gradient-to-b from-gray-800/90 to-gray-900/90 backdrop-blur-xl border-r border-gray-600/30 z-40 shadow-2xl">
+          <div className="flex flex-col items-center py-4 space-y-3">
+            {sidebarIcons.map((icon, index) => (
+              <div
+                key={icon.id}
+                className="w-14 h-14 flex items-center justify-center rounded-2xl hover:bg-white/10 transition-all duration-300 cursor-pointer group hover:scale-105 relative"
+                onClick={() => {
+                  playClickSound()
+                  icon.action()
+                }}
+                title={icon.name}
+              >
+                {/* Active indicator */}
+                <div className="absolute -left-1 w-1 h-10 bg-white rounded-r-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                {/* Icon with glow effect */}
+                <div className="group-hover:drop-shadow-xl transition-all duration-300 group-hover:brightness-125">
+                  {icon.icon}
+                </div>
+
+                {/* Tooltip */}
+                <div className="absolute left-20 bg-gray-900/95 text-white text-sm px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap shadow-lg border border-gray-700">
+                  {icon.name}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop Icons */}
+        <div className="absolute inset-0 p-4" style={{ paddingTop: "64px", paddingBottom: "64px", paddingLeft: "100px" }}>
+          {memoizedDesktopIcons.map((icon) => (
+            <div
+              key={icon.id}
+              className={`absolute cursor-pointer select-none ${draggedIcon === icon.id ? "opacity-50" : ""}`}
+              style={{
+                left: icon.position.x,
+                top: icon.position.y,
+              }}
+              onMouseDown={(e) => {
+                playClickSound()
+                handleIconMouseDown(e, icon.id)
+              }}
+              onDoubleClick={icon.action}
+            >
+              <div className={`flex flex-col items-center space-y-2 p-3 rounded-lg transition-all duration-300 ${draggedIcon === icon.id
+                ? "bg-white/20 scale-110 shadow-2xl backdrop-blur-sm"
+                : "hover:bg-white/10 hover:scale-105 hover:shadow-lg"
+                }`}>
+                <div className="drop-shadow-lg">
+                  {icon.icon}
+                </div>
+                <span className="text-white text-xs text-center max-w-16 truncate font-medium drop-shadow-md">{icon.name}</span>
+              </div>
+            </div>
           ))}
         </div>
-        </div>
 
-        {/* System tray */}
-        <div className="flex items-center space-x-2">
-          <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-          <span className="text-xs text-gray-300">Connected</span>
-        </div>
-      </div>
+        {/* Windows */}
+        {memoizedWindows
+          .filter((w) => !w.isMinimized)
+          .map((window) => (
+            <div
+              key={window.id}
+              className="absolute bg-white rounded-lg shadow-2xl border border-gray-200 overflow-hidden"
+              style={{
+                left: window.isMaximized ? 0 : window.position.x,
+                top: window.isMaximized ? 48 : window.position.y,
+                width: window.size.width,
+                height: window.size.height,
+                zIndex: window.zIndex,
+              }}
+              onClick={() => bringToFront(window.id)}
+            >
+              <div
+                className="bg-gradient-to-r from-gray-200 to-gray-300 border-b border-gray-400 px-4 py-3 flex items-center justify-between cursor-move select-none shadow-sm"
+                onMouseDown={(e) => handleWindowMouseDown(e, window.id)}
+              >
+                <div className="flex items-center space-x-3">
+                  <div className="flex space-x-2">
+                    <div className="w-4 h-4 bg-red-500 rounded-full hover:bg-red-600 transition-colors cursor-pointer"></div>
+                    <div className="w-4 h-4 bg-yellow-500 rounded-full hover:bg-yellow-600 transition-colors cursor-pointer"></div>
+                    <div className="w-4 h-4 bg-green-500 rounded-full hover:bg-green-600 transition-colors cursor-pointer"></div>
+                  </div>
+                  <span className="text-sm font-semibold text-gray-800 ml-2">{window.title}</span>
+                </div>
+                <div className="flex space-x-2">
+                  <button
+                    className="w-4 h-4 bg-destructive rounded-full hover:bg-destructive/80 transition-colors flex items-center justify-center"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      closeWindow(window.id)
+                    }}
+                    title="Close"
+                    aria-label="Close window"
+                  >
+                    <X className="w-3 h-3 text-destructive-foreground" />
+                  </button>
+                  <button
+                    className="w-4 h-4 bg-chart-5 rounded-full hover:bg-chart-5/80 transition-colors flex items-center justify-center"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      minimizeWindow(window.id)
+                    }}
+                    title="Minimize"
+                    aria-label="Minimize window"
+                  >
+                    <Minus className="w-3 h-3 text-foreground" />
+                  </button>
+                  <button
+                    className="w-4 h-4 bg-chart-3 rounded-full hover:bg-chart-3/80 transition-colors flex items-center justify-center"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      maximizeWindow(window.id)
+                    }}
+                    title="Maximize"
+                    aria-label="Maximize window"
+                  >
+                    <Square className="w-3 h-3 text-foreground" />
+                  </button>
+                </div>
+              </div>
 
-      {/* Ubuntu-style Notifications */}
-      <div className="fixed top-16 right-4 z-50 space-y-2">
-        {notifications.map((notification) => (
-          <div
-            key={notification.id}
-            className={`bg-white/95 backdrop-blur-md rounded-lg shadow-lg border-l-4 px-4 py-3 max-w-sm transform transition-all duration-300 ${
-              notification.type === 'error' ? 'border-red-500' :
-              notification.type === 'warning' ? 'border-yellow-500' :
-              notification.type === 'success' ? 'border-green-500' :
-              'border-blue-500'
-            }`}
-          >
-            <div className="flex items-center space-x-2">
-              <div className={`w-2 h-2 rounded-full ${
-                notification.type === 'error' ? 'bg-red-500' :
-                notification.type === 'warning' ? 'bg-yellow-500' :
-                notification.type === 'success' ? 'bg-green-500' :
-                'bg-blue-500'
-              }`}></div>
-              <span className="text-sm font-medium text-gray-800">{notification.message}</span>
+              {/* Window Content */}
+              <div className="h-full bg-white" style={{ height: "calc(100% - 40px)" }}>
+                {window.component}
+              </div>
+            </div>
+          ))}
+
+        {/* Ubuntu Bottom Taskbar */}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-[#2C2C2C] to-[#1A1A1A] backdrop-blur-lg text-white px-4 py-2 flex items-center justify-between z-50 h-12 border-t border-gray-600/30 shadow-2xl">
+          <div className="flex items-center space-x-3">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-white hover:bg-white/10 px-3 py-2 rounded-md transition-all duration-200"
+            >
+              <div className="flex items-center space-x-2">
+                <div className="w-6 h-6 bg-gradient-to-br from-[#E95420] to-[#F7A072] rounded-md flex items-center justify-center">
+                  <span className="text-xs font-bold text-white">U</span>
+                </div>
+                <span className="text-sm font-medium">Show Applications</span>
+              </div>
+            </Button>
+
+            <div className="w-px h-6 bg-gray-600"></div>
+
+            {/* Window buttons */}
+            <div className="flex items-center space-x-1">
+              {memoizedWindows.map((window) => (
+                <Button
+                  key={window.id}
+                  variant="ghost"
+                  size="sm"
+                  className={`text-white hover:bg-white/10 px-3 py-2 rounded-md transition-all duration-200 ${window.isMinimized
+                    ? "opacity-60 bg-white/5"
+                    : "bg-white/10 shadow-md"
+                    }`}
+                  onClick={() => (window.isMinimized ? restoreWindow(window.id) : bringToFront(window.id))}
+                >
+                  <span className="text-sm font-medium">{window.title}</span>
+                </Button>
+              ))}
             </div>
           </div>
-        ))}
+
+          {/* System tray */}
+          <div className="flex items-center space-x-2">
+            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+            <span className="text-xs text-gray-300">Connected</span>
+          </div>
+        </div>
+
+        {/* Ubuntu-style Notifications */}
+        <div className="fixed top-16 right-4 z-50 space-y-2">
+          {notifications.map((notification) => (
+            <div
+              key={notification.id}
+              className={`bg-white/95 backdrop-blur-md rounded-lg shadow-lg border-l-4 px-4 py-3 max-w-sm transform transition-all duration-300 ${notification.type === 'error' ? 'border-red-500' :
+                  notification.type === 'warning' ? 'border-yellow-500' :
+                    notification.type === 'success' ? 'border-green-500' :
+                      'border-blue-500'
+                }`}
+            >
+              <div className="flex items-center space-x-2">
+                <div className={`w-2 h-2 rounded-full ${notification.type === 'error' ? 'bg-red-500' :
+                    notification.type === 'warning' ? 'bg-yellow-500' :
+                      notification.type === 'success' ? 'bg-green-500' :
+                        'bg-blue-500'
+                  }`}></div>
+                <span className="text-sm font-medium text-gray-800">{notification.message}</span>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-  )
+      )
 }
