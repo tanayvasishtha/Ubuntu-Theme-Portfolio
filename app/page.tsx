@@ -1041,21 +1041,21 @@ export default function UbuntuPortfolio() {
             description: "Chrome & Firefox extension that instantly applies dark mode to any website with one click",
             tech: ["JavaScript", "Chrome Extension API", "Firefox WebExtensions", "CSS"],
             status: "Live",
-            link: "https://github.com/orgs/SynthraLabs"
+            link: "https://chromewebstore.google.com/detail/dark-mode-bang-universal/hnnplkbhhlfopkkhfepdiljdbclfbpjh"
           },
           {
             title: "Volume Bang",
             description: "Browser extension for instant volume control and audio management across all tabs",
             tech: ["JavaScript", "Web Audio API", "Chrome Extension API", "Firefox WebExtensions"],
             status: "Live",
-            link: "https://github.com/orgs/SynthraLabs"
+            link: "https://chromewebstore.google.com/detail/volume-bang-premium-audio/ancjplaiedoominjbebhdgjipcgfbopl"
           },
           {
             title: "Speed Bang",
             description: "Performance optimization extension that accelerates web browsing and reduces loading times",
             tech: ["JavaScript", "Performance API", "Chrome Extension API", "Firefox WebExtensions"],
             status: "Live",
-            link: "https://github.com/orgs/SynthraLabs"
+            link: "https://chromewebstore.google.com/detail/speedbang-multiplatform-v/kaacodjcoaepldmhnpgodhafbcmlkfgo"
           },
           {
             title: "Portfolio Website",
