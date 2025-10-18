@@ -512,6 +512,9 @@ export default function UbuntuPortfolio() {
       setTimeout(() => {
         terminalInputRef.current?.focus()
       }, 100)
+      setTimeout(() => {
+        terminalInputRef.current?.focus()
+      }, 500)
     }
   }, [windows])
 
@@ -1246,9 +1249,10 @@ export default function UbuntuPortfolio() {
           value={currentCommand}
           onChange={(e) => setCurrentCommand(e.target.value)}
           onKeyDown={handleTerminalCommand}
-          className="flex-1 bg-transparent text-white outline-none font-mono caret-white"
+          className="flex-1 bg-transparent text-white outline-none font-mono caret-white border-none"
           placeholder="Type a command..."
           autoFocus
+          tabIndex={0}
           onBlur={(e) => {
             setTimeout(() => {
               if (windows.find((w) => w.id === "terminal")) {
