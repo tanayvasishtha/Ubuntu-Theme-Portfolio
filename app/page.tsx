@@ -1593,37 +1593,41 @@ Happy exploring! 🐧`}
     const [volume, setVolume] = useState(50)
     const [currentTrack, setCurrentTrack] = useState(0)
     const [currentPlaylist, setCurrentPlaylist] = useState("favorites")
-    const [showPlaylists, setShowPlaylists] = useState(false)
+    const [isShuffled, setIsShuffled] = useState(false)
+    const [isRepeated, setIsRepeated] = useState(false)
 
     const playlists = {
       favorites: {
         name: "Your Favorites",
+        description: "Songs you love",
         tracks: [
-          { id: 1, title: "Skyfall", artist: "Adele", duration: "4:46", album: "Skyfall", year: "2012" },
-          { id: 2, title: "God's Plan", artist: "Drake", duration: "3:18", album: "Scorpion", year: "2018" },
-          { id: 3, title: "Happy Nation", artist: "Ace of Base", duration: "4:16", album: "Happy Nation", year: "1992" },
-          { id: 4, title: "Stronger", artist: "Kanye West", duration: "5:11", album: "Graduation", year: "2007" },
-          { id: 5, title: "I Wonder", artist: "Kanye West", duration: "4:03", album: "Graduation", year: "2007" },
-          { id: 6, title: "Good Life", artist: "Kanye West ft. T-Pain", duration: "3:27", album: "Graduation", year: "2007" },
-          { id: 7, title: "Runaway", artist: "Kanye West", duration: "9:08", album: "My Beautiful Dark Twisted Fantasy", year: "2010" },
-          { id: 8, title: "Power", artist: "Kanye West", duration: "4:52", album: "My Beautiful Dark Twisted Fantasy", year: "2010" }
+          { id: 1, title: "Skyfall", artist: "Adele", duration: "4:46", album: "Skyfall", year: "2012", cover: "🎵" },
+          { id: 2, title: "God's Plan", artist: "Drake", duration: "3:18", album: "Scorpion", year: "2018", cover: "🎵" },
+          { id: 3, title: "Happy Nation", artist: "Ace of Base", duration: "4:16", album: "Happy Nation", year: "1992", cover: "🎵" },
+          { id: 4, title: "Stronger", artist: "Kanye West", duration: "5:11", album: "Graduation", year: "2007", cover: "🎵" },
+          { id: 5, title: "I Wonder", artist: "Kanye West", duration: "4:03", album: "Graduation", year: "2007", cover: "🎵" },
+          { id: 6, title: "Good Life", artist: "Kanye West ft. T-Pain", duration: "3:27", album: "Graduation", year: "2007", cover: "🎵" },
+          { id: 7, title: "Runaway", artist: "Kanye West", duration: "9:08", album: "My Beautiful Dark Twisted Fantasy", year: "2010", cover: "🎵" },
+          { id: 8, title: "Power", artist: "Kanye West", duration: "4:52", album: "My Beautiful Dark Twisted Fantasy", year: "2010", cover: "🎵" }
         ]
       },
       topHits: {
         name: "Top Hits",
+        description: "Popular songs right now",
         tracks: [
-          { id: 9, title: "Blinding Lights", artist: "The Weeknd", duration: "3:20", album: "After Hours", year: "2020" },
-          { id: 10, title: "Levitating", artist: "Dua Lipa", duration: "3:23", album: "Future Nostalgia", year: "2020" },
-          { id: 11, title: "Watermelon Sugar", artist: "Harry Styles", duration: "2:54", album: "Fine Line", year: "2019" },
-          { id: 12, title: "Good 4 U", artist: "Olivia Rodrigo", duration: "2:58", album: "SOUR", year: "2021" }
+          { id: 9, title: "Blinding Lights", artist: "The Weeknd", duration: "3:20", album: "After Hours", year: "2020", cover: "🎵" },
+          { id: 10, title: "Levitating", artist: "Dua Lipa", duration: "3:23", album: "Future Nostalgia", year: "2020", cover: "🎵" },
+          { id: 11, title: "Watermelon Sugar", artist: "Harry Styles", duration: "2:54", album: "Fine Line", year: "2019", cover: "🎵" },
+          { id: 12, title: "Good 4 U", artist: "Olivia Rodrigo", duration: "2:58", album: "SOUR", year: "2021", cover: "🎵" }
         ]
       },
       classics: {
         name: "Classics",
+        description: "Timeless favorites",
         tracks: [
-          { id: 13, title: "Bohemian Rhapsody", artist: "Queen", duration: "5:55", album: "A Night at the Opera", year: "1975" },
-          { id: 14, title: "Hotel California", artist: "Eagles", duration: "6:30", album: "Hotel California", year: "1976" },
-          { id: 15, title: "Imagine", artist: "John Lennon", duration: "3:07", album: "Imagine", year: "1971" }
+          { id: 13, title: "Bohemian Rhapsody", artist: "Queen", duration: "5:55", album: "A Night at the Opera", year: "1975", cover: "🎵" },
+          { id: 14, title: "Hotel California", artist: "Eagles", duration: "6:30", album: "Hotel California", year: "1976", cover: "🎵" },
+          { id: 15, title: "Imagine", artist: "John Lennon", duration: "3:07", album: "Imagine", year: "1971", cover: "🎵" }
         ]
       }
     }
@@ -1659,47 +1663,60 @@ Happy exploring! 🐧`}
     return (
       <div className="w-full h-full bg-black text-white flex">
         {/* Sidebar */}
-        <div className="w-64 bg-gray-900 p-4 flex flex-col">
-          <div className="mb-6">
-            <div className="flex items-center space-x-2 mb-4">
+        <div className="w-64 bg-black border-r border-gray-800 flex flex-col">
+          <div className="p-6">
+            <div className="flex items-center space-x-3 mb-8">
               <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold">♪</span>
+                <span className="text-white font-bold text-sm">♪</span>
               </div>
               <span className="text-xl font-bold">Spotify</span>
             </div>
-            <div className="space-y-2">
+            
+            <nav className="space-y-1">
               <button 
                 onClick={() => setCurrentPlaylist("favorites")}
-                className={`w-full text-left p-2 rounded hover:bg-gray-800 ${currentPlaylist === "favorites" ? "bg-gray-700" : ""}`}
+                className={`w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  currentPlaylist === "favorites" 
+                    ? "bg-gray-800 text-white" 
+                    : "text-gray-400 hover:text-white hover:bg-gray-800"
+                }`}
               >
                 🎵 Your Favorites
               </button>
               <button 
                 onClick={() => setCurrentPlaylist("topHits")}
-                className={`w-full text-left p-2 rounded hover:bg-gray-800 ${currentPlaylist === "topHits" ? "bg-gray-700" : ""}`}
+                className={`w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  currentPlaylist === "topHits" 
+                    ? "bg-gray-800 text-white" 
+                    : "text-gray-400 hover:text-white hover:bg-gray-800"
+                }`}
               >
                 🔥 Top Hits
               </button>
               <button 
                 onClick={() => setCurrentPlaylist("classics")}
-                className={`w-full text-left p-2 rounded hover:bg-gray-800 ${currentPlaylist === "classics" ? "bg-gray-700" : ""}`}
+                className={`w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  currentPlaylist === "classics" 
+                    ? "bg-gray-800 text-white" 
+                    : "text-gray-400 hover:text-white hover:bg-gray-800"
+                }`}
               >
                 🎭 Classics
               </button>
-            </div>
+            </nav>
           </div>
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col bg-gradient-to-b from-gray-900 to-black">
           {/* Header */}
-          <div className="bg-gray-800 p-4 flex items-center justify-between">
+          <div className="bg-black/50 backdrop-blur-md p-4 flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <button className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
-                ←
+              <button className="w-8 h-8 bg-black/70 rounded-full flex items-center justify-center hover:bg-black/90 transition-colors">
+                <span className="text-gray-400">←</span>
               </button>
-              <button className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
-                →
+              <button className="w-8 h-8 bg-black/70 rounded-full flex items-center justify-center hover:bg-black/90 transition-colors">
+                <span className="text-gray-400">→</span>
               </button>
             </div>
             <div className="flex items-center space-x-4">
@@ -1708,99 +1725,141 @@ Happy exploring! 🐧`}
           </div>
 
           {/* Playlist Header */}
-          <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-6">
-            <div className="flex items-end space-x-4">
-              <div className="w-48 h-48 bg-gray-800 rounded-lg flex items-center justify-center shadow-2xl">
-                <span className="text-6xl">🎵</span>
+          <div className="p-6">
+            <div className="flex items-end space-x-6">
+              <div className="w-48 h-48 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center shadow-2xl">
+                <span className="text-8xl">🎵</span>
               </div>
               <div className="flex-1">
-                <p className="text-sm text-gray-200 uppercase tracking-wider">Playlist</p>
-                <h1 className="text-5xl font-bold mt-2 mb-4">{playlists[currentPlaylist as keyof typeof playlists].name}</h1>
-                <p className="text-gray-200">{currentTracks.length} songs</p>
+                <p className="text-sm text-gray-400 uppercase tracking-wider">Playlist</p>
+                <h1 className="text-6xl font-bold mt-2 mb-4">{playlists[currentPlaylist as keyof typeof playlists].name}</h1>
+                <p className="text-gray-400 text-lg">{playlists[currentPlaylist as keyof typeof playlists].description}</p>
+                <div className="flex items-center space-x-4 mt-4">
+                  <span className="text-sm text-gray-400">{currentTracks.length} songs</span>
+                  <span className="text-sm text-gray-400">•</span>
+                  <span className="text-sm text-gray-400">About {Math.floor(currentTracks.reduce((acc, track) => acc + parseDuration(track.duration), 0) / 60)} min</span>
+                </div>
               </div>
             </div>
           </div>
 
+          {/* Play Button */}
+          <div className="px-6 mb-6">
+            <button 
+              onClick={() => setIsPlaying(!isPlaying)}
+              className="w-14 h-14 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-400 hover:scale-105 transition-all duration-200 shadow-lg"
+            >
+              <span className="text-2xl text-black">{isPlaying ? "⏸" : "▶"}</span>
+            </button>
+          </div>
+
           {/* Track List */}
-          <div className="flex-1 bg-gray-900 p-4 overflow-y-auto">
-            <div className="space-y-2">
+          <div className="flex-1 px-6 pb-24">
+            <div className="space-y-1">
               {currentTracks.map((track, index) => (
                 <div 
                   key={track.id}
-                  className={`flex items-center space-x-4 p-3 rounded hover:bg-gray-800 cursor-pointer ${index === currentTrack ? "bg-gray-700" : ""}`}
+                  className={`flex items-center space-x-4 p-3 rounded-md hover:bg-white/10 cursor-pointer group transition-colors ${
+                    index === currentTrack ? "bg-white/10" : ""
+                  }`}
                   onClick={() => {
                     setCurrentTrack(index)
                     setIsPlaying(true)
                     setCurrentTime(0)
                   }}
                 >
-                  <div className="w-8 text-center text-gray-400">
-                    {index === currentTrack && isPlaying ? "♪" : index + 1}
+                  <div className="w-4 text-center text-gray-400 group-hover:text-white transition-colors">
+                    {index === currentTrack && isPlaying ? (
+                      <div className="flex items-center justify-center">
+                        <div className="w-1 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                        <div className="w-1 h-2 bg-green-500 rounded-full animate-pulse ml-1"></div>
+                        <div className="w-1 h-4 bg-green-500 rounded-full animate-pulse ml-1"></div>
+                      </div>
+                    ) : (
+                      index + 1
+                    )}
                   </div>
-                  <div className="flex-1">
-                    <div className={`font-medium ${index === currentTrack ? "text-green-400" : "text-white"}`}>
-                      {track.title}
+                  <div className="flex-1 flex items-center space-x-4">
+                    <div className="w-10 h-10 bg-gray-700 rounded flex items-center justify-center">
+                      <span className="text-lg">{track.cover}</span>
                     </div>
-                    <div className="text-sm text-gray-400">{track.artist}</div>
+                    <div className="flex-1">
+                      <div className={`font-medium ${index === currentTrack ? "text-green-400" : "text-white"} group-hover:text-white transition-colors`}>
+                        {track.title}
+                      </div>
+                      <div className="text-sm text-gray-400 group-hover:text-white transition-colors">{track.artist}</div>
+                    </div>
                   </div>
-                  <div className="text-sm text-gray-400">{track.duration}</div>
+                  <div className="text-sm text-gray-400 group-hover:text-white transition-colors">{track.duration}</div>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Player Controls */}
-          <div className="bg-gray-800 p-4">
+          <div className="bg-gray-900 border-t border-gray-800 p-4">
             <div className="flex items-center justify-between">
               {/* Current Track Info */}
               <div className="flex items-center space-x-4 w-1/4">
-                <div className="w-12 h-12 bg-gray-700 rounded flex items-center justify-center">
-                  <span className="text-lg">🎵</span>
+                <div className="w-14 h-14 bg-gray-700 rounded flex items-center justify-center">
+                  <span className="text-xl">{currentSong.cover}</span>
                 </div>
                 <div>
-                  <div className="font-medium text-white">{currentSong.title}</div>
-                  <div className="text-sm text-gray-400">{currentSong.artist}</div>
+                  <div className="font-medium text-white text-sm">{currentSong.title}</div>
+                  <div className="text-xs text-gray-400">{currentSong.artist}</div>
                 </div>
               </div>
 
               {/* Center Controls */}
               <div className="flex flex-col items-center space-y-2 w-1/2">
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-6">
+                  <button 
+                    onClick={() => setIsShuffled(!isShuffled)}
+                    className={`w-6 h-6 ${isShuffled ? "text-green-400" : "text-gray-400"} hover:text-white transition-colors`}
+                  >
+                    🔀
+                  </button>
                   <button 
                     onClick={prevTrack}
-                    className="w-8 h-8 text-gray-400 hover:text-white"
+                    className="w-8 h-8 text-gray-400 hover:text-white transition-colors"
                   >
                     ⏮
                   </button>
                   <button 
                     onClick={() => setIsPlaying(!isPlaying)}
-                    className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-black hover:scale-105 transition-transform"
+                    className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-black hover:scale-105 transition-transform"
                   >
                     {isPlaying ? "⏸" : "▶"}
                   </button>
                   <button 
                     onClick={nextTrack}
-                    className="w-8 h-8 text-gray-400 hover:text-white"
+                    className="w-8 h-8 text-gray-400 hover:text-white transition-colors"
                   >
                     ⏭
                   </button>
+                  <button 
+                    onClick={() => setIsRepeated(!isRepeated)}
+                    className={`w-6 h-6 ${isRepeated ? "text-green-400" : "text-gray-400"} hover:text-white transition-colors`}
+                  >
+                    🔁
+                  </button>
                 </div>
-                <div className="flex items-center space-x-2 w-full">
-                  <span className="text-xs text-gray-400">{formatTime(currentTime)}</span>
+                <div className="flex items-center space-x-2 w-full max-w-md">
+                  <span className="text-xs text-gray-400 w-8">{formatTime(currentTime)}</span>
                   <div className="flex-1 bg-gray-600 rounded-full h-1">
                     <div 
                       className="bg-white h-1 rounded-full transition-all duration-300"
                       style={{ width: `${(currentTime / parseDuration(currentSong.duration)) * 100}%` }}
                     ></div>
                   </div>
-                  <span className="text-xs text-gray-400">{currentSong.duration}</span>
+                  <span className="text-xs text-gray-400 w-8">{currentSong.duration}</span>
                 </div>
               </div>
 
               {/* Volume Control */}
               <div className="flex items-center space-x-2 w-1/4 justify-end">
-                <span className="text-gray-400">🔊</span>
-                <div className="w-20 bg-gray-600 rounded-full h-1">
+                <span className="text-gray-400 text-sm">🔊</span>
+                <div className="w-24 bg-gray-600 rounded-full h-1">
                   <div 
                     className="bg-white h-1 rounded-full transition-all duration-300"
                     style={{ width: `${volume}%` }}
