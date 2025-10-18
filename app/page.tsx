@@ -1595,45 +1595,73 @@ Happy exploring! 🐧`}
     const [currentPlaylist, setCurrentPlaylist] = useState("favorites")
     const [isShuffled, setIsShuffled] = useState(false)
     const [isRepeated, setIsRepeated] = useState(false)
+    const [audioRef, setAudioRef] = useState<HTMLAudioElement | null>(null)
 
     const playlists = {
       favorites: {
         name: "Your Favorites",
         description: "Songs you love",
         tracks: [
-          { id: 1, title: "Skyfall", artist: "Adele", duration: "4:46", album: "Skyfall", year: "2012", cover: "🎵" },
-          { id: 2, title: "God's Plan", artist: "Drake", duration: "3:18", album: "Scorpion", year: "2018", cover: "🎵" },
-          { id: 3, title: "Happy Nation", artist: "Ace of Base", duration: "4:16", album: "Happy Nation", year: "1992", cover: "🎵" },
-          { id: 4, title: "Stronger", artist: "Kanye West", duration: "5:11", album: "Graduation", year: "2007", cover: "🎵" },
-          { id: 5, title: "I Wonder", artist: "Kanye West", duration: "4:03", album: "Graduation", year: "2007", cover: "🎵" },
-          { id: 6, title: "Good Life", artist: "Kanye West ft. T-Pain", duration: "3:27", album: "Graduation", year: "2007", cover: "🎵" },
-          { id: 7, title: "Runaway", artist: "Kanye West", duration: "9:08", album: "My Beautiful Dark Twisted Fantasy", year: "2010", cover: "🎵" },
-          { id: 8, title: "Power", artist: "Kanye West", duration: "4:52", album: "My Beautiful Dark Twisted Fantasy", year: "2010", cover: "🎵" }
+          { id: 1, title: "Skyfall", artist: "Adele", duration: "4:46", album: "Skyfall", year: "2012", cover: "🎵", audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" },
+          { id: 2, title: "God's Plan", artist: "Drake", duration: "3:18", album: "Scorpion", year: "2018", cover: "🎵", audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" },
+          { id: 3, title: "Happy Nation", artist: "Ace of Base", duration: "4:16", album: "Happy Nation", year: "1992", cover: "🎵", audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" },
+          { id: 4, title: "Stronger", artist: "Kanye West", duration: "5:11", album: "Graduation", year: "2007", cover: "🎵", audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" },
+          { id: 5, title: "I Wonder", artist: "Kanye West", duration: "4:03", album: "Graduation", year: "2007", cover: "🎵", audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" },
+          { id: 6, title: "Good Life", artist: "Kanye West ft. T-Pain", duration: "3:27", album: "Graduation", year: "2007", cover: "🎵", audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" },
+          { id: 7, title: "Runaway", artist: "Kanye West", duration: "9:08", album: "My Beautiful Dark Twisted Fantasy", year: "2010", cover: "🎵", audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" },
+          { id: 8, title: "Power", artist: "Kanye West", duration: "4:52", album: "My Beautiful Dark Twisted Fantasy", year: "2010", cover: "🎵", audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" }
         ]
       },
       topHits: {
         name: "Top Hits",
         description: "Popular songs right now",
         tracks: [
-          { id: 9, title: "Blinding Lights", artist: "The Weeknd", duration: "3:20", album: "After Hours", year: "2020", cover: "🎵" },
-          { id: 10, title: "Levitating", artist: "Dua Lipa", duration: "3:23", album: "Future Nostalgia", year: "2020", cover: "🎵" },
-          { id: 11, title: "Watermelon Sugar", artist: "Harry Styles", duration: "2:54", album: "Fine Line", year: "2019", cover: "🎵" },
-          { id: 12, title: "Good 4 U", artist: "Olivia Rodrigo", duration: "2:58", album: "SOUR", year: "2021", cover: "🎵" }
+          { id: 9, title: "Blinding Lights", artist: "The Weeknd", duration: "3:20", album: "After Hours", year: "2020", cover: "🎵", audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" },
+          { id: 10, title: "Levitating", artist: "Dua Lipa", duration: "3:23", album: "Future Nostalgia", year: "2020", cover: "🎵", audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" },
+          { id: 11, title: "Watermelon Sugar", artist: "Harry Styles", duration: "2:54", album: "Fine Line", year: "2019", cover: "🎵", audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" },
+          { id: 12, title: "Good 4 U", artist: "Olivia Rodrigo", duration: "2:58", album: "SOUR", year: "2021", cover: "🎵", audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" }
         ]
       },
       classics: {
         name: "Classics",
         description: "Timeless favorites",
         tracks: [
-          { id: 13, title: "Bohemian Rhapsody", artist: "Queen", duration: "5:55", album: "A Night at the Opera", year: "1975", cover: "🎵" },
-          { id: 14, title: "Hotel California", artist: "Eagles", duration: "6:30", album: "Hotel California", year: "1976", cover: "🎵" },
-          { id: 15, title: "Imagine", artist: "John Lennon", duration: "3:07", album: "Imagine", year: "1971", cover: "🎵" }
+          { id: 13, title: "Bohemian Rhapsody", artist: "Queen", duration: "5:55", album: "A Night at the Opera", year: "1975", cover: "🎵", audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" },
+          { id: 14, title: "Hotel California", artist: "Eagles", duration: "6:30", album: "Hotel California", year: "1976", cover: "🎵", audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" },
+          { id: 15, title: "Imagine", artist: "John Lennon", duration: "3:07", album: "Imagine", year: "1971", cover: "🎵", audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" }
         ]
       }
     }
 
     const currentTracks = playlists[currentPlaylist as keyof typeof playlists].tracks
     const currentSong = currentTracks[currentTrack]
+
+    // Audio functionality
+    useEffect(() => {
+      if (audioRef) {
+        audioRef.volume = volume / 100
+        audioRef.addEventListener('timeupdate', () => {
+          setCurrentTime(audioRef.currentTime)
+        })
+        audioRef.addEventListener('ended', () => {
+          if (isRepeated) {
+            audioRef.currentTime = 0
+            audioRef.play()
+          } else {
+            nextTrack()
+          }
+        })
+      }
+    }, [audioRef, volume, isRepeated])
+
+    useEffect(() => {
+      if (audioRef && currentSong) {
+        audioRef.src = currentSong.audioUrl
+        if (isPlaying) {
+          audioRef.play()
+        }
+      }
+    }, [currentSong, audioRef])
 
     const formatTime = (seconds: number) => {
       const mins = Math.floor(seconds / 60)
@@ -1660,8 +1688,35 @@ Happy exploring! 🐧`}
       }
     }
 
+    const togglePlay = () => {
+      if (audioRef) {
+        if (isPlaying) {
+          audioRef.pause()
+        } else {
+          audioRef.play()
+        }
+        setIsPlaying(!isPlaying)
+      }
+    }
+
+    const handleTrackClick = (index: number) => {
+      setCurrentTrack(index)
+      setIsPlaying(true)
+      setCurrentTime(0)
+      if (audioRef) {
+        audioRef.currentTime = 0
+        audioRef.play()
+      }
+    }
+
     return (
       <div className="w-full h-full bg-black text-white flex">
+        {/* Hidden Audio Element */}
+        <audio
+          ref={setAudioRef}
+          preload="metadata"
+        />
+        
         {/* Sidebar */}
         <div className="w-64 bg-black border-r border-gray-800 flex flex-col">
           <div className="p-6">
@@ -1746,7 +1801,7 @@ Happy exploring! 🐧`}
           {/* Play Button */}
           <div className="px-6 mb-6">
             <button 
-              onClick={() => setIsPlaying(!isPlaying)}
+              onClick={togglePlay}
               className="w-14 h-14 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-400 hover:scale-105 transition-all duration-200 shadow-lg"
             >
               <span className="text-2xl text-black">{isPlaying ? "⏸" : "▶"}</span>
@@ -1754,7 +1809,7 @@ Happy exploring! 🐧`}
           </div>
 
           {/* Track List */}
-          <div className="flex-1 px-6 pb-24">
+          <div className="flex-1 px-6 pb-24 overflow-y-auto">
             <div className="space-y-1">
               {currentTracks.map((track, index) => (
                 <div 
@@ -1762,11 +1817,7 @@ Happy exploring! 🐧`}
                   className={`flex items-center space-x-4 p-3 rounded-md hover:bg-white/10 cursor-pointer group transition-colors ${
                     index === currentTrack ? "bg-white/10" : ""
                   }`}
-                  onClick={() => {
-                    setCurrentTrack(index)
-                    setIsPlaying(true)
-                    setCurrentTime(0)
-                  }}
+                  onClick={() => handleTrackClick(index)}
                 >
                   <div className="w-4 text-center text-gray-400 group-hover:text-white transition-colors">
                     {index === currentTrack && isPlaying ? (
@@ -1826,7 +1877,7 @@ Happy exploring! 🐧`}
                     ⏮
                   </button>
                   <button 
-                    onClick={() => setIsPlaying(!isPlaying)}
+                    onClick={togglePlay}
                     className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-black hover:scale-105 transition-transform"
                   >
                     {isPlaying ? "⏸" : "▶"}
@@ -1859,12 +1910,19 @@ Happy exploring! 🐧`}
               {/* Volume Control */}
               <div className="flex items-center space-x-2 w-1/4 justify-end">
                 <span className="text-gray-400 text-sm">🔊</span>
-                <div className="w-24 bg-gray-600 rounded-full h-1">
-                  <div 
-                    className="bg-white h-1 rounded-full transition-all duration-300"
-                    style={{ width: `${volume}%` }}
-                  ></div>
-                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={volume}
+                  onChange={(e) => {
+                    setVolume(Number(e.target.value))
+                    if (audioRef) {
+                      audioRef.volume = Number(e.target.value) / 100
+                    }
+                  }}
+                  className="w-24 bg-gray-600 rounded-full h-1"
+                />
               </div>
             </div>
           </div>
