@@ -1030,31 +1030,25 @@ export default function UbuntuPortfolio() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {[
           {
-            title: "E-commerce Platform",
-            description: "Full-stack e-commerce solution with React, Node.js, and MongoDB",
-            tech: ["React", "Node.js", "MongoDB", "Stripe"],
-            status: "Completed",
+            title: "Debtrix",
+            description: "AI-powered personal debt management platform with real-time tracking and personalized payoff strategies",
+            tech: ["Next.js", "TypeScript", "Supabase", "Perplexity AI", "Tailwind CSS"],
+            status: "Live",
+            link: "https://debtrix-nine.vercel.app"
           },
           {
-            title: "Task Management App",
-            description: "Collaborative task management with real-time updates",
-            tech: ["Next.js", "Socket.io", "PostgreSQL"],
-            status: "In Progress",
+            title: "WeLoveQR",
+            description: "Modern QR code generator with advanced customization, analytics, and bulk generation features",
+            tech: ["React", "Node.js", "MongoDB", "QR Code API"],
+            status: "Live",
+            link: "https://weloveqr.netlify.app"
           },
           {
-            title: "API Gateway",
-            description: "Microservices API gateway with advanced features",
-            features: [
-              "Request routing and load balancing",
-              "Authentication and authorization",
-              "Rate limiting and throttling",
-              "Request/response transformation",
-              "Monitoring and analytics",
-              "Circuit breaker pattern",
-              "Docker containerization",
-            ],
-            tech: ["Express.js", "Redis", "JWT", "Docker", "Nginx", "Prometheus"],
-            status: "Production Ready",
+            title: "SynthraLabs",
+            description: "Multi-repository organization featuring dark mode, volume control, and speed optimization projects",
+            tech: ["React", "TypeScript", "Advanced UI/UX", "Performance Optimization"],
+            status: "Active Development",
+            link: "https://github.com/orgs/SynthraLabs"
           },
           {
             title: "Portfolio Website",
@@ -1075,6 +1069,19 @@ export default function UbuntuPortfolio() {
           <div key={index} className="border border-border rounded-lg p-4 hover:shadow-md transition-shadow">
             <h3 className="text-lg font-semibold text-foreground mb-2">{project.title}</h3>
             <p className="text-card-foreground mb-3">{project.description}</p>
+            {project.link && (
+              <div className="mb-3">
+                <a 
+                  href={project.link} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-primary hover:text-primary/80 text-sm font-medium flex items-center gap-1"
+                >
+                  <ExternalLink className="w-3 h-3" />
+                  View Project
+                </a>
+              </div>
+            )}
             <div className="mt-4">
               <span
                 className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${project.status === "Completed" || project.status === "Live"
