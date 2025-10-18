@@ -48,9 +48,9 @@ const UbuntuLoadingScreen = ({ onLoadingComplete }: { onLoadingComplete: () => v
         setLoadingText(step.text)
         currentStep++
       } else {
-        clearInterval(progressTimer)
+          clearInterval(progressTimer)
         setTimeout(() => onLoadingComplete(), 800)
-      }
+        }
     }, 300)
 
     return () => {
@@ -86,7 +86,7 @@ const UbuntuLoadingScreen = ({ onLoadingComplete }: { onLoadingComplete: () => v
           className="h-full bg-gradient-to-r from-[#E95420] to-[#F7A072] transition-all duration-300 ease-out"
           style={{ width: `${loadingProgress}%` }}
         />
-      </div>
+        </div>
 
       {/* Loading text */}
       <p className="text-white text-lg font-light mb-2">{loadingText}</p>
@@ -663,13 +663,13 @@ export default function UbuntuPortfolio() {
       prev.map((w) =>
         w.id === id
           ? {
-            ...w,
-            isMaximized: !w.isMaximized,
-            position: w.isMaximized ? { x: 50, y: 50 } : { x: 0, y: 48 },
-            size: w.isMaximized
-              ? { width: 640, height: 400 }
-              : { width: window.innerWidth, height: window.innerHeight - 96 },
-          }
+              ...w,
+              isMaximized: !w.isMaximized,
+              position: w.isMaximized ? { x: 50, y: 50 } : { x: 0, y: 48 },
+              size: w.isMaximized
+                ? { width: 640, height: 400 }
+                : { width: window.innerWidth, height: window.innerHeight - 96 },
+            }
           : w,
       ),
     )
@@ -1076,9 +1076,9 @@ export default function UbuntuPortfolio() {
             <div className="mt-4">
               <span
                 className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${project.status === "Completed" || project.status === "Live"
-                  ? "bg-chart-3/20 text-chart-3"
-                  : "bg-chart-5/20 text-chart-5"
-                  }`}
+                    ? "bg-chart-3/20 text-chart-3"
+                    : "bg-chart-5/20 text-chart-5"
+                }`}
               >
                 {project.status}
               </span>
@@ -1275,7 +1275,7 @@ Happy exploring! 🐧`}
                     </div>
                     <span className="text-xs text-card-foreground text-center leading-tight">
                       {skill.name}
-                    </span>
+                  </span>
                   </div>
                 ))}
               </div>
@@ -1358,8 +1358,8 @@ Happy exploring! 🐧`}
     }
 
     return (
-      <div className="h-full bg-card p-6 overflow-y-auto">
-        <h2 className="text-2xl font-bold text-foreground mb-6">System Settings</h2>
+    <div className="h-full bg-card p-6 overflow-y-auto">
+      <h2 className="text-2xl font-bold text-foreground mb-6">System Settings</h2>
         <div className="space-y-6">
           <div>
             <h3 className="text-lg font-semibold text-foreground mb-3">Wallpaper</h3>
@@ -1387,20 +1387,20 @@ Happy exploring! 🐧`}
               ))}
             </div>
           </div>
-          <div className="border border-border rounded-lg p-4">
-            <h3 className="font-semibold text-foreground mb-2">Display</h3>
-            <p className="text-card-foreground text-sm">Resolution: 1920x1080</p>
-            <p className="text-card-foreground text-sm">Theme: Ubuntu Default</p>
-          </div>
-          <div className="border border-border rounded-lg p-4">
-            <h3 className="font-semibold text-foreground mb-2">System Info</h3>
-            <p className="text-card-foreground text-sm">OS: Ubuntu 22.04 LTS</p>
-            <p className="text-card-foreground text-sm">Kernel: 5.15.0-generic</p>
-            <p className="text-card-foreground text-sm">Desktop: Portfolio Desktop</p>
-          </div>
+        <div className="border border-border rounded-lg p-4">
+          <h3 className="font-semibold text-foreground mb-2">Display</h3>
+          <p className="text-card-foreground text-sm">Resolution: 1920x1080</p>
+          <p className="text-card-foreground text-sm">Theme: Ubuntu Default</p>
+        </div>
+        <div className="border border-border rounded-lg p-4">
+          <h3 className="font-semibold text-foreground mb-2">System Info</h3>
+          <p className="text-card-foreground text-sm">OS: Ubuntu 22.04 LTS</p>
+          <p className="text-card-foreground text-sm">Kernel: 5.15.0-generic</p>
+          <p className="text-card-foreground text-sm">Desktop: Portfolio Desktop</p>
         </div>
       </div>
-    )
+    </div>
+  )
   }
 
   const SoftwareCenterWindow = () => (
@@ -1652,6 +1652,11 @@ Happy exploring! 🐧`}
     const [currentUrl, setCurrentUrl] = useState("https://www.google.com")
     const [urlInput, setUrlInput] = useState("https://www.google.com")
     const [isLoading, setIsLoading] = useState(false)
+    const [activeTab, setActiveTab] = useState(1)
+    const [tabs, setTabs] = useState([
+      { id: 1, title: "Google", url: "https://www.google.com", active: true },
+      { id: 2, title: "New Tab", url: "about:blank", active: false }
+    ])
 
     const handleUrlSubmit = (e: React.FormEvent) => {
       e.preventDefault()
@@ -1660,49 +1665,149 @@ Happy exploring! 🐧`}
       setTimeout(() => setIsLoading(false), 1000)
     }
 
-    const navigateTo = (url: string) => {
+    const navigateTo = (url: string, title: string) => {
       setIsLoading(true)
       setCurrentUrl(url)
       setUrlInput(url)
+      // Update active tab
+      setTabs(tabs.map(tab => ({ ...tab, active: tab.url === url })))
       setTimeout(() => setIsLoading(false), 1000)
+    }
+
+    const addNewTab = () => {
+      const newTab = { id: Date.now(), title: "New Tab", url: "about:blank", active: true }
+      setTabs([...tabs.map(tab => ({ ...tab, active: false })), newTab])
+      setCurrentUrl("about:blank")
+      setUrlInput("about:blank")
+    }
+
+    const closeTab = (tabId: number) => {
+      if (tabs.length > 1) {
+        const newTabs = tabs.filter(tab => tab.id !== tabId)
+        const activeTab = newTabs.find(tab => tab.active) || newTabs[0]
+        setTabs(newTabs.map(tab => ({ ...tab, active: tab.id === activeTab.id })))
+        setCurrentUrl(activeTab.url)
+        setUrlInput(activeTab.url)
+      }
     }
 
     return (
       <div className="w-full h-full bg-white flex flex-col">
-        {/* Browser Toolbar */}
-        <div className="bg-gray-100 border-b border-gray-300 p-2 flex items-center space-x-2">
-          <div className="flex space-x-1">
-            <button className="w-3 h-3 bg-red-500 rounded-full"></button>
-            <button className="w-3 h-3 bg-yellow-500 rounded-full"></button>
-            <button className="w-3 h-3 bg-green-500 rounded-full"></button>
+        {/* Firefox Title Bar */}
+        <div className="bg-gradient-to-r from-gray-100 to-gray-200 border-b border-gray-300 p-2 flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <img src="/assets/program-icons/firefox.png" alt="Firefox" className="w-4 h-4" />
+            <span className="text-sm font-medium text-gray-700">Firefox</span>
           </div>
-          <div className="flex-1 flex items-center space-x-2">
-            <button onClick={() => navigateTo("https://www.google.com")} className="p-1 hover:bg-gray-200 rounded">
-              ←
-            </button>
-            <button onClick={() => navigateTo("https://www.google.com")} className="p-1 hover:bg-gray-200 rounded">
-              →
-            </button>
-            <button onClick={() => navigateTo("https://www.google.com")} className="p-1 hover:bg-gray-200 rounded">
-              ↻
-            </button>
-            <form onSubmit={handleUrlSubmit} className="flex-1 flex">
-              <input
-                type="text"
-                value={urlInput}
-                onChange={(e) => setUrlInput(e.target.value)}
-                className="flex-1 px-3 py-1 border border-gray-300 rounded text-sm"
-                placeholder="Search or enter address"
-              />
-            </form>
-          </div>
-          <div className="flex space-x-1">
-            <button className="p-1 hover:bg-gray-200 rounded">⋮</button>
+          <div className="flex items-center space-x-2">
+            <button className="w-3 h-3 bg-red-500 rounded-full hover:bg-red-600"></button>
+            <button className="w-3 h-3 bg-yellow-500 rounded-full hover:bg-yellow-600"></button>
+            <button className="w-3 h-3 bg-green-500 rounded-full hover:bg-green-600"></button>
           </div>
         </div>
 
+        {/* Firefox Toolbar */}
+        <div className="bg-gray-50 border-b border-gray-200 p-2">
+          <div className="flex items-center space-x-2">
+            {/* Navigation buttons */}
+            <div className="flex space-x-1">
+              <button 
+                onClick={() => navigateTo("https://www.google.com", "Google")}
+                className="p-1 hover:bg-gray-200 rounded text-gray-600 hover:text-gray-800"
+                title="Back"
+              >
+                ←
+              </button>
+              <button 
+                onClick={() => navigateTo("https://www.google.com", "Google")}
+                className="p-1 hover:bg-gray-200 rounded text-gray-600 hover:text-gray-800"
+                title="Forward"
+              >
+                →
+              </button>
+              <button 
+                onClick={() => navigateTo(currentUrl, "Refresh")}
+                className="p-1 hover:bg-gray-200 rounded text-gray-600 hover:text-gray-800"
+                title="Refresh"
+              >
+                ↻
+              </button>
+            </div>
+
+            {/* URL Bar */}
+            <form onSubmit={handleUrlSubmit} className="flex-1 flex">
+              <div className="flex-1 flex items-center bg-white border border-gray-300 rounded-md px-3 py-1">
+                <div className="w-4 h-4 mr-2">
+                  {currentUrl.includes("https") ? (
+                    <div className="w-4 h-4 bg-green-500 rounded-sm flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">🔒</span>
+                    </div>
+                  ) : (
+                    <div className="w-4 h-4 bg-gray-400 rounded-sm"></div>
+                  )}
+                </div>
+                <input
+                  type="text"
+                  value={urlInput}
+                  onChange={(e) => setUrlInput(e.target.value)}
+                  className="flex-1 text-sm outline-none"
+                  placeholder="Search or enter address"
+                />
+              </div>
+            </form>
+
+            {/* Firefox Menu */}
+            <div className="flex space-x-1">
+              <button className="p-1 hover:bg-gray-200 rounded text-gray-600 hover:text-gray-800">
+                ⭐
+              </button>
+              <button className="p-1 hover:bg-gray-200 rounded text-gray-600 hover:text-gray-800">
+                📚
+              </button>
+              <button className="p-1 hover:bg-gray-200 rounded text-gray-600 hover:text-gray-800">
+                ⋮
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Tab Bar */}
+        <div className="bg-gray-100 border-b border-gray-200 flex items-center px-2">
+          {tabs.map((tab) => (
+            <div
+              key={tab.id}
+              className={`flex items-center px-3 py-2 mr-1 rounded-t-md cursor-pointer ${
+                tab.active ? 'bg-white border-t border-l border-r border-gray-300' : 'hover:bg-gray-200'
+              }`}
+              onClick={() => {
+                setCurrentUrl(tab.url)
+                setUrlInput(tab.url)
+                setTabs(tabs.map(t => ({ ...t, active: t.id === tab.id })))
+              }}
+            >
+              <span className="text-xs text-gray-700 mr-2 truncate max-w-20">{tab.title}</span>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  closeTab(tab.id)
+                }}
+                className="text-gray-400 hover:text-gray-600 text-xs"
+              >
+                ×
+              </button>
+            </div>
+          ))}
+          <button
+            onClick={addNewTab}
+            className="p-1 hover:bg-gray-200 rounded text-gray-600 hover:text-gray-800 ml-1"
+            title="New Tab"
+          >
+            +
+          </button>
+        </div>
+
         {/* Browser Content */}
-        <div className="flex-1 bg-white">
+        <div className="flex-1 bg-white overflow-hidden">
           {isLoading ? (
             <div className="flex items-center justify-center h-full">
               <div className="text-center">
@@ -1725,19 +1830,31 @@ Happy exploring! 🐧`}
                       />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
-                      <button onClick={() => navigateTo("https://github.com")} className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50">
+                      <button 
+                        onClick={() => navigateTo("https://github.com", "GitHub")} 
+                        className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                      >
                         <div className="text-lg mb-2">🐙</div>
                         <div className="text-sm font-medium">GitHub</div>
                       </button>
-                      <button onClick={() => navigateTo("https://stackoverflow.com")} className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50">
+                      <button 
+                        onClick={() => navigateTo("https://stackoverflow.com", "Stack Overflow")} 
+                        className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                      >
                         <div className="text-lg mb-2">📚</div>
                         <div className="text-sm font-medium">Stack Overflow</div>
                       </button>
-                      <button onClick={() => navigateTo("https://developer.mozilla.org")} className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50">
+                      <button 
+                        onClick={() => navigateTo("https://developer.mozilla.org", "MDN Web Docs")} 
+                        className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                      >
                         <div className="text-lg mb-2">🌐</div>
                         <div className="text-sm font-medium">MDN Web Docs</div>
                       </button>
-                      <button onClick={() => navigateTo("https://ubuntu.com")} className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50">
+                      <button 
+                        onClick={() => navigateTo("https://ubuntu.com", "Ubuntu")} 
+                        className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                      >
                         <div className="text-lg mb-2">🐧</div>
                         <div className="text-sm font-medium">Ubuntu</div>
                       </button>
@@ -1746,13 +1863,86 @@ Happy exploring! 🐧`}
                 </div>
               ) : currentUrl.includes("github.com") ? (
                 <div className="text-center">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-gray-800 rounded-lg flex items-center justify-center">
+                    <span className="text-white text-2xl">🐙</span>
+                  </div>
                   <h1 className="text-2xl font-bold mb-4">GitHub</h1>
-                  <p className="text-gray-600">Welcome to GitHub! This is a simulated browser experience.</p>
+                  <p className="text-gray-600 mb-4">Welcome to GitHub! This is a simulated browser experience.</p>
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <h3 className="font-semibold mb-2">Popular Repositories</h3>
+                    <div className="space-y-2 text-left">
+                      <div className="flex items-center space-x-2">
+                        <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                        <span className="text-sm">microsoft/vscode</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                        <span className="text-sm">facebook/react</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                        <span className="text-sm">vercel/next.js</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : currentUrl.includes("stackoverflow.com") ? (
+                <div className="text-center">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-orange-500 rounded-lg flex items-center justify-center">
+                    <span className="text-white text-2xl">📚</span>
+                  </div>
+                  <h1 className="text-2xl font-bold mb-4">Stack Overflow</h1>
+                  <p className="text-gray-600 mb-4">The world's largest developer community.</p>
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <h3 className="font-semibold mb-2">Popular Questions</h3>
+                    <div className="space-y-2 text-left">
+                      <div className="text-sm">How to center a div in CSS?</div>
+                      <div className="text-sm">What is the difference between let and var in JavaScript?</div>
+                      <div className="text-sm">How to install npm packages?</div>
+                    </div>
+                  </div>
+                </div>
+              ) : currentUrl.includes("developer.mozilla.org") ? (
+                <div className="text-center">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-blue-500 rounded-lg flex items-center justify-center">
+                    <span className="text-white text-2xl">🌐</span>
+                  </div>
+                  <h1 className="text-2xl font-bold mb-4">MDN Web Docs</h1>
+                  <p className="text-gray-600 mb-4">Resources for developers, by developers.</p>
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <h3 className="font-semibold mb-2">Web Technologies</h3>
+                    <div className="grid grid-cols-2 gap-2 text-sm">
+                      <span className="bg-blue-100 px-2 py-1 rounded">HTML</span>
+                      <span className="bg-blue-100 px-2 py-1 rounded">CSS</span>
+                      <span className="bg-blue-100 px-2 py-1 rounded">JavaScript</span>
+                      <span className="bg-blue-100 px-2 py-1 rounded">React</span>
+                    </div>
+                  </div>
+                </div>
+              ) : currentUrl.includes("ubuntu.com") ? (
+                <div className="text-center">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-orange-500 rounded-lg flex items-center justify-center">
+                    <span className="text-white text-2xl">🐧</span>
+                  </div>
+                  <h1 className="text-2xl font-bold mb-4">Ubuntu</h1>
+                  <p className="text-gray-600 mb-4">The world's most popular open source operating system.</p>
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <h3 className="font-semibold mb-2">Ubuntu Features</h3>
+                    <div className="space-y-2 text-left">
+                      <div className="text-sm">• Free and open source</div>
+                      <div className="text-sm">• Secure and reliable</div>
+                      <div className="text-sm">• Easy to use</div>
+                      <div className="text-sm">• Great for developers</div>
+                    </div>
+                  </div>
                 </div>
               ) : (
                 <div className="text-center">
-                  <h1 className="text-2xl font-bold mb-4">Web Browser</h1>
-                  <p className="text-gray-600">This is a simulated web browser experience.</p>
+                  <div className="w-16 h-16 mx-auto mb-4 bg-gray-400 rounded-lg flex items-center justify-center">
+                    <span className="text-white text-2xl">🌐</span>
+                  </div>
+                  <h1 className="text-2xl font-bold mb-4">New Tab</h1>
+                  <p className="text-gray-600">Start browsing by entering a URL or searching.</p>
                 </div>
               )}
             </div>
@@ -1913,9 +2103,9 @@ Happy exploring! 🐧`}
             <div className="mt-4">
               <span
                 className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${details.status === "Production Ready" || details.status === "Live"
-                  ? "bg-chart-3/20 text-chart-3"
-                  : "bg-chart-5/20 text-chart-5"
-                  }`}
+                    ? "bg-chart-3/20 text-chart-3"
+                    : "bg-chart-5/20 text-chart-5"
+                }`}
               >
                 {details.status}
               </span>
@@ -2079,7 +2269,7 @@ Happy exploring! 🐧`}
               : "hover:bg-white/10 hover:scale-105 hover:shadow-lg"
               }`}>
               <div className="drop-shadow-lg">
-                {icon.icon}
+              {icon.icon}
               </div>
               <span className="text-white text-xs text-center max-w-16 truncate font-medium drop-shadow-md">{icon.name}</span>
             </div>
@@ -2167,10 +2357,10 @@ Happy exploring! 🐧`}
             size="sm"
             className="text-white hover:bg-white/10 px-3 py-2 rounded-md transition-all duration-200"
           >
-            <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2">
               <div className="w-6 h-6 bg-gradient-to-br from-[#E95420] to-[#F7A072] rounded-md flex items-center justify-center">
                 <span className="text-xs font-bold text-white">U</span>
-              </div>
+            </div>
               <span className="text-sm font-medium">Show Applications</span>
             </div>
           </Button>
@@ -2180,20 +2370,20 @@ Happy exploring! 🐧`}
           {/* Window buttons */}
           <div className="flex items-center space-x-1">
             {memoizedWindows.map((window) => (
-              <Button
-                key={window.id}
-                variant="ghost"
-                size="sm"
+            <Button
+              key={window.id}
+              variant="ghost"
+              size="sm"
                 className={`text-white hover:bg-white/10 px-3 py-2 rounded-md transition-all duration-200 ${window.isMinimized
                   ? "opacity-60 bg-white/5"
                   : "bg-white/10 shadow-md"
                   }`}
-                onClick={() => (window.isMinimized ? restoreWindow(window.id) : bringToFront(window.id))}
-              >
+              onClick={() => (window.isMinimized ? restoreWindow(window.id) : bringToFront(window.id))}
+            >
                 <span className="text-sm font-medium">{window.title}</span>
-              </Button>
-            ))}
-          </div>
+            </Button>
+          ))}
+        </div>
         </div>
 
         {/* System tray */}
