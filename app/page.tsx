@@ -24,6 +24,7 @@ import {
   HardDrive,
   HelpCircle,
   Monitor,
+  Twitter
 } from "lucide-react"
 
 const UbuntuLoadingScreen = ({ onLoadingComplete }: { onLoadingComplete: () => void }) => {
@@ -1296,21 +1297,28 @@ Happy exploring! 🐧`}
             <Mail className="w-5 h-5 text-primary" />
             <div>
               <p className="font-medium text-foreground">Email</p>
-              <p className="text-card-foreground">developer@ubuntu-portfolio.dev</p>
+              <p className="text-card-foreground">edgepersonal2004@gmail.com</p>
             </div>
           </div>
           <div className="flex items-center space-x-3 p-3 border border-border rounded-lg">
             <Github className="w-5 h-5 text-primary" />
             <div>
               <p className="font-medium text-foreground">GitHub</p>
-              <p className="text-card-foreground">@ubuntu-developer</p>
+              <p className="text-card-foreground">@tanayvasishtha</p>
             </div>
           </div>
           <div className="flex items-center space-x-3 p-3 border border-border rounded-lg">
             <Linkedin className="w-5 h-5 text-primary" />
             <div>
               <p className="font-medium text-foreground">LinkedIn</p>
-              <p className="text-card-foreground">/in/ubuntu-developer</p>
+              <p className="text-card-foreground">/in/tanayvasishtha</p>
+            </div>
+          </div>
+          <div className="flex items-center space-x-3 p-3 border border-border rounded-lg">
+            <Twitter className="w-5 h-5 text-primary" />
+            <div>
+              <p className="font-medium text-foreground">X (Twitter)</p>
+              <p className="text-card-foreground">@TanayVasishtha</p>
             </div>
           </div>
         </div>
