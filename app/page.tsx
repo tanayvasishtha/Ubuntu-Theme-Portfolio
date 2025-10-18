@@ -76,9 +76,9 @@ const UbuntuLoadingScreen = ({ onLoadingComplete }: { onLoadingComplete: () => v
         setLoadingText(step.text)
         currentStep++
       } else {
-        clearInterval(progressTimer)
+          clearInterval(progressTimer)
         setTimeout(() => onLoadingComplete(), 800)
-      }
+        }
     }, 300)
 
     return () => {
@@ -114,7 +114,7 @@ const UbuntuLoadingScreen = ({ onLoadingComplete }: { onLoadingComplete: () => v
           className="h-full bg-gradient-to-r from-[#E95420] to-[#F7A072] transition-all duration-300 ease-out"
           style={{ width: `${loadingProgress}%` }}
         />
-      </div>
+        </div>
 
       {/* Loading text */}
       <p className="text-white text-lg font-light mb-2">{loadingText}</p>
@@ -692,13 +692,13 @@ export default function UbuntuPortfolio() {
       prev.map((w) =>
         w.id === id
           ? {
-            ...w,
-            isMaximized: !w.isMaximized,
-            position: w.isMaximized ? { x: 50, y: 50 } : { x: 0, y: 48 },
-            size: w.isMaximized
-              ? { width: 640, height: 400 }
-              : { width: window.innerWidth, height: window.innerHeight - 96 },
-          }
+              ...w,
+              isMaximized: !w.isMaximized,
+              position: w.isMaximized ? { x: 50, y: 50 } : { x: 0, y: 48 },
+              size: w.isMaximized
+                ? { width: 640, height: 400 }
+                : { width: window.innerWidth, height: window.innerHeight - 96 },
+            }
           : w,
       ),
     )
@@ -1119,9 +1119,9 @@ export default function UbuntuPortfolio() {
             <div className="mt-4">
               <span
                 className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${project.status === "Completed" || project.status === "Live"
-                  ? "bg-chart-3/20 text-chart-3"
-                  : "bg-chart-5/20 text-chart-5"
-                  }`}
+                    ? "bg-chart-3/20 text-chart-3"
+                    : "bg-chart-5/20 text-chart-5"
+                }`}
               >
                 {project.status}
               </span>
@@ -1209,76 +1209,68 @@ Happy exploring! 🐧`}
           </p>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 pt-6">
-          <Button
-            size="sm"
+          <Button 
+            size="sm" 
             variant="outline"
             className="hover:bg-primary hover:text-primary-foreground transition-colors"
             onClick={() => window.open('https://github.com/tanayvasishtha', '_blank')}
           >
-            <Github className="w-4 h-4 mr-2" />
-            GitHub
+            <Github className="w-4 h-4" />
           </Button>
-          <Button
-            size="sm"
+          <Button 
+            size="sm" 
             variant="outline"
             className="hover:bg-primary hover:text-primary-foreground transition-colors"
             onClick={() => window.open('https://www.linkedin.com/in/tanayvasishtha/', '_blank')}
           >
-            <Linkedin className="w-4 h-4 mr-2" />
-            LinkedIn
+            <Linkedin className="w-4 h-4" />
           </Button>
-          <Button
-            size="sm"
+          <Button 
+            size="sm" 
             variant="outline"
             className="hover:bg-primary hover:text-primary-foreground transition-colors"
             onClick={() => window.open('https://x.com/TanayVasishtha', '_blank')}
           >
-            <XLogo className="w-4 h-4 mr-2" />
-            X
+            <XLogo className="w-4 h-4" />
           </Button>
-          <Button
-            size="sm"
+          <Button 
+            size="sm" 
             variant="outline"
             className="hover:bg-primary hover:text-primary-foreground transition-colors"
             onClick={() => window.open('https://medium.com/@tanayvasishtha', '_blank')}
           >
-            <BookOpen className="w-4 h-4 mr-2" />
-            Medium
+            <BookOpen className="w-4 h-4" />
           </Button>
-          <Button
-            size="sm"
+          <Button 
+            size="sm" 
             variant="outline"
             className="hover:bg-primary hover:text-primary-foreground transition-colors"
             onClick={() => window.open('https://www.producthunt.com/@tanayvasishtha', '_blank')}
           >
-            <Zap className="w-4 h-4 mr-2" />
-            Product Hunt
+            <Zap className="w-4 h-4" />
           </Button>
-          <Button
-            size="sm"
+          <Button 
+            size="sm" 
             variant="outline"
             className="hover:bg-primary hover:text-primary-foreground transition-colors"
             onClick={() => window.open('https://peerlist.io/tanayvasishtha', '_blank')}
           >
-            <User className="w-4 h-4 mr-2" />
-            Peerlist
+            <User className="w-4 h-4" />
           </Button>
-          <Button
-            size="sm"
+          <Button 
+            size="sm" 
             variant="outline"
             className="hover:bg-primary hover:text-primary-foreground transition-colors"
             onClick={() => window.open('https://buymeacoffee.com/tanayvasishtha', '_blank')}
           >
-            <Coffee className="w-4 h-4 mr-2" />
-            Buy me a coffee
+            <Coffee className="w-4 h-4" />
           </Button>
-          <Button
-            size="sm"
+          <Button 
+            size="sm" 
             variant="outline"
             className="hover:bg-primary hover:text-primary-foreground transition-colors"
           >
-            <Download className="w-4 h-4 mr-2" />
-            Resume
+            <Download className="w-4 h-4" />
           </Button>
         </div>
       </div>
@@ -1382,7 +1374,7 @@ Happy exploring! 🐧`}
                     </div>
                     <span className="text-xs text-card-foreground text-center leading-tight">
                       {skill.name}
-                    </span>
+                  </span>
                   </div>
                 ))}
               </div>
@@ -1472,8 +1464,8 @@ Happy exploring! 🐧`}
     }
 
     return (
-      <div className="h-full bg-card p-6 overflow-y-auto">
-        <h2 className="text-2xl font-bold text-foreground mb-6">System Settings</h2>
+    <div className="h-full bg-card p-6 overflow-y-auto">
+      <h2 className="text-2xl font-bold text-foreground mb-6">System Settings</h2>
         <div className="space-y-6">
           <div>
             <h3 className="text-lg font-semibold text-foreground mb-3">Wallpaper</h3>
@@ -1501,20 +1493,20 @@ Happy exploring! 🐧`}
               ))}
             </div>
           </div>
-          <div className="border border-border rounded-lg p-4">
-            <h3 className="font-semibold text-foreground mb-2">Display</h3>
-            <p className="text-card-foreground text-sm">Resolution: 1920x1080</p>
-            <p className="text-card-foreground text-sm">Theme: Ubuntu Default</p>
-          </div>
-          <div className="border border-border rounded-lg p-4">
-            <h3 className="font-semibold text-foreground mb-2">System Info</h3>
-            <p className="text-card-foreground text-sm">OS: Ubuntu 22.04 LTS</p>
-            <p className="text-card-foreground text-sm">Kernel: 5.15.0-generic</p>
-            <p className="text-card-foreground text-sm">Desktop: Portfolio Desktop</p>
-          </div>
+        <div className="border border-border rounded-lg p-4">
+          <h3 className="font-semibold text-foreground mb-2">Display</h3>
+          <p className="text-card-foreground text-sm">Resolution: 1920x1080</p>
+          <p className="text-card-foreground text-sm">Theme: Ubuntu Default</p>
+        </div>
+        <div className="border border-border rounded-lg p-4">
+          <h3 className="font-semibold text-foreground mb-2">System Info</h3>
+          <p className="text-card-foreground text-sm">OS: Ubuntu 22.04 LTS</p>
+          <p className="text-card-foreground text-sm">Kernel: 5.15.0-generic</p>
+          <p className="text-card-foreground text-sm">Desktop: Portfolio Desktop</p>
         </div>
       </div>
-    )
+    </div>
+  )
   }
 
   const SoftwareCenterWindow = () => (
@@ -2695,9 +2687,9 @@ Happy exploring! 🐧`}
             <div className="mt-4">
               <span
                 className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${details.status === "Production Ready" || details.status === "Live"
-                  ? "bg-chart-3/20 text-chart-3"
-                  : "bg-chart-5/20 text-chart-5"
-                  }`}
+                    ? "bg-chart-3/20 text-chart-3"
+                    : "bg-chart-5/20 text-chart-5"
+                }`}
               >
                 {details.status}
               </span>
@@ -2861,7 +2853,7 @@ Happy exploring! 🐧`}
               : "hover:bg-white/10 hover:scale-105 hover:shadow-lg"
               }`}>
               <div className="drop-shadow-lg w-12 h-12 flex items-center justify-center">
-                {icon.icon}
+              {icon.icon}
               </div>
               <span className="text-white text-xs text-center w-full truncate font-medium drop-shadow-md leading-tight">{icon.name}</span>
             </div>
@@ -2949,10 +2941,10 @@ Happy exploring! 🐧`}
             size="sm"
             className="text-white hover:bg-white/10 px-3 py-2 rounded-md transition-all duration-200"
           >
-            <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2">
               <div className="w-6 h-6 bg-gradient-to-br from-[#E95420] to-[#F7A072] rounded-md flex items-center justify-center">
                 <span className="text-xs font-bold text-white">U</span>
-              </div>
+            </div>
               <span className="text-sm font-medium">Show Applications</span>
             </div>
           </Button>
@@ -2962,20 +2954,20 @@ Happy exploring! 🐧`}
           {/* Window buttons */}
           <div className="flex items-center space-x-1">
             {memoizedWindows.map((window) => (
-              <Button
-                key={window.id}
-                variant="ghost"
-                size="sm"
+            <Button
+              key={window.id}
+              variant="ghost"
+              size="sm"
                 className={`text-white hover:bg-white/10 px-3 py-2 rounded-md transition-all duration-200 ${window.isMinimized
                   ? "opacity-60 bg-white/5"
                   : "bg-white/10 shadow-md"
                   }`}
-                onClick={() => (window.isMinimized ? restoreWindow(window.id) : bringToFront(window.id))}
-              >
+              onClick={() => (window.isMinimized ? restoreWindow(window.id) : bringToFront(window.id))}
+            >
                 <span className="text-sm font-medium">{window.title}</span>
-              </Button>
-            ))}
-          </div>
+            </Button>
+          ))}
+        </div>
         </div>
 
         {/* System tray */}
