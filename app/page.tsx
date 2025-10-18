@@ -2018,92 +2018,17 @@ Happy exploring! 🐧`}
     }
 
     return (
-      <div className="w-full h-full bg-black text-white flex flex-col">
-        {/* Real Spotify Embed */}
-        <div className="flex-1">
-          <iframe
-            title="Spotify Embed: Build Inc. Playlist"
-            src="https://open.spotify.com/embed/playlist/6pEbErhMyNati1TEcZ8jsz?utm_source=generator&theme=0"
-            width="100%"
-            height="100%"
-            frameBorder="0"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy"
-            className="rounded-lg"
-          />
-        </div>
-        
-        {/* Custom Controls Overlay */}
-        <div className="bg-gray-900 border-t border-gray-800 p-4">
-          <div className="flex items-center justify-between">
-            {/* Current Track Info */}
-            <div className="flex items-center space-x-4 w-1/4">
-              <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-500 rounded flex items-center justify-center">
-                <span className="text-xl">🔱</span>
-              </div>
-              <div>
-                <div className="font-medium text-white text-sm">Build Inc.</div>
-                <div className="text-xs text-gray-400">The worst thing you can do is know what you need to do and not do it</div>
-              </div>
-            </div>
-
-            {/* Center Controls */}
-            <div className="flex flex-col items-center space-y-2 w-1/2">
-              <div className="flex items-center space-x-6">
-                <button
-                  onClick={() => setIsShuffled(!isShuffled)}
-                  className={`w-6 h-6 ${isShuffled ? "text-green-400" : "text-gray-400"} hover:text-white transition-colors`}
-                >
-                  🔀
-                </button>
-                <button
-                  onClick={prevTrack}
-                  className="w-8 h-8 text-gray-400 hover:text-white transition-colors"
-                >
-                  ⏮
-                </button>
-                <button
-                  onClick={togglePlay}
-                  className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-black hover:scale-105 transition-transform"
-                >
-                  {isPlaying ? "⏸" : "▶"}
-                </button>
-                <button
-                  onClick={nextTrack}
-                  className="w-8 h-8 text-gray-400 hover:text-white transition-colors"
-                >
-                  ⏭
-                </button>
-                <button
-                  onClick={() => setIsRepeated(!isRepeated)}
-                  className={`w-6 h-6 ${isRepeated ? "text-green-400" : "text-gray-400"} hover:text-white transition-colors`}
-                >
-                  🔁
-                </button>
-              </div>
-              <div className="flex items-center space-x-2 w-full max-w-md">
-                <span className="text-xs text-gray-400 w-8">0:00</span>
-                <div className="flex-1 bg-gray-600 rounded-full h-1">
-                  <div className="bg-white h-1 rounded-full transition-all duration-300" style={{ width: "0%" }}></div>
-                </div>
-                <span className="text-xs text-gray-400 w-8">26:16</span>
-              </div>
-            </div>
-
-            {/* Volume Control */}
-            <div className="flex items-center space-x-2 w-1/4 justify-end">
-              <span className="text-gray-400 text-sm">🔊</span>
-              <input
-                type="range"
-                min="0"
-                max="100"
-                value={volume}
-                onChange={(e) => setVolume(Number(e.target.value))}
-                className="w-24 bg-gray-600 rounded-full h-1"
-              />
-            </div>
-          </div>
-        </div>
+      <div className="w-full h-full bg-black">
+        <iframe
+          title="Spotify Embed: Build Inc. Playlist"
+          src="https://open.spotify.com/embed/playlist/6pEbErhMyNati1TEcZ8jsz?utm_source=generator&theme=0"
+          width="100%"
+          height="100%"
+          frameBorder="0"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+          className="rounded-lg"
+        />
       </div>
     )
   }
