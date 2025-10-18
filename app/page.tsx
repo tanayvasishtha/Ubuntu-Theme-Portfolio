@@ -1182,9 +1182,9 @@ Happy exploring! 🐧`}
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-6">
           <div className="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden border-2 border-primary">
-            <img 
-              src="/Best Pfp.jpg" 
-              alt="Tanay Vasishtha" 
+            <img
+              src="/Best Pfp.jpg"
+              alt="Tanay Vasishtha"
               className="w-full h-full object-cover"
             />
           </div>
@@ -1440,21 +1440,56 @@ Happy exploring! 🐧`}
     </div>
   )
 
-  const GalleryWindow = () => (
-    <div className="h-full bg-card p-6 overflow-y-auto">
-      <h2 className="text-2xl font-bold text-foreground mb-6">Project Gallery</h2>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-        {Array.from({ length: 6 }, (_, i) => (
-          <div
-            key={i}
-            className="aspect-square bg-muted rounded-lg flex items-center justify-center border border-border"
-          >
-            <ImageIcon className="w-8 h-8 text-muted-foreground" />
-          </div>
-        ))}
+  const GalleryWindow = () => {
+    const projects = [
+      {
+        name: "Dark Mode Bang",
+        image: "/assets/project-gallery/DarkModeBangSc.png",
+        description: "Universal dark theme browser extension"
+      },
+      {
+        name: "Speed Bang", 
+        image: "/assets/project-gallery/SpeedBangSc.png",
+        description: "Multiplatform video speed controller"
+      },
+      {
+        name: "Volume Bang",
+        image: "/assets/project-gallery/VolumeBangSc.png", 
+        description: "Premium audio booster extension"
+      },
+      {
+        name: "Volume Bang Logo",
+        image: "/assets/project-gallery/VolumeBanglogo.png",
+        description: "Volume Bang branding and logo design"
+      }
+    ]
+
+    return (
+      <div className="h-full bg-card p-6 overflow-y-auto">
+        <h2 className="text-2xl font-bold text-foreground mb-6">Project Gallery</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {projects.map((project, index) => (
+            <div
+              key={index}
+              className="bg-muted rounded-lg border border-border overflow-hidden hover:shadow-lg transition-shadow"
+            >
+              <div className="aspect-video bg-gray-100 flex items-center justify-center">
+                <img 
+                  src={project.image} 
+                  alt={project.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="p-4">
+                <h3 className="font-semibold text-foreground mb-2">{project.name}</h3>
+                <p className="text-sm text-card-foreground">{project.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 
   const SettingsWindow = () => {
     const wallpapers = [
