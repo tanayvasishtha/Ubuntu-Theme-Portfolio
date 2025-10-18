@@ -48,9 +48,9 @@ const UbuntuLoadingScreen = ({ onLoadingComplete }: { onLoadingComplete: () => v
         setLoadingText(step.text)
         currentStep++
       } else {
-          clearInterval(progressTimer)
+        clearInterval(progressTimer)
         setTimeout(() => onLoadingComplete(), 800)
-        }
+      }
     }, 300)
 
     return () => {
@@ -86,7 +86,7 @@ const UbuntuLoadingScreen = ({ onLoadingComplete }: { onLoadingComplete: () => v
           className="h-full bg-gradient-to-r from-[#E95420] to-[#F7A072] transition-all duration-300 ease-out"
           style={{ width: `${loadingProgress}%` }}
         />
-        </div>
+      </div>
 
       {/* Loading text */}
       <p className="text-white text-lg font-light mb-2">{loadingText}</p>
@@ -663,13 +663,13 @@ export default function UbuntuPortfolio() {
       prev.map((w) =>
         w.id === id
           ? {
-              ...w,
-              isMaximized: !w.isMaximized,
-              position: w.isMaximized ? { x: 50, y: 50 } : { x: 0, y: 48 },
-              size: w.isMaximized
-                ? { width: 640, height: 400 }
-                : { width: window.innerWidth, height: window.innerHeight - 96 },
-            }
+            ...w,
+            isMaximized: !w.isMaximized,
+            position: w.isMaximized ? { x: 50, y: 50 } : { x: 0, y: 48 },
+            size: w.isMaximized
+              ? { width: 640, height: 400 }
+              : { width: window.innerWidth, height: window.innerHeight - 96 },
+          }
           : w,
       ),
     )
@@ -1076,9 +1076,9 @@ export default function UbuntuPortfolio() {
             <div className="mt-4">
               <span
                 className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${project.status === "Completed" || project.status === "Live"
-                    ? "bg-chart-3/20 text-chart-3"
-                    : "bg-chart-5/20 text-chart-5"
-                }`}
+                  ? "bg-chart-3/20 text-chart-3"
+                  : "bg-chart-5/20 text-chart-5"
+                  }`}
               >
                 {project.status}
               </span>
@@ -1275,7 +1275,7 @@ Happy exploring! 🐧`}
                     </div>
                     <span className="text-xs text-card-foreground text-center leading-tight">
                       {skill.name}
-                  </span>
+                    </span>
                   </div>
                 ))}
               </div>
@@ -1358,8 +1358,8 @@ Happy exploring! 🐧`}
     }
 
     return (
-    <div className="h-full bg-card p-6 overflow-y-auto">
-      <h2 className="text-2xl font-bold text-foreground mb-6">System Settings</h2>
+      <div className="h-full bg-card p-6 overflow-y-auto">
+        <h2 className="text-2xl font-bold text-foreground mb-6">System Settings</h2>
         <div className="space-y-6">
           <div>
             <h3 className="text-lg font-semibold text-foreground mb-3">Wallpaper</h3>
@@ -1387,20 +1387,20 @@ Happy exploring! 🐧`}
               ))}
             </div>
           </div>
-        <div className="border border-border rounded-lg p-4">
-          <h3 className="font-semibold text-foreground mb-2">Display</h3>
-          <p className="text-card-foreground text-sm">Resolution: 1920x1080</p>
-          <p className="text-card-foreground text-sm">Theme: Ubuntu Default</p>
-        </div>
-        <div className="border border-border rounded-lg p-4">
-          <h3 className="font-semibold text-foreground mb-2">System Info</h3>
-          <p className="text-card-foreground text-sm">OS: Ubuntu 22.04 LTS</p>
-          <p className="text-card-foreground text-sm">Kernel: 5.15.0-generic</p>
-          <p className="text-card-foreground text-sm">Desktop: Portfolio Desktop</p>
+          <div className="border border-border rounded-lg p-4">
+            <h3 className="font-semibold text-foreground mb-2">Display</h3>
+            <p className="text-card-foreground text-sm">Resolution: 1920x1080</p>
+            <p className="text-card-foreground text-sm">Theme: Ubuntu Default</p>
+          </div>
+          <div className="border border-border rounded-lg p-4">
+            <h3 className="font-semibold text-foreground mb-2">System Info</h3>
+            <p className="text-card-foreground text-sm">OS: Ubuntu 22.04 LTS</p>
+            <p className="text-card-foreground text-sm">Kernel: 5.15.0-generic</p>
+            <p className="text-card-foreground text-sm">Desktop: Portfolio Desktop</p>
+          </div>
         </div>
       </div>
-    </div>
-  )
+    )
   }
 
   const SoftwareCenterWindow = () => (
@@ -1904,6 +1904,7 @@ Happy exploring! 🐧`}
     const [isShuffled, setIsShuffled] = useState(false)
     const [isRepeated, setIsRepeated] = useState(false)
     const [audioRef, setAudioRef] = useState<HTMLAudioElement | null>(null)
+    const [spotifyEmbed, setSpotifyEmbed] = useState(true)
 
     const playlists = {
       favorites: {
@@ -2017,216 +2018,89 @@ Happy exploring! 🐧`}
     }
 
     return (
-      <div className="w-full h-full bg-black text-white flex">
-        {/* Hidden Audio Element */}
-        <audio
-          ref={setAudioRef}
-          preload="metadata"
-        />
-
-        {/* Sidebar */}
-        <div className="w-64 bg-black border-r border-gray-800 flex flex-col">
-          <div className="p-6">
-            <div className="flex items-center space-x-3 mb-8">
-              <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-sm">♪</span>
-              </div>
-              <span className="text-xl font-bold">Spotify</span>
-            </div>
-
-            <nav className="space-y-1">
-              <button
-                onClick={() => setCurrentPlaylist("favorites")}
-                className={`w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${currentPlaylist === "favorites"
-                  ? "bg-gray-800 text-white"
-                  : "text-gray-400 hover:text-white hover:bg-gray-800"
-                  }`}
-              >
-                🔱 Build Inc.
-              </button>
-              <button
-                onClick={() => setCurrentPlaylist("topHits")}
-                className={`w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${currentPlaylist === "topHits"
-                  ? "bg-gray-800 text-white"
-                  : "text-gray-400 hover:text-white hover:bg-gray-800"
-                  }`}
-              >
-                🔥 Top Hits
-              </button>
-              <button
-                onClick={() => setCurrentPlaylist("classics")}
-                className={`w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${currentPlaylist === "classics"
-                  ? "bg-gray-800 text-white"
-                  : "text-gray-400 hover:text-white hover:bg-gray-800"
-                  }`}
-              >
-                🎭 Classics
-              </button>
-            </nav>
-          </div>
+      <div className="w-full h-full bg-black text-white flex flex-col">
+        {/* Real Spotify Embed */}
+        <div className="flex-1">
+          <iframe
+            title="Spotify Embed: Build Inc. Playlist"
+            src="https://open.spotify.com/embed/playlist/6pEbErhMyNati1TEcZ8jsz?utm_source=generator&theme=0"
+            width="100%"
+            height="100%"
+            frameBorder="0"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+            className="rounded-lg"
+          />
         </div>
-
-        {/* Main Content */}
-        <div className="flex-1 flex flex-col bg-gradient-to-b from-gray-900 to-black">
-          {/* Header */}
-          <div className="bg-black/50 backdrop-blur-md p-4 flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <button className="w-8 h-8 bg-black/70 rounded-full flex items-center justify-center hover:bg-black/90 transition-colors">
-                <span className="text-gray-400">←</span>
-              </button>
-              <button className="w-8 h-8 bg-black/70 rounded-full flex items-center justify-center hover:bg-black/90 transition-colors">
-                <span className="text-gray-400">→</span>
-              </button>
-            </div>
-            <div className="flex items-center space-x-4">
-              <div className="w-8 h-8 bg-gray-600 rounded-full"></div>
-            </div>
-          </div>
-
-          {/* Playlist Header */}
-          <div className="p-6">
-            <div className="flex items-end space-x-6">
-              <div className="w-48 h-48 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center shadow-2xl">
-                <span className="text-8xl">🎵</span>
+        
+        {/* Custom Controls Overlay */}
+        <div className="bg-gray-900 border-t border-gray-800 p-4">
+          <div className="flex items-center justify-between">
+            {/* Current Track Info */}
+            <div className="flex items-center space-x-4 w-1/4">
+              <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-500 rounded flex items-center justify-center">
+                <span className="text-xl">🔱</span>
               </div>
-              <div className="flex-1">
-                <p className="text-sm text-gray-400 uppercase tracking-wider">Playlist</p>
-                <h1 className="text-6xl font-bold mt-2 mb-4">{playlists[currentPlaylist as keyof typeof playlists].name}</h1>
-                <p className="text-gray-400 text-lg">{playlists[currentPlaylist as keyof typeof playlists].description}</p>
-                <div className="flex items-center space-x-4 mt-4">
-                  <span className="text-sm text-gray-400">{currentTracks.length} songs</span>
-                  <span className="text-sm text-gray-400">•</span>
-                  <span className="text-sm text-gray-400">About {Math.floor(currentTracks.reduce((acc, track) => acc + parseDuration(track.duration), 0) / 60)} min</span>
-                </div>
+              <div>
+                <div className="font-medium text-white text-sm">Build Inc.</div>
+                <div className="text-xs text-gray-400">The worst thing you can do is know what you need to do and not do it</div>
               </div>
             </div>
-          </div>
 
-          {/* Play Button */}
-          <div className="px-6 mb-6">
-            <button
-              onClick={togglePlay}
-              className="w-14 h-14 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-400 hover:scale-105 transition-all duration-200 shadow-lg"
-            >
-              <span className="text-2xl text-black">{isPlaying ? "⏸" : "▶"}</span>
-            </button>
-          </div>
-
-          {/* Track List */}
-          <div className="flex-1 px-6 pb-20 overflow-y-auto">
-            <div className="space-y-2">
-              {currentTracks.map((track, index) => (
-                <div
-                  key={track.id}
-                  className={`flex items-center space-x-4 p-3 rounded-md hover:bg-white/10 cursor-pointer group transition-colors ${index === currentTrack ? "bg-white/10" : ""
-                    }`}
-                  onClick={() => handleTrackClick(index)}
+            {/* Center Controls */}
+            <div className="flex flex-col items-center space-y-2 w-1/2">
+              <div className="flex items-center space-x-6">
+                <button
+                  onClick={() => setIsShuffled(!isShuffled)}
+                  className={`w-6 h-6 ${isShuffled ? "text-green-400" : "text-gray-400"} hover:text-white transition-colors`}
                 >
-                  <div className="w-4 text-center text-gray-400 group-hover:text-white transition-colors">
-                    {index === currentTrack && isPlaying ? (
-                      <div className="flex items-center justify-center">
-                        <div className="w-1 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                        <div className="w-1 h-2 bg-green-500 rounded-full animate-pulse ml-1"></div>
-                        <div className="w-1 h-4 bg-green-500 rounded-full animate-pulse ml-1"></div>
-                      </div>
-                    ) : (
-                      index + 1
-                    )}
-                  </div>
-                  <div className="flex-1 flex items-center space-x-4">
-                    <div className="w-10 h-10 bg-gray-700 rounded flex items-center justify-center">
-                      <span className="text-lg">{track.cover}</span>
-                    </div>
-                    <div className="flex-1">
-                      <div className={`font-medium ${index === currentTrack ? "text-green-400" : "text-white"} group-hover:text-white transition-colors`}>
-                        {track.title}
-                      </div>
-                      <div className="text-sm text-gray-400 group-hover:text-white transition-colors">{track.artist}</div>
-                    </div>
-                  </div>
-                  <div className="text-sm text-gray-400 group-hover:text-white transition-colors">{track.duration}</div>
+                  🔀
+                </button>
+                <button
+                  onClick={prevTrack}
+                  className="w-8 h-8 text-gray-400 hover:text-white transition-colors"
+                >
+                  ⏮
+                </button>
+                <button
+                  onClick={togglePlay}
+                  className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-black hover:scale-105 transition-transform"
+                >
+                  {isPlaying ? "⏸" : "▶"}
+                </button>
+                <button
+                  onClick={nextTrack}
+                  className="w-8 h-8 text-gray-400 hover:text-white transition-colors"
+                >
+                  ⏭
+                </button>
+                <button
+                  onClick={() => setIsRepeated(!isRepeated)}
+                  className={`w-6 h-6 ${isRepeated ? "text-green-400" : "text-gray-400"} hover:text-white transition-colors`}
+                >
+                  🔁
+                </button>
+              </div>
+              <div className="flex items-center space-x-2 w-full max-w-md">
+                <span className="text-xs text-gray-400 w-8">0:00</span>
+                <div className="flex-1 bg-gray-600 rounded-full h-1">
+                  <div className="bg-white h-1 rounded-full transition-all duration-300" style={{ width: "0%" }}></div>
                 </div>
-              ))}
+                <span className="text-xs text-gray-400 w-8">26:16</span>
+              </div>
             </div>
-          </div>
 
-          {/* Player Controls */}
-          <div className="bg-gray-900 border-t border-gray-800 p-4">
-            <div className="flex items-center justify-between">
-              {/* Current Track Info */}
-              <div className="flex items-center space-x-4 w-1/4">
-                <div className="w-14 h-14 bg-gray-700 rounded flex items-center justify-center">
-                  <span className="text-xl">{currentSong.cover}</span>
-                </div>
-                <div>
-                  <div className="font-medium text-white text-sm">{currentSong.title}</div>
-                  <div className="text-xs text-gray-400">{currentSong.artist}</div>
-                </div>
-              </div>
-
-              {/* Center Controls */}
-              <div className="flex flex-col items-center space-y-2 w-1/2">
-                <div className="flex items-center space-x-6">
-                  <button
-                    onClick={() => setIsShuffled(!isShuffled)}
-                    className={`w-6 h-6 ${isShuffled ? "text-green-400" : "text-gray-400"} hover:text-white transition-colors`}
-                  >
-                    🔀
-                  </button>
-                  <button
-                    onClick={prevTrack}
-                    className="w-8 h-8 text-gray-400 hover:text-white transition-colors"
-                  >
-                    ⏮
-                  </button>
-                  <button
-                    onClick={togglePlay}
-                    className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-black hover:scale-105 transition-transform"
-                  >
-                    {isPlaying ? "⏸" : "▶"}
-                  </button>
-                  <button
-                    onClick={nextTrack}
-                    className="w-8 h-8 text-gray-400 hover:text-white transition-colors"
-                  >
-                    ⏭
-                  </button>
-                  <button
-                    onClick={() => setIsRepeated(!isRepeated)}
-                    className={`w-6 h-6 ${isRepeated ? "text-green-400" : "text-gray-400"} hover:text-white transition-colors`}
-                  >
-                    🔁
-                  </button>
-                </div>
-                <div className="flex items-center space-x-2 w-full max-w-md">
-                  <span className="text-xs text-gray-400 w-8">{formatTime(currentTime)}</span>
-                  <div className="flex-1 bg-gray-600 rounded-full h-1">
-                    <div
-                      className="bg-white h-1 rounded-full transition-all duration-300"
-                      style={{ width: `${(currentTime / parseDuration(currentSong.duration)) * 100}%` }}
-                    ></div>
-                  </div>
-                  <span className="text-xs text-gray-400 w-8">{currentSong.duration}</span>
-                </div>
-              </div>
-
-              {/* Volume Control */}
-              <div className="flex items-center space-x-2 w-1/4 justify-end">
-                <span className="text-gray-400 text-sm">🔊</span>
-                <input
-                  type="range"
-                  min="0"
-                  max="100"
-                  value={volume}
-                  onChange={(e) => {
-                    setVolume(Number(e.target.value))
-                    if (audioRef) {
-                      audioRef.volume = Number(e.target.value) / 100
-                    }
-                  }}
-                  className="w-24 bg-gray-600 rounded-full h-1"
-                />
-              </div>
+            {/* Volume Control */}
+            <div className="flex items-center space-x-2 w-1/4 justify-end">
+              <span className="text-gray-400 text-sm">🔊</span>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={volume}
+                onChange={(e) => setVolume(Number(e.target.value))}
+                className="w-24 bg-gray-600 rounded-full h-1"
+              />
             </div>
           </div>
         </div>
@@ -2781,9 +2655,9 @@ Happy exploring! 🐧`}
             <div className="mt-4">
               <span
                 className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${details.status === "Production Ready" || details.status === "Live"
-                    ? "bg-chart-3/20 text-chart-3"
-                    : "bg-chart-5/20 text-chart-5"
-                }`}
+                  ? "bg-chart-3/20 text-chart-3"
+                  : "bg-chart-5/20 text-chart-5"
+                  }`}
               >
                 {details.status}
               </span>
@@ -2947,7 +2821,7 @@ Happy exploring! 🐧`}
               : "hover:bg-white/10 hover:scale-105 hover:shadow-lg"
               }`}>
               <div className="drop-shadow-lg">
-              {icon.icon}
+                {icon.icon}
               </div>
               <span className="text-white text-xs text-center max-w-16 truncate font-medium drop-shadow-md">{icon.name}</span>
             </div>
@@ -3035,10 +2909,10 @@ Happy exploring! 🐧`}
             size="sm"
             className="text-white hover:bg-white/10 px-3 py-2 rounded-md transition-all duration-200"
           >
-        <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2">
               <div className="w-6 h-6 bg-gradient-to-br from-[#E95420] to-[#F7A072] rounded-md flex items-center justify-center">
                 <span className="text-xs font-bold text-white">U</span>
-            </div>
+              </div>
               <span className="text-sm font-medium">Show Applications</span>
             </div>
           </Button>
@@ -3048,20 +2922,20 @@ Happy exploring! 🐧`}
           {/* Window buttons */}
           <div className="flex items-center space-x-1">
             {memoizedWindows.map((window) => (
-            <Button
-              key={window.id}
-              variant="ghost"
-              size="sm"
+              <Button
+                key={window.id}
+                variant="ghost"
+                size="sm"
                 className={`text-white hover:bg-white/10 px-3 py-2 rounded-md transition-all duration-200 ${window.isMinimized
                   ? "opacity-60 bg-white/5"
                   : "bg-white/10 shadow-md"
                   }`}
-              onClick={() => (window.isMinimized ? restoreWindow(window.id) : bringToFront(window.id))}
-            >
+                onClick={() => (window.isMinimized ? restoreWindow(window.id) : bringToFront(window.id))}
+              >
                 <span className="text-sm font-medium">{window.title}</span>
-            </Button>
-          ))}
-        </div>
+              </Button>
+            ))}
+          </div>
         </div>
 
         {/* System tray */}
