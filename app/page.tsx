@@ -2281,9 +2281,24 @@ Happy exploring! 🐧`}
             <span className="text-sm font-medium text-gray-700">Firefox</span>
           </div>
           <div className="flex items-center space-x-2">
-            <button
+            <button 
+              className="w-3 h-3 bg-yellow-500 rounded-full hover:bg-yellow-600 flex items-center justify-center"
+              onClick={() => minimizeWindow("firefox")}
+              title="Minimize"
+            >
+              <Minus className="w-2 h-2 text-white" />
+            </button>
+            <button 
+              className="w-3 h-3 bg-green-500 rounded-full hover:bg-green-600 flex items-center justify-center"
+              onClick={() => maximizeWindow("firefox")}
+              title="Maximize"
+            >
+              <Square className="w-2 h-2 text-white" />
+            </button>
+            <button 
               className="w-3 h-3 bg-red-500 rounded-full hover:bg-red-600 flex items-center justify-center"
               onClick={() => closeWindow("firefox")}
+              title="Close"
             >
               <X className="w-2 h-2 text-white" />
             </button>
@@ -2946,18 +2961,7 @@ Happy exploring! 🐧`}
               </div>
               <div className="flex space-x-2">
                 <button
-                  className="w-4 h-4 bg-destructive rounded-full hover:bg-destructive/80 transition-colors flex items-center justify-center"
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    closeWindow(window.id)
-                  }}
-                  title="Close"
-                  aria-label="Close window"
-                >
-                  <X className="w-3 h-3 text-destructive-foreground" />
-                </button>
-                <button
-                  className="w-4 h-4 bg-chart-5 rounded-full hover:bg-chart-5/80 transition-colors flex items-center justify-center"
+                  className="w-4 h-4 bg-yellow-500 rounded-full hover:bg-yellow-600 transition-colors flex items-center justify-center"
                   onClick={(e) => {
                     e.stopPropagation()
                     minimizeWindow(window.id)
@@ -2965,18 +2969,34 @@ Happy exploring! 🐧`}
                   title="Minimize"
                   aria-label="Minimize window"
                 >
-                  <Minus className="w-3 h-3 text-foreground" />
+                  <Minus className="w-3 h-3 text-white" />
                 </button>
                 <button
-                  className="w-4 h-4 bg-chart-3 rounded-full hover:bg-chart-3/80 transition-colors flex items-center justify-center"
+                  className="w-4 h-4 bg-green-500 rounded-full hover:bg-green-600 transition-colors flex items-center justify-center"
                   onClick={(e) => {
                     e.stopPropagation()
-                    maximizeWindow(window.id)
+                    // Toggle maximize/restore functionality
+                    if (window.isMaximized) {
+                      restoreWindow(window.id)
+                    } else {
+                      maximizeWindow(window.id)
+                    }
                   }}
-                  title="Maximize"
-                  aria-label="Maximize window"
+                  title={window.isMaximized ? "Restore" : "Maximize"}
+                  aria-label={window.isMaximized ? "Restore window" : "Maximize window"}
                 >
-                  <Square className="w-3 h-3 text-foreground" />
+                  <Square className="w-3 h-3 text-white" />
+                </button>
+                <button
+                  className="w-4 h-4 bg-red-500 rounded-full hover:bg-red-600 transition-colors flex items-center justify-center"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    closeWindow(window.id)
+                  }}
+                  title="Close"
+                  aria-label="Close window"
+                >
+                  <X className="w-3 h-3 text-white" />
                 </button>
               </div>
             </div>
