@@ -137,6 +137,18 @@ export default function UbuntuPortfolio() {
   const [isClient, setIsClient] = useState(false)
   const [currentWallpaper, setCurrentWallpaper] = useState("/assets/wallpapers/ubuntu-wallpaper.jpg")
   const [notifications, setNotifications] = useState<Array<{ id: string, message: string, type: 'info' | 'success' | 'warning' | 'error' }>>([])
+  const [backgroundMusic, setBackgroundMusic] = useState<{ isPlaying: boolean; currentTrack: number; volume: number }>({ isPlaying: false, currentTrack: 0, volume: 50 })
+
+  // Background music tracks (Build Inc. playlist)
+  const backgroundTracks = [
+    { id: 1, title: "Father Stretch My Hands Pt. 1", artist: "Kanye West", duration: "2:15", audioUrl: "https://www.bensound.com/bensound-music/bensound-sunny.mp3" },
+    { id: 2, title: "Heartless", artist: "Kanye West", duration: "3:31", audioUrl: "https://www.bensound.com/bensound-music/bensound-creativeminds.mp3" },
+    { id: 3, title: "Flashing Lights", artist: "Kanye West, Dwele", duration: "3:57", audioUrl: "https://www.bensound.com/bensound-music/bensound-happiness.mp3" },
+    { id: 4, title: "I Wonder", artist: "Kanye West", duration: "4:03", audioUrl: "https://www.bensound.com/bensound-music/bensound-energy.mp3" },
+    { id: 5, title: "Good Life", artist: "Kanye West, T-Pain", duration: "3:27", audioUrl: "https://www.bensound.com/bensound-music/bensound-dreams.mp3" },
+    { id: 6, title: "Skyfall", artist: "Adele", duration: "4:46", audioUrl: "https://www.bensound.com/bensound-music/bensound-sweet.mp3" },
+    { id: 7, title: "Happy Nation - 2015 Remastered", artist: "Ace of Base", duration: "4:16", audioUrl: "https://www.bensound.com/bensound-music/bensound-epic.mp3" }
+  ]
 
   // Ubuntu-style sound effects (visual feedback)
   const playClickSound = () => {
@@ -1971,6 +1983,15 @@ Happy exploring! 🐧`}
       }
     }, [currentSong, audioRef])
 
+    // Sync background music with Spotify embed
+    useEffect(() => {
+      const audio = document.getElementById('backgroundMusic') as HTMLAudioElement
+      if (audio && backgroundMusic.isPlaying) {
+        audio.src = backgroundTracks[backgroundMusic.currentTrack].audioUrl
+        audio.play()
+      }
+    }, [backgroundMusic.currentTrack])
+
     const formatTime = (seconds: number) => {
       const mins = Math.floor(seconds / 60)
       const secs = Math.floor(seconds % 60)
@@ -2015,10 +2036,21 @@ Happy exploring! 🐧`}
         audioRef.currentTime = 0
         audioRef.play()
       }
+      // Start background music for continuous playback
+      startBackgroundMusic(index)
+    }
+
+    const startBackgroundMusic = (trackIndex: number) => {
+      const audio = document.getElementById('backgroundMusic') as HTMLAudioElement
+      if (audio && backgroundTracks[trackIndex]) {
+        audio.src = backgroundTracks[trackIndex].audioUrl
+        audio.play()
+        setBackgroundMusic(prev => ({ ...prev, isPlaying: true, currentTrack: trackIndex }))
+      }
     }
 
     return (
-      <div className="w-full h-full bg-black">
+      <div className="w-full h-full bg-black relative">
         <iframe
           title="Spotify Embed: Build Inc. Playlist"
           src="https://open.spotify.com/embed/playlist/6pEbErhMyNati1TEcZ8jsz?utm_source=generator&theme=0"
@@ -2029,6 +2061,16 @@ Happy exploring! 🐧`}
           loading="lazy"
           className="rounded-lg"
         />
+        
+        {/* Background Music Play Button Overlay */}
+        <div className="absolute top-4 right-4 z-10">
+          <button
+            onClick={() => startBackgroundMusic(0)}
+            className="bg-green-500 hover:bg-green-400 text-white px-4 py-2 rounded-full font-medium shadow-lg transition-all duration-200 hover:scale-105"
+          >
+            🎵 Play Background Music
+          </button>
+        </div>
       </div>
     )
   }
@@ -2651,6 +2693,23 @@ Happy exploring! 🐧`}
 
   return (
     <div className="h-screen w-screen overflow-hidden relative bg-gradient-to-br from-purple-900 via-purple-800 to-orange-600">
+      {/* Background Music Audio Element */}
+      <audio
+        id="backgroundMusic"
+        preload="metadata"
+        volume={backgroundMusic.volume / 100}
+        onEnded={() => {
+          const nextTrack = (backgroundMusic.currentTrack + 1) % backgroundTracks.length
+          setBackgroundMusic(prev => ({ ...prev, currentTrack: nextTrack }))
+        }}
+        onLoadedData={() => {
+          const audio = document.getElementById('backgroundMusic') as HTMLAudioElement
+          if (audio && backgroundMusic.isPlaying) {
+            audio.play()
+          }
+        }}
+      />
+
       {/* Desktop Wallpaper */}
       <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${currentWallpaper})` }} />
 
@@ -2682,6 +2741,39 @@ Happy exploring! 🐧`}
           <div className="text-sm text-white font-mono bg-black/20 px-3 py-1 rounded-md">
             {isClient ? currentTime : "--:--:--"}
           </div>
+
+          {/* Background Music Controls */}
+          {backgroundMusic.isPlaying && (
+            <div className="flex items-center space-x-2 bg-black/20 px-3 py-1 rounded-md">
+              <button
+                onClick={() => {
+                  const audio = document.getElementById('backgroundMusic') as HTMLAudioElement
+                  if (audio) {
+                    audio.pause()
+                    setBackgroundMusic(prev => ({ ...prev, isPlaying: false }))
+                  }
+                }}
+                className="text-white hover:text-red-400 transition-colors"
+              >
+                ⏸
+              </button>
+              <div className="text-xs text-gray-300 max-w-32 truncate">
+                {backgroundTracks[backgroundMusic.currentTrack]?.title}
+              </div>
+              <button
+                onClick={() => {
+                  const audio = document.getElementById('backgroundMusic') as HTMLAudioElement
+                  if (audio) {
+                    audio.play()
+                    setBackgroundMusic(prev => ({ ...prev, isPlaying: true }))
+                  }
+                }}
+                className="text-white hover:text-green-400 transition-colors"
+              >
+                ▶
+              </button>
+            </div>
+          )}
 
           {/* System menu */}
           <Button
