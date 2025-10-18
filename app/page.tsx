@@ -1602,33 +1602,33 @@ Happy exploring! 🐧`}
         name: "Your Favorites",
         description: "Songs you love",
         tracks: [
-          { id: 1, title: "Skyfall", artist: "Adele", duration: "4:46", album: "Skyfall", year: "2012", cover: "🎵", audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" },
-          { id: 2, title: "God's Plan", artist: "Drake", duration: "3:18", album: "Scorpion", year: "2018", cover: "🎵", audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" },
-          { id: 3, title: "Happy Nation", artist: "Ace of Base", duration: "4:16", album: "Happy Nation", year: "1992", cover: "🎵", audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" },
-          { id: 4, title: "Stronger", artist: "Kanye West", duration: "5:11", album: "Graduation", year: "2007", cover: "🎵", audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" },
-          { id: 5, title: "I Wonder", artist: "Kanye West", duration: "4:03", album: "Graduation", year: "2007", cover: "🎵", audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" },
-          { id: 6, title: "Good Life", artist: "Kanye West ft. T-Pain", duration: "3:27", album: "Graduation", year: "2007", cover: "🎵", audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" },
-          { id: 7, title: "Runaway", artist: "Kanye West", duration: "9:08", album: "My Beautiful Dark Twisted Fantasy", year: "2010", cover: "🎵", audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" },
-          { id: 8, title: "Power", artist: "Kanye West", duration: "4:52", album: "My Beautiful Dark Twisted Fantasy", year: "2010", cover: "🎵", audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" }
+          { id: 1, title: "Skyfall", artist: "Adele", duration: "4:46", album: "Skyfall", year: "2012", cover: "🎵", audioUrl: "https://www.bensound.com/bensound-music/bensound-sunny.mp3" },
+          { id: 2, title: "God's Plan", artist: "Drake", duration: "3:18", album: "Scorpion", year: "2018", cover: "🎵", audioUrl: "https://www.bensound.com/bensound-music/bensound-creativeminds.mp3" },
+          { id: 3, title: "Happy Nation", artist: "Ace of Base", duration: "4:16", album: "Happy Nation", year: "1992", cover: "🎵", audioUrl: "https://www.bensound.com/bensound-music/bensound-happiness.mp3" },
+          { id: 4, title: "Stronger", artist: "Kanye West", duration: "5:11", album: "Graduation", year: "2007", cover: "🎵", audioUrl: "https://www.bensound.com/bensound-music/bensound-energy.mp3" },
+          { id: 5, title: "I Wonder", artist: "Kanye West", duration: "4:03", album: "Graduation", year: "2007", cover: "🎵", audioUrl: "https://www.bensound.com/bensound-music/bensound-dreams.mp3" },
+          { id: 6, title: "Good Life", artist: "Kanye West ft. T-Pain", duration: "3:27", album: "Graduation", year: "2007", cover: "🎵", audioUrl: "https://www.bensound.com/bensound-music/bensound-sweet.mp3" },
+          { id: 7, title: "Runaway", artist: "Kanye West", duration: "9:08", album: "My Beautiful Dark Twisted Fantasy", year: "2010", cover: "🎵", audioUrl: "https://www.bensound.com/bensound-music/bensound-epic.mp3" },
+          { id: 8, title: "Power", artist: "Kanye West", duration: "4:52", album: "My Beautiful Dark Twisted Fantasy", year: "2010", cover: "🎵", audioUrl: "https://www.bensound.com/bensound-music/bensound-power.mp3" }
         ]
       },
       topHits: {
         name: "Top Hits",
         description: "Popular songs right now",
         tracks: [
-          { id: 9, title: "Blinding Lights", artist: "The Weeknd", duration: "3:20", album: "After Hours", year: "2020", cover: "🎵", audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" },
-          { id: 10, title: "Levitating", artist: "Dua Lipa", duration: "3:23", album: "Future Nostalgia", year: "2020", cover: "🎵", audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" },
-          { id: 11, title: "Watermelon Sugar", artist: "Harry Styles", duration: "2:54", album: "Fine Line", year: "2019", cover: "🎵", audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" },
-          { id: 12, title: "Good 4 U", artist: "Olivia Rodrigo", duration: "2:58", album: "SOUR", year: "2021", cover: "🎵", audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" }
+          { id: 9, title: "Blinding Lights", artist: "The Weeknd", duration: "3:20", album: "After Hours", year: "2020", cover: "🎵", audioUrl: "https://www.bensound.com/bensound-music/bensound-sunny.mp3" },
+          { id: 10, title: "Levitating", artist: "Dua Lipa", duration: "3:23", album: "Future Nostalgia", year: "2020", cover: "🎵", audioUrl: "https://www.bensound.com/bensound-music/bensound-creativeminds.mp3" },
+          { id: 11, title: "Watermelon Sugar", artist: "Harry Styles", duration: "2:54", album: "Fine Line", year: "2019", cover: "🎵", audioUrl: "https://www.bensound.com/bensound-music/bensound-happiness.mp3" },
+          { id: 12, title: "Good 4 U", artist: "Olivia Rodrigo", duration: "2:58", album: "SOUR", year: "2021", cover: "🎵", audioUrl: "https://www.bensound.com/bensound-music/bensound-energy.mp3" }
         ]
       },
       classics: {
         name: "Classics",
         description: "Timeless favorites",
         tracks: [
-          { id: 13, title: "Bohemian Rhapsody", artist: "Queen", duration: "5:55", album: "A Night at the Opera", year: "1975", cover: "🎵", audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" },
-          { id: 14, title: "Hotel California", artist: "Eagles", duration: "6:30", album: "Hotel California", year: "1976", cover: "🎵", audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" },
-          { id: 15, title: "Imagine", artist: "John Lennon", duration: "3:07", album: "Imagine", year: "1971", cover: "🎵", audioUrl: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" }
+          { id: 13, title: "Bohemian Rhapsody", artist: "Queen", duration: "5:55", album: "A Night at the Opera", year: "1975", cover: "🎵", audioUrl: "https://www.bensound.com/bensound-music/bensound-dreams.mp3" },
+          { id: 14, title: "Hotel California", artist: "Eagles", duration: "6:30", album: "Hotel California", year: "1976", cover: "🎵", audioUrl: "https://www.bensound.com/bensound-music/bensound-sweet.mp3" },
+          { id: 15, title: "Imagine", artist: "John Lennon", duration: "3:07", album: "Imagine", year: "1971", cover: "🎵", audioUrl: "https://www.bensound.com/bensound-music/bensound-epic.mp3" }
         ]
       }
     }
@@ -1716,7 +1716,7 @@ Happy exploring! 🐧`}
           ref={setAudioRef}
           preload="metadata"
         />
-        
+
         {/* Sidebar */}
         <div className="w-64 bg-black border-r border-gray-800 flex flex-col">
           <div className="p-6">
@@ -1726,35 +1726,32 @@ Happy exploring! 🐧`}
               </div>
               <span className="text-xl font-bold">Spotify</span>
             </div>
-            
+
             <nav className="space-y-1">
-              <button 
+              <button
                 onClick={() => setCurrentPlaylist("favorites")}
-                className={`w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                  currentPlaylist === "favorites" 
-                    ? "bg-gray-800 text-white" 
+                className={`w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${currentPlaylist === "favorites"
+                    ? "bg-gray-800 text-white"
                     : "text-gray-400 hover:text-white hover:bg-gray-800"
-                }`}
+                  }`}
               >
                 🎵 Your Favorites
               </button>
-              <button 
+              <button
                 onClick={() => setCurrentPlaylist("topHits")}
-                className={`w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                  currentPlaylist === "topHits" 
-                    ? "bg-gray-800 text-white" 
+                className={`w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${currentPlaylist === "topHits"
+                    ? "bg-gray-800 text-white"
                     : "text-gray-400 hover:text-white hover:bg-gray-800"
-                }`}
+                  }`}
               >
                 🔥 Top Hits
               </button>
-              <button 
+              <button
                 onClick={() => setCurrentPlaylist("classics")}
-                className={`w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                  currentPlaylist === "classics" 
-                    ? "bg-gray-800 text-white" 
+                className={`w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${currentPlaylist === "classics"
+                    ? "bg-gray-800 text-white"
                     : "text-gray-400 hover:text-white hover:bg-gray-800"
-                }`}
+                  }`}
               >
                 🎭 Classics
               </button>
@@ -1800,7 +1797,7 @@ Happy exploring! 🐧`}
 
           {/* Play Button */}
           <div className="px-6 mb-6">
-            <button 
+            <button
               onClick={togglePlay}
               className="w-14 h-14 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-400 hover:scale-105 transition-all duration-200 shadow-lg"
             >
@@ -1812,11 +1809,10 @@ Happy exploring! 🐧`}
           <div className="flex-1 px-6 pb-24 overflow-y-auto">
             <div className="space-y-1">
               {currentTracks.map((track, index) => (
-                <div 
+                <div
                   key={track.id}
-                  className={`flex items-center space-x-4 p-3 rounded-md hover:bg-white/10 cursor-pointer group transition-colors ${
-                    index === currentTrack ? "bg-white/10" : ""
-                  }`}
+                  className={`flex items-center space-x-4 p-3 rounded-md hover:bg-white/10 cursor-pointer group transition-colors ${index === currentTrack ? "bg-white/10" : ""
+                    }`}
                   onClick={() => handleTrackClick(index)}
                 >
                   <div className="w-4 text-center text-gray-400 group-hover:text-white transition-colors">
@@ -1864,31 +1860,31 @@ Happy exploring! 🐧`}
               {/* Center Controls */}
               <div className="flex flex-col items-center space-y-2 w-1/2">
                 <div className="flex items-center space-x-6">
-                  <button 
+                  <button
                     onClick={() => setIsShuffled(!isShuffled)}
                     className={`w-6 h-6 ${isShuffled ? "text-green-400" : "text-gray-400"} hover:text-white transition-colors`}
                   >
                     🔀
                   </button>
-                  <button 
+                  <button
                     onClick={prevTrack}
                     className="w-8 h-8 text-gray-400 hover:text-white transition-colors"
                   >
                     ⏮
                   </button>
-                  <button 
+                  <button
                     onClick={togglePlay}
                     className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-black hover:scale-105 transition-transform"
                   >
                     {isPlaying ? "⏸" : "▶"}
                   </button>
-                  <button 
+                  <button
                     onClick={nextTrack}
                     className="w-8 h-8 text-gray-400 hover:text-white transition-colors"
                   >
                     ⏭
                   </button>
-                  <button 
+                  <button
                     onClick={() => setIsRepeated(!isRepeated)}
                     className={`w-6 h-6 ${isRepeated ? "text-green-400" : "text-gray-400"} hover:text-white transition-colors`}
                   >
@@ -1898,7 +1894,7 @@ Happy exploring! 🐧`}
                 <div className="flex items-center space-x-2 w-full max-w-md">
                   <span className="text-xs text-gray-400 w-8">{formatTime(currentTime)}</span>
                   <div className="flex-1 bg-gray-600 rounded-full h-1">
-                    <div 
+                    <div
                       className="bg-white h-1 rounded-full transition-all duration-300"
                       style={{ width: `${(currentTime / parseDuration(currentSong.duration)) * 100}%` }}
                     ></div>
@@ -1949,7 +1945,7 @@ Happy exploring! 🐧`}
       { title: "Ubuntu", url: "https://ubuntu.com", favicon: "🐧" }
     ])
     const [showBookmarks, setShowBookmarks] = useState(false)
-    
+
     const handleSearchSubmit = (e: React.FormEvent) => {
       e.preventDefault()
       if (searchQuery.trim()) {
@@ -1964,7 +1960,7 @@ Happy exploring! 🐧`}
     const handleUrlSubmit = (e: React.FormEvent) => {
       e.preventDefault()
       setIsLoading(true)
-      
+
       // Check if it's a URL or search query
       let targetUrl = urlInput
       if (!urlInput.startsWith('http://') && !urlInput.startsWith('https://') && !urlInput.includes('.')) {
@@ -1974,7 +1970,7 @@ Happy exploring! 🐧`}
         // Add https:// if missing
         targetUrl = `https://${urlInput}`
       }
-      
+
       setCurrentUrl(targetUrl)
       setUrlInput(targetUrl)
       setTimeout(() => setIsLoading(false), 1000)
@@ -2073,7 +2069,7 @@ Happy exploring! 🐧`}
 
             {/* Firefox Menu */}
             <div className="flex space-x-1">
-              <button 
+              <button
                 onClick={() => {
                   const newBookmark = { title: urlInput, url: currentUrl, favicon: "⭐" }
                   setBookmarks(prev => [...prev, newBookmark])
@@ -2083,7 +2079,7 @@ Happy exploring! 🐧`}
               >
                 ⭐
               </button>
-              <button 
+              <button
                 onClick={() => setShowBookmarks(!showBookmarks)}
                 className="p-1 hover:bg-gray-200 rounded text-gray-600 hover:text-gray-800"
                 title="Bookmarks"
