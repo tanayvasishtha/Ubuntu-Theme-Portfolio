@@ -1181,11 +1181,15 @@ Happy exploring! 🐧`}
     <div className="h-full bg-card p-6 overflow-y-auto">
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-6">
-          <div className="w-24 h-24 bg-gradient-to-br from-chart-4 to-primary rounded-full mx-auto mb-4 flex items-center justify-center">
-            <User className="w-12 h-12 text-primary-foreground" />
+          <div className="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden border-2 border-primary">
+            <img 
+              src="/placeholder-user.jpg" 
+              alt="Tanay Vasishtha" 
+              className="w-full h-full object-cover"
+            />
           </div>
           <h2 className="text-2xl font-bold text-foreground">Tanay Vasishtha</h2>
-          <p className="text-card-foreground">B-Tech Student & Tech Enthusiast</p>
+          <p className="text-card-foreground">B-Tech Student & Builder</p>
         </div>
         <div className="space-y-4 text-card-foreground">
           <p>
@@ -1215,7 +1219,8 @@ Happy exploring! 🐧`}
             className="hover:bg-primary hover:text-primary-foreground transition-colors"
             onClick={() => window.open('https://github.com/tanayvasishtha', '_blank')}
           >
-            <Github className="w-4 h-4" />
+            <Github className="w-4 h-4 mr-2" />
+            GitHub
           </Button>
           <Button 
             size="sm" 
@@ -1223,7 +1228,8 @@ Happy exploring! 🐧`}
             className="hover:bg-primary hover:text-primary-foreground transition-colors"
             onClick={() => window.open('https://www.linkedin.com/in/tanayvasishtha/', '_blank')}
           >
-            <Linkedin className="w-4 h-4" />
+            <Linkedin className="w-4 h-4 mr-2" />
+            LinkedIn
           </Button>
           <Button 
             size="sm" 
@@ -1239,7 +1245,8 @@ Happy exploring! 🐧`}
             className="hover:bg-primary hover:text-primary-foreground transition-colors"
             onClick={() => window.open('https://medium.com/@tanayvasishtha', '_blank')}
           >
-            <BookOpen className="w-4 h-4" />
+            <BookOpen className="w-4 h-4 mr-2" />
+            Medium
           </Button>
           <Button 
             size="sm" 
@@ -1247,7 +1254,8 @@ Happy exploring! 🐧`}
             className="hover:bg-primary hover:text-primary-foreground transition-colors"
             onClick={() => window.open('https://www.producthunt.com/@tanayvasishtha', '_blank')}
           >
-            <Zap className="w-4 h-4" />
+            <Zap className="w-4 h-4 mr-2" />
+            Product Hunt
           </Button>
           <Button 
             size="sm" 
@@ -1255,7 +1263,8 @@ Happy exploring! 🐧`}
             className="hover:bg-primary hover:text-primary-foreground transition-colors"
             onClick={() => window.open('https://peerlist.io/tanayvasishtha', '_blank')}
           >
-            <User className="w-4 h-4" />
+            <User className="w-4 h-4 mr-2" />
+            Peerlist
           </Button>
           <Button 
             size="sm" 
@@ -1263,14 +1272,16 @@ Happy exploring! 🐧`}
             className="hover:bg-primary hover:text-primary-foreground transition-colors"
             onClick={() => window.open('https://buymeacoffee.com/tanayvasishtha', '_blank')}
           >
-            <Coffee className="w-4 h-4" />
+            <Coffee className="w-4 h-4 mr-2" />
+            Buy me a coffee
           </Button>
           <Button 
             size="sm" 
             variant="outline"
             className="hover:bg-primary hover:text-primary-foreground transition-colors"
           >
-            <Download className="w-4 h-4" />
+            <Download className="w-4 h-4 mr-2" />
+            Resume
           </Button>
         </div>
       </div>
