@@ -1183,7 +1183,7 @@ Happy exploring! 🐧`}
         <div className="text-center mb-6">
           <div className="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden border-2 border-primary">
             <img 
-              src="/tanay-profile.jpg" 
+              src="/Best Pfp.jpg" 
               alt="Tanay Vasishtha" 
               className="w-full h-full object-cover"
             />
