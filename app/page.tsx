@@ -1603,8 +1603,8 @@ Happy exploring! 🐧`}
           { id: 2, title: "God's Plan", artist: "Drake", duration: "3:18", album: "Scorpion", year: "2018" },
           { id: 3, title: "Happy Nation", artist: "Ace of Base", duration: "4:16", album: "Happy Nation", year: "1992" },
           { id: 4, title: "Stronger", artist: "Kanye West", duration: "5:11", album: "Graduation", year: "2007" },
-          { id: 5, title: "Gold Digger", artist: "Kanye West ft. Jamie Foxx", duration: "3:28", album: "Late Registration", year: "2005" },
-          { id: 6, title: "Heartless", artist: "Kanye West", duration: "3:31", album: "808s & Heartbreak", year: "2008" },
+          { id: 5, title: "I Wonder", artist: "Kanye West", duration: "4:03", album: "Graduation", year: "2007" },
+          { id: 6, title: "Good Life", artist: "Kanye West ft. T-Pain", duration: "3:27", album: "Graduation", year: "2007" },
           { id: 7, title: "Runaway", artist: "Kanye West", duration: "9:08", album: "My Beautiful Dark Twisted Fantasy", year: "2010" },
           { id: 8, title: "Power", artist: "Kanye West", duration: "4:52", album: "My Beautiful Dark Twisted Fantasy", year: "2010" }
         ]
@@ -1722,13 +1722,17 @@ Happy exploring! 🐧`}
           </div>
 
           {/* Track List */}
-          <div className="flex-1 bg-gray-900 p-4">
+          <div className="flex-1 bg-gray-900 p-4 overflow-y-auto">
             <div className="space-y-2">
               {currentTracks.map((track, index) => (
                 <div 
                   key={track.id}
                   className={`flex items-center space-x-4 p-3 rounded hover:bg-gray-800 cursor-pointer ${index === currentTrack ? "bg-gray-700" : ""}`}
-                  onClick={() => setCurrentTrack(index)}
+                  onClick={() => {
+                    setCurrentTrack(index)
+                    setIsPlaying(true)
+                    setCurrentTime(0)
+                  }}
                 >
                   <div className="w-8 text-center text-gray-400">
                     {index === currentTrack && isPlaying ? "♪" : index + 1}
@@ -1992,7 +1996,7 @@ Happy exploring! 🐧`}
         </div>
 
         {/* Browser Content */}
-        <div className="flex-1 bg-white overflow-hidden">
+        <div className="flex-1 bg-white overflow-y-auto">
           {isLoading ? (
             <div className="flex items-center justify-center h-full">
               <div className="text-center">
@@ -2001,7 +2005,7 @@ Happy exploring! 🐧`}
               </div>
             </div>
           ) : (
-            <div className="h-full p-4">
+            <div className="h-full p-4 overflow-y-auto">
               {currentUrl.includes("google.com") ? (
                 <div className="text-center">
                   <img src="/assets/program-icons/firefox.png" alt="Firefox" className="w-16 h-16 mx-auto mb-4" />
