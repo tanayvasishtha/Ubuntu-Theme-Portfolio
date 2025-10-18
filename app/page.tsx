@@ -3099,7 +3099,7 @@ Happy exploring! 🐧`}
       </div>
 
       {/* Ubuntu Sidebar - Authentic Ubuntu Dock */}
-      <div className="absolute left-0 top-12 bottom-12 w-20 bg-gradient-to-b from-gray-900/60 to-black/70 backdrop-blur-xl border-r border-gray-700/30 z-40 shadow-2xl">
+      <div className="absolute left-0 top-12 bottom-12 w-20 bg-gradient-to-b from-gray-900/40 to-black/50 backdrop-blur-xl border-r border-gray-700/20 z-40 shadow-2xl">
         <div className="flex flex-col items-center py-4 space-y-3">
           {sidebarIcons.map((icon, index) => (
             <div
