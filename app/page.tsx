@@ -1972,14 +1972,6 @@ Happy exploring! 🐧`}
       }
     }, [currentSong, audioRef])
 
-    // Sync background music with Spotify embed
-    useEffect(() => {
-      const audio = document.getElementById('backgroundMusic') as HTMLAudioElement
-      if (audio && backgroundMusic.isPlaying) {
-        audio.src = backgroundTracks[backgroundMusic.currentTrack].audioUrl
-        audio.play()
-      }
-    }, [backgroundMusic.currentTrack])
 
     const formatTime = (seconds: number) => {
       const mins = Math.floor(seconds / 60)
@@ -2024,17 +2016,6 @@ Happy exploring! 🐧`}
       if (audioRef) {
         audioRef.currentTime = 0
         audioRef.play()
-      }
-      // Start background music for continuous playback
-      startBackgroundMusic(index)
-    }
-
-    const startBackgroundMusic = (trackIndex: number) => {
-      const audio = document.getElementById('backgroundMusic') as HTMLAudioElement
-      if (audio && backgroundTracks[trackIndex]) {
-        audio.src = backgroundTracks[trackIndex].audioUrl
-        audio.play()
-        setBackgroundMusic(prev => ({ ...prev, isPlaying: true, currentTrack: trackIndex }))
       }
     }
 
