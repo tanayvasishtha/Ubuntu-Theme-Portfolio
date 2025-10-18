@@ -1862,28 +1862,28 @@ Happy exploring! 🐧`}
                         className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
                       >
                         <div className="text-lg mb-2">🐙</div>
-                        <div className="text-sm font-medium">GitHub</div>
+                        <div className="text-sm font-medium text-gray-800">GitHub</div>
                       </button>
                       <button
                         onClick={() => navigateTo("https://stackoverflow.com", "Stack Overflow")}
                         className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
                       >
                         <div className="text-lg mb-2">📚</div>
-                        <div className="text-sm font-medium">Stack Overflow</div>
+                        <div className="text-sm font-medium text-gray-800">Stack Overflow</div>
                       </button>
                       <button
                         onClick={() => navigateTo("https://developer.mozilla.org", "MDN Web Docs")}
                         className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
                       >
                         <div className="text-lg mb-2">🌐</div>
-                        <div className="text-sm font-medium">MDN Web Docs</div>
+                        <div className="text-sm font-medium text-gray-800">MDN Web Docs</div>
                       </button>
                       <button
                         onClick={() => navigateTo("https://ubuntu.com", "Ubuntu")}
                         className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
                       >
                         <div className="text-lg mb-2">🐧</div>
-                        <div className="text-sm font-medium">Ubuntu</div>
+                        <div className="text-sm font-medium text-gray-800">Ubuntu</div>
                       </button>
                     </div>
                   </div>
