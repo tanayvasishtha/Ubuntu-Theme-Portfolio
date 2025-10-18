@@ -212,12 +212,12 @@ export default function UbuntuPortfolio() {
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
           <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
-            <path fill="#E95420" d="M10 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2h-8l-2-2z"/>
-            <path fill="#FFFFFF" d="M12 8v8l4-4-4-4z"/>
+            <path fill="#E95420" d="M10 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2h-8l-2-2z" />
+            <path fill="#FFFFFF" d="M12 8v8l4-4-4-4z" />
           </svg>
         </div>
       ),
-      position: { x: 120, y: 180 },
+      position: { x: 120, y: 160 },
       action: () => openWindow("projects", "Projects", <ProjectsWindow />),
     },
     {
@@ -226,12 +226,12 @@ export default function UbuntuPortfolio() {
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
           <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
-            <path fill="#7C3AED" d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
-            <path fill="#FFFFFF" d="M8 12h8v2H8v-2zm0 4h8v2H8v-2zm0-8h5v5H8V8z"/>
+            <path fill="#7C3AED" d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
+            <path fill="#FFFFFF" d="M8 12h8v2H8v-2zm0 4h8v2H8v-2zm0-8h5v5H8V8z" />
           </svg>
         </div>
       ),
-      position: { x: 120, y: 260 },
+      position: { x: 120, y: 220 },
       action: () => openWindow("notepad", "Commands Guide", <NotepadWindow />),
     },
     {
@@ -240,13 +240,13 @@ export default function UbuntuPortfolio() {
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
           <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
-            <path fill="#16A34A" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-            <circle fill="#FFFFFF" cx="12" cy="8" r="2"/>
-            <path fill="#FFFFFF" d="M12 12c-2.5 0-4.5 2-4.5 4.5h9c0-2.5-2-4.5-4.5-4.5z"/>
+            <path fill="#16A34A" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+            <circle fill="#FFFFFF" cx="12" cy="8" r="2" />
+            <path fill="#FFFFFF" d="M12 12c-2.5 0-4.5 2-4.5 4.5h9c0-2.5-2-4.5-4.5-4.5z" />
           </svg>
         </div>
       ),
-      position: { x: 120, y: 340 },
+      position: { x: 120, y: 280 },
       action: () => openWindow("about", "About Me", <AboutWindow />),
     },
     {
@@ -255,12 +255,12 @@ export default function UbuntuPortfolio() {
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
           <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
-            <path fill="#DC2626" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-            <path fill="#FFFFFF" d="M12 6l1.5 3L17 10l-2.5 2.5L15 17l-3-1.5L9 17l.5-4.5L7 10l3.5-1L12 6z"/>
+            <path fill="#DC2626" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            <path fill="#FFFFFF" d="M12 6l1.5 3L17 10l-2.5 2.5L15 17l-3-1.5L9 17l.5-4.5L7 10l3.5-1L12 6z" />
           </svg>
         </div>
       ),
-      position: { x: 120, y: 420 },
+      position: { x: 120, y: 340 },
       action: () => openWindow("skills", "Skills", <SkillsWindow />),
     },
     {
@@ -269,8 +269,8 @@ export default function UbuntuPortfolio() {
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
           <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
-            <path fill="#0891B2" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-            <path fill="#FFFFFF" d="M12 11l8-5H4l8 5z"/>
+            <path fill="#0891B2" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+            <path fill="#FFFFFF" d="M12 11l8-5H4l8 5z" />
           </svg>
         </div>
       ),
@@ -283,12 +283,12 @@ export default function UbuntuPortfolio() {
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
           <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
-            <path fill="#9333EA" d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-            <circle fill="#FFFFFF" cx="8.5" cy="8.5" r="1.5"/>
+            <path fill="#9333EA" d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" />
+            <circle fill="#FFFFFF" cx="8.5" cy="8.5" r="1.5" />
           </svg>
         </div>
       ),
-      position: { x: 270, y: 180 },
+      position: { x: 270, y: 160 },
       action: () => openWindow("gallery", "Gallery", <GalleryWindow />),
     },
     {
@@ -299,7 +299,7 @@ export default function UbuntuPortfolio() {
           <img src="/assets/program-icons/system-settings.png" alt="Settings" className="w-8 h-8 drop-shadow-lg" />
         </div>
       ),
-      position: { x: 270, y: 260 },
+      position: { x: 270, y: 220 },
       action: () => openWindow("settings", "Settings", <SettingsWindow />),
     },
   ])
@@ -1784,7 +1784,7 @@ Happy exploring! 🐧`}
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-white text-lg font-semibold">Image Viewer</h3>
             <div className="flex space-x-2">
-              <button 
+              <button
                 onClick={() => setCurrentImage(Math.max(0, currentImage - 1))}
                 className="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-600"
               >
@@ -1793,7 +1793,7 @@ Happy exploring! 🐧`}
               <span className="text-white text-sm px-2 py-1">
                 {currentImage + 1} / {images.length}
               </span>
-              <button 
+              <button
                 onClick={() => setCurrentImage(Math.min(images.length - 1, currentImage + 1))}
                 className="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-600"
               >
@@ -1802,8 +1802,8 @@ Happy exploring! 🐧`}
             </div>
           </div>
           <div className="flex-1 bg-black rounded-lg overflow-hidden">
-            <img 
-              src={images[currentImage]} 
+            <img
+              src={images[currentImage]}
               alt={`Image ${currentImage + 1}`}
               className="w-full h-full object-contain"
             />
@@ -1814,12 +1814,11 @@ Happy exploring! 🐧`}
               <button
                 key={index}
                 onClick={() => setCurrentImage(index)}
-                className={`flex-shrink-0 w-16 h-16 rounded border-2 overflow-hidden ${
-                  index === currentImage ? 'border-orange-500' : 'border-gray-600'
-                }`}
+                className={`flex-shrink-0 w-16 h-16 rounded border-2 overflow-hidden ${index === currentImage ? 'border-orange-500' : 'border-gray-600'
+                  }`}
               >
-                <img 
-                  src={image} 
+                <img
+                  src={image}
                   alt={`Thumbnail ${index + 1}`}
                   className="w-full h-full object-cover"
                 />
@@ -2022,6 +2021,7 @@ Happy exploring! 🐧`}
             variant="ghost"
             size="icon"
             className="text-white hover:bg-white/10 h-8 w-8 rounded-md transition-all duration-200"
+            onClick={() => openWindow("settings", "Settings", <SettingsWindow />)}
           >
             <Settings className="w-4 h-4" />
           </Button>
