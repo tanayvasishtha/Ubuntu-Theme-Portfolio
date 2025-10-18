@@ -135,7 +135,7 @@ export default function UbuntuPortfolio() {
   const [isLoading, setIsLoading] = useState(true)
   const [currentTime, setCurrentTime] = useState("")
   const [isClient, setIsClient] = useState(false)
-  const [currentWallpaper, setCurrentWallpaper] = useState("/ubuntu-wallpaper.jpg")
+  const [currentWallpaper, setCurrentWallpaper] = useState("/assets/wallpapers/ubuntu-wallpaper.jpg")
   const [notifications, setNotifications] = useState<Array<{ id: string, message: string, type: 'info' | 'success' | 'warning' | 'error' }>>([])
 
   // Ubuntu-style sound effects (visual feedback)
@@ -1322,7 +1322,6 @@ Happy exploring! 🐧`}
 
   const SettingsWindow = () => {
     const wallpapers = [
-      { name: "Ubuntu Default", path: "/ubuntu-wallpaper.jpg" },
       { name: "Ubuntu Wallpaper", path: "/assets/wallpapers/ubuntu-wallpaper.jpg" },
       { name: "Clouds", path: "/assets/wallpapers/clouds.jpg" },
       { name: "Valley", path: "/assets/wallpapers/valley.jpg" },
