@@ -2743,7 +2743,7 @@ Happy exploring! 🐧`}
             }}
             onDoubleClick={icon.action}
           >
-            <div className={`flex flex-col items-center space-y-2 p-3 rounded-lg transition-all duration-300 w-20 ${draggedIcon === icon.id
+            <div className={`flex flex-col items-center space-y-2 p-3 rounded-lg transition-all duration-300 w-24 ${draggedIcon === icon.id
               ? "bg-white/20 scale-110 shadow-2xl backdrop-blur-sm"
               : "hover:bg-white/10 hover:scale-105 hover:shadow-lg"
               }`}>
