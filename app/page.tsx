@@ -48,9 +48,9 @@ const UbuntuLoadingScreen = ({ onLoadingComplete }: { onLoadingComplete: () => v
         setLoadingText(step.text)
         currentStep++
       } else {
-        clearInterval(progressTimer)
+          clearInterval(progressTimer)
         setTimeout(() => onLoadingComplete(), 800)
-      }
+        }
     }, 300)
 
     return () => {
@@ -86,7 +86,7 @@ const UbuntuLoadingScreen = ({ onLoadingComplete }: { onLoadingComplete: () => v
           className="h-full bg-gradient-to-r from-[#E95420] to-[#F7A072] transition-all duration-300 ease-out"
           style={{ width: `${loadingProgress}%` }}
         />
-      </div>
+        </div>
 
       {/* Loading text */}
       <p className="text-white text-lg font-light mb-2">{loadingText}</p>
@@ -663,13 +663,13 @@ export default function UbuntuPortfolio() {
       prev.map((w) =>
         w.id === id
           ? {
-            ...w,
-            isMaximized: !w.isMaximized,
-            position: w.isMaximized ? { x: 50, y: 50 } : { x: 0, y: 48 },
-            size: w.isMaximized
-              ? { width: 640, height: 400 }
-              : { width: window.innerWidth, height: window.innerHeight - 96 },
-          }
+              ...w,
+              isMaximized: !w.isMaximized,
+              position: w.isMaximized ? { x: 50, y: 50 } : { x: 0, y: 48 },
+              size: w.isMaximized
+                ? { width: 640, height: 400 }
+                : { width: window.innerWidth, height: window.innerHeight - 96 },
+            }
           : w,
       ),
     )
@@ -1076,9 +1076,9 @@ export default function UbuntuPortfolio() {
             <div className="mt-4">
               <span
                 className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${project.status === "Completed" || project.status === "Live"
-                  ? "bg-chart-3/20 text-chart-3"
-                  : "bg-chart-5/20 text-chart-5"
-                  }`}
+                    ? "bg-chart-3/20 text-chart-3"
+                    : "bg-chart-5/20 text-chart-5"
+                }`}
               >
                 {project.status}
               </span>
@@ -1275,7 +1275,7 @@ Happy exploring! 🐧`}
                     </div>
                     <span className="text-xs text-card-foreground text-center leading-tight">
                       {skill.name}
-                    </span>
+                  </span>
                   </div>
                 ))}
               </div>
@@ -1358,8 +1358,8 @@ Happy exploring! 🐧`}
     }
 
     return (
-      <div className="h-full bg-card p-6 overflow-y-auto">
-        <h2 className="text-2xl font-bold text-foreground mb-6">System Settings</h2>
+    <div className="h-full bg-card p-6 overflow-y-auto">
+      <h2 className="text-2xl font-bold text-foreground mb-6">System Settings</h2>
         <div className="space-y-6">
           <div>
             <h3 className="text-lg font-semibold text-foreground mb-3">Wallpaper</h3>
@@ -1387,20 +1387,20 @@ Happy exploring! 🐧`}
               ))}
             </div>
           </div>
-          <div className="border border-border rounded-lg p-4">
-            <h3 className="font-semibold text-foreground mb-2">Display</h3>
-            <p className="text-card-foreground text-sm">Resolution: 1920x1080</p>
-            <p className="text-card-foreground text-sm">Theme: Ubuntu Default</p>
-          </div>
-          <div className="border border-border rounded-lg p-4">
-            <h3 className="font-semibold text-foreground mb-2">System Info</h3>
-            <p className="text-card-foreground text-sm">OS: Ubuntu 22.04 LTS</p>
-            <p className="text-card-foreground text-sm">Kernel: 5.15.0-generic</p>
-            <p className="text-card-foreground text-sm">Desktop: Portfolio Desktop</p>
-          </div>
+        <div className="border border-border rounded-lg p-4">
+          <h3 className="font-semibold text-foreground mb-2">Display</h3>
+          <p className="text-card-foreground text-sm">Resolution: 1920x1080</p>
+          <p className="text-card-foreground text-sm">Theme: Ubuntu Default</p>
+        </div>
+        <div className="border border-border rounded-lg p-4">
+          <h3 className="font-semibold text-foreground mb-2">System Info</h3>
+          <p className="text-card-foreground text-sm">OS: Ubuntu 22.04 LTS</p>
+          <p className="text-card-foreground text-sm">Kernel: 5.15.0-generic</p>
+          <p className="text-card-foreground text-sm">Desktop: Portfolio Desktop</p>
         </div>
       </div>
-    )
+    </div>
+  )
   }
 
   const SoftwareCenterWindow = () => (
@@ -2112,29 +2112,9 @@ Happy exploring! 🐧`}
             </button>
           </div>
 
-          {/* Spotify Embed Section */}
-          <div className="px-6 mb-6">
-            <div className="bg-gray-800 rounded-lg p-4">
-              <h3 className="text-white font-semibold mb-2">🔗 Real Spotify Playlist</h3>
-              <p className="text-gray-300 text-sm mb-3">Listen to the actual playlist on Spotify:</p>
-              <div className="bg-black rounded-lg overflow-hidden">
-                <iframe
-                  title="Spotify Embed: Build Inc. Playlist"
-                  src="https://open.spotify.com/embed/playlist/6pEbErhMyNati1TEcZ8jsz?utm_source=generator&theme=0"
-                  width="100%"
-                  height="152"
-                  frameBorder="0"
-                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                  loading="lazy"
-                  className="rounded-lg"
-                />
-              </div>
-            </div>
-          </div>
-
           {/* Track List */}
-          <div className="flex-1 px-6 pb-24 overflow-y-auto">
-            <div className="space-y-1">
+          <div className="flex-1 px-6 pb-20 overflow-y-auto">
+            <div className="space-y-2">
               {currentTracks.map((track, index) => (
                 <div
                   key={track.id}
@@ -2801,9 +2781,9 @@ Happy exploring! 🐧`}
             <div className="mt-4">
               <span
                 className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${details.status === "Production Ready" || details.status === "Live"
-                  ? "bg-chart-3/20 text-chart-3"
-                  : "bg-chart-5/20 text-chart-5"
-                  }`}
+                    ? "bg-chart-3/20 text-chart-3"
+                    : "bg-chart-5/20 text-chart-5"
+                }`}
               >
                 {details.status}
               </span>
@@ -2967,7 +2947,7 @@ Happy exploring! 🐧`}
               : "hover:bg-white/10 hover:scale-105 hover:shadow-lg"
               }`}>
               <div className="drop-shadow-lg">
-                {icon.icon}
+              {icon.icon}
               </div>
               <span className="text-white text-xs text-center max-w-16 truncate font-medium drop-shadow-md">{icon.name}</span>
             </div>
@@ -3055,10 +3035,10 @@ Happy exploring! 🐧`}
             size="sm"
             className="text-white hover:bg-white/10 px-3 py-2 rounded-md transition-all duration-200"
           >
-            <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2">
               <div className="w-6 h-6 bg-gradient-to-br from-[#E95420] to-[#F7A072] rounded-md flex items-center justify-center">
                 <span className="text-xs font-bold text-white">U</span>
-              </div>
+            </div>
               <span className="text-sm font-medium">Show Applications</span>
             </div>
           </Button>
@@ -3068,20 +3048,20 @@ Happy exploring! 🐧`}
           {/* Window buttons */}
           <div className="flex items-center space-x-1">
             {memoizedWindows.map((window) => (
-              <Button
-                key={window.id}
-                variant="ghost"
-                size="sm"
+            <Button
+              key={window.id}
+              variant="ghost"
+              size="sm"
                 className={`text-white hover:bg-white/10 px-3 py-2 rounded-md transition-all duration-200 ${window.isMinimized
                   ? "opacity-60 bg-white/5"
                   : "bg-white/10 shadow-md"
                   }`}
-                onClick={() => (window.isMinimized ? restoreWindow(window.id) : bringToFront(window.id))}
-              >
+              onClick={() => (window.isMinimized ? restoreWindow(window.id) : bringToFront(window.id))}
+            >
                 <span className="text-sm font-medium">{window.title}</span>
-              </Button>
-            ))}
-          </div>
+            </Button>
+          ))}
+        </div>
         </div>
 
         {/* System tray */}
