@@ -24,7 +24,6 @@ import {
   HardDrive,
   HelpCircle,
   Monitor,
-  X,
   Coffee,
   BookOpen,
   Zap,
