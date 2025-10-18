@@ -1206,7 +1206,8 @@ Happy exploring! 🐧`}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 pt-6">
           <Button 
             size="sm" 
-            className="bg-primary hover:bg-primary/90 text-primary-foreground"
+            variant="outline"
+            className="hover:bg-primary hover:text-primary-foreground transition-colors"
             onClick={() => window.open('https://github.com/tanayvasishtha', '_blank')}
           >
             <Github className="w-4 h-4 mr-2" />
@@ -1215,6 +1216,7 @@ Happy exploring! 🐧`}
           <Button 
             size="sm" 
             variant="outline"
+            className="hover:bg-primary hover:text-primary-foreground transition-colors"
             onClick={() => window.open('https://www.linkedin.com/in/tanayvasishtha/', '_blank')}
           >
             <Linkedin className="w-4 h-4 mr-2" />
@@ -1223,6 +1225,7 @@ Happy exploring! 🐧`}
           <Button 
             size="sm" 
             variant="outline"
+            className="hover:bg-primary hover:text-primary-foreground transition-colors"
             onClick={() => window.open('https://x.com/TanayVasishtha', '_blank')}
           >
             <Twitter className="w-4 h-4 mr-2" />
@@ -1231,6 +1234,7 @@ Happy exploring! 🐧`}
           <Button 
             size="sm" 
             variant="outline"
+            className="hover:bg-primary hover:text-primary-foreground transition-colors"
             onClick={() => window.open('https://medium.com/@tanayvasishtha', '_blank')}
           >
             <BookOpen className="w-4 h-4 mr-2" />
@@ -1239,6 +1243,7 @@ Happy exploring! 🐧`}
           <Button 
             size="sm" 
             variant="outline"
+            className="hover:bg-primary hover:text-primary-foreground transition-colors"
             onClick={() => window.open('https://www.producthunt.com/@tanayvasishtha', '_blank')}
           >
             <Zap className="w-4 h-4 mr-2" />
@@ -1247,6 +1252,7 @@ Happy exploring! 🐧`}
           <Button 
             size="sm" 
             variant="outline"
+            className="hover:bg-primary hover:text-primary-foreground transition-colors"
             onClick={() => window.open('https://peerlist.io/tanayvasishtha', '_blank')}
           >
             <User className="w-4 h-4 mr-2" />
@@ -1255,12 +1261,17 @@ Happy exploring! 🐧`}
           <Button 
             size="sm" 
             variant="outline"
+            className="hover:bg-primary hover:text-primary-foreground transition-colors"
             onClick={() => window.open('https://buymeacoffee.com/tanayvasishtha', '_blank')}
           >
             <Coffee className="w-4 h-4 mr-2" />
             Buy me a coffee
           </Button>
-          <Button size="sm" variant="outline">
+          <Button 
+            size="sm" 
+            variant="outline"
+            className="hover:bg-primary hover:text-primary-foreground transition-colors"
+          >
             <Download className="w-4 h-4 mr-2" />
             Resume
           </Button>
