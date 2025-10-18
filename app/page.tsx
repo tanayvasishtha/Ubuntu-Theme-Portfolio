@@ -1,0 +1,1621 @@
+"use client"
+
+import React, { useState, useRef, useEffect, useMemo } from "react"
+import { Button } from "@/components/ui/button"
+import {
+  Terminal,
+  Folder,
+  FileText,
+  User,
+  Code,
+  Mail,
+  ImageIcon,
+  Settings,
+  Github,
+  Linkedin,
+  Download,
+  ExternalLink,
+  Minus,
+  Square,
+  X,
+  Home,
+  Search,
+  Trash2,
+  HardDrive,
+  HelpCircle,
+  Monitor,
+} from "lucide-react"
+
+const UbuntuLoadingScreen = ({ onLoadingComplete }: { onLoadingComplete: () => void }) => {
+  const [loadingProgress, setLoadingProgress] = useState(0)
+  const [loadingText, setLoadingText] = useState("Starting Ubuntu...")
+
+  useEffect(() => {
+    const loadingSteps = [
+      { progress: 20, text: "Loading kernel modules..." },
+      { progress: 40, text: "Starting system services..." },
+      { progress: 60, text: "Initializing desktop environment..." },
+      { progress: 80, text: "Loading user interface..." },
+      { progress: 95, text: "Almost ready..." },
+      { progress: 100, text: "Welcome to Ubuntu!" },
+    ]
+
+    let currentStep = 0
+    const progressTimer = setInterval(() => {
+      if (currentStep < loadingSteps.length) {
+        const step = loadingSteps[currentStep]
+        setLoadingProgress(step.progress)
+        setLoadingText(step.text)
+        currentStep++
+      } else {
+        clearInterval(progressTimer)
+        setTimeout(() => onLoadingComplete(), 800)
+      }
+    }, 300)
+
+    return () => {
+      clearInterval(progressTimer)
+    }
+  }, [onLoadingComplete])
+
+  return (
+    <div className="fixed inset-0 bg-black z-50 flex flex-col items-center justify-center">
+      {/* Ubuntu Logo with pulsing animation */}
+      <div className="mb-8 animate-pulse">
+        <img
+          src="/ubuntu-logo-circle.png"
+          alt="Ubuntu"
+          className="w-32 h-32 drop-shadow-2xl"
+        />
+      </div>
+
+      {/* Loading dots animation */}
+      <div className="flex space-x-2 mb-6">
+        {[0, 1, 2].map((i) => (
+          <div
+            key={i}
+            className="w-3 h-3 bg-[#E95420] rounded-full animate-bounce"
+            style={{ animationDelay: `${i * 0.2}s` }}
+          />
+        ))}
+      </div>
+
+      {/* Progress bar */}
+      <div className="w-80 h-2 bg-gray-800 rounded-full overflow-hidden mb-4">
+        <div
+          className="h-full bg-gradient-to-r from-[#E95420] to-[#F7A072] transition-all duration-300 ease-out"
+          style={{ width: `${loadingProgress}%` }}
+        />
+      </div>
+
+      {/* Loading text */}
+      <p className="text-white text-lg font-light mb-2">{loadingText}</p>
+      <p className="text-gray-400 text-sm">{loadingProgress}%</p>
+
+      {/* Ubuntu branding */}
+      <div className="absolute bottom-8 left-8 flex items-center gap-3">
+        <img src="/ubuntu-logo-official.png" alt="Ubuntu" className="w-8 h-8" />
+        <span className="text-white text-xl font-light">Ubuntu</span>
+      </div>
+
+      {/* Version info */}
+      <div className="absolute bottom-8 right-8 text-gray-500 text-sm">
+        Ubuntu 22.04.3 LTS
+      </div>
+    </div>
+  )
+}
+
+interface Window {
+  id: string
+  title: string
+  component: React.ReactNode
+  position: { x: number; y: number }
+  size: { width: number; height: number }
+  isMinimized: boolean
+  isMaximized: boolean
+  zIndex: number
+}
+
+interface DesktopIcon {
+  id: string
+  name: string
+  icon: React.ReactNode
+  position: { x: number; y: number }
+  action: () => void
+}
+
+interface DragState {
+  isDragging: boolean
+  draggedIcon: string | null
+  offset: { x: number; y: number }
+}
+
+export default function UbuntuPortfolio() {
+  const [isLoading, setIsLoading] = useState(true)
+  const [currentTime, setCurrentTime] = useState("")
+  const [isClient, setIsClient] = useState(false)
+
+  // Ubuntu-style sound effects (visual feedback)
+  const playClickSound = () => {
+    // Visual feedback for clicks
+    const clickEffect = document.createElement('div')
+    clickEffect.className = 'fixed inset-0 pointer-events-none z-50'
+    clickEffect.innerHTML = '<div class="w-2 h-2 bg-white rounded-full animate-ping absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>'
+    document.body.appendChild(clickEffect)
+    setTimeout(() => clickEffect.remove(), 300)
+  }
+
+  const playHoverSound = () => {
+    // Subtle hover effect
+    const hoverEffect = document.createElement('div')
+    hoverEffect.className = 'fixed inset-0 pointer-events-none z-40'
+    hoverEffect.innerHTML = '<div class="w-1 h-1 bg-white/50 rounded-full animate-pulse absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>'
+    document.body.appendChild(hoverEffect)
+    setTimeout(() => hoverEffect.remove(), 200)
+  }
+  const [windows, setWindows] = useState<Window[]>([])
+  const [nextZIndex, setNextZIndex] = useState(1000)
+  const [draggedIcon, setDraggedIcon] = useState<string | null>(null)
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 })
+  const [draggedWindow, setDraggedWindow] = useState<string | null>(null)
+  const [windowDragOffset, setWindowDragOffset] = useState({ x: 0, y: 0 })
+  const [iconPositions, setIconPositions] = useState<Record<string, { x: number; y: number }>>({
+    terminal: { x: 100, y: 100 },
+    projects: { x: 100, y: 180 },
+    notepad: { x: 100, y: 260 },
+    about: { x: 100, y: 340 },
+    skills: { x: 100, y: 420 },
+    contact: { x: 250, y: 100 },
+    gallery: { x: 250, y: 180 },
+    settings: { x: 250, y: 260 },
+  })
+  const [terminalHistory, setTerminalHistory] = useState<string[]>([
+    "Ubuntu 22.04.3 LTS ubuntu-developer tty1",
+    "",
+    "ubuntu-developer login: portfolio",
+    "Welcome to Ubuntu Portfolio Desktop!",
+    'Type "help" for available commands.',
+    "",
+  ])
+  const [terminalInput, setTerminalInput] = useState("")
+  const terminalRef = useRef<HTMLDivElement>(null)
+  const terminalInputRef = useRef<HTMLInputElement>(null)
+  const [currentCommand, setCurrentCommand] = useState("")
+
+  const [desktopIcons, setDesktopIcons] = useState<DesktopIcon[]>([
+    {
+      id: "terminal",
+      name: "Terminal",
+      icon: <Terminal className="w-8 h-8 text-primary-foreground" />,
+      position: { x: 100, y: 100 },
+      action: () => openWindow("terminal", "Terminal", <TerminalWindow />),
+    },
+    {
+      id: "projects",
+      name: "Projects",
+      icon: <Folder className="w-8 h-8 text-chart-5" />,
+      position: { x: 100, y: 180 },
+      action: () => openWindow("projects", "Projects", <ProjectsWindow />),
+    },
+    {
+      id: "notepad",
+      name: "Commands",
+      icon: <FileText className="w-8 h-8 text-chart-2" />,
+      position: { x: 100, y: 260 },
+      action: () => openWindow("notepad", "Commands Guide", <NotepadWindow />),
+    },
+    {
+      id: "about",
+      name: "About Me",
+      icon: <User className="w-8 h-8 text-chart-3" />,
+      position: { x: 100, y: 340 },
+      action: () => openWindow("about", "About Me", <AboutWindow />),
+    },
+    {
+      id: "skills",
+      name: "Skills",
+      icon: <Code className="w-8 h-8 text-chart-4" />,
+      position: { x: 100, y: 420 },
+      action: () => openWindow("skills", "Skills", <SkillsWindow />),
+    },
+    {
+      id: "contact",
+      name: "Contact",
+      icon: <Mail className="w-8 h-8 text-destructive" />,
+      position: { x: 250, y: 100 },
+      action: () => openWindow("contact", "Contact", <ContactWindow />),
+    },
+    {
+      id: "gallery",
+      name: "Gallery",
+      icon: <ImageIcon className="w-8 h-8 text-accent-foreground" />,
+      position: { x: 250, y: 180 },
+      action: () => openWindow("gallery", "Gallery", <GalleryWindow />),
+    },
+    {
+      id: "settings",
+      name: "Settings",
+      icon: <Settings className="w-8 h-8 text-muted-foreground" />,
+      position: { x: 250, y: 260 },
+      action: () => openWindow("settings", "Settings", <SettingsWindow />),
+    },
+  ])
+
+  const [sidebarIcons, setSidebarIcons] = useState<DesktopIcon[]>([
+    {
+      id: "home",
+      name: "Home",
+      icon: (
+        <div className="w-6 h-6 flex items-center justify-center">
+          <svg viewBox="0 0 24 24" className="w-6 h-6 text-white">
+            <path fill="currentColor" d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+          </svg>
+        </div>
+      ),
+      position: { x: 0, y: 0 },
+      action: () => {
+        // Close all windows to show desktop
+        setWindows([])
+      },
+    },
+    {
+      id: "software-center",
+      name: "Software Center",
+      icon: (
+        <div className="w-6 h-6 bg-[#E95420] rounded flex items-center justify-center">
+          <svg viewBox="0 0 24 24" className="w-4 h-4 text-white">
+            <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+          </svg>
+        </div>
+      ),
+      position: { x: 0, y: 0 },
+      action: () => openWindow("software-center", "Software Center", <SoftwareCenterWindow />),
+    },
+    {
+      id: "help",
+      name: "Help",
+      icon: (
+        <div className="w-6 h-6 flex items-center justify-center">
+          <svg viewBox="0 0 24 24" className="w-6 h-6 text-blue-400">
+            <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z" />
+          </svg>
+        </div>
+      ),
+      position: { x: 0, y: 0 },
+      action: () => openWindow("help", "Help & Support", <HelpWindow />),
+    },
+    {
+      id: "files",
+      name: "Files",
+      icon: (
+        <div className="w-6 h-6 flex items-center justify-center">
+          <svg viewBox="0 0 24 24" className="w-6 h-6 text-gray-300">
+            <path fill="currentColor" d="M20 6h-2l-2-2H8L6 6H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z" />
+          </svg>
+        </div>
+      ),
+      position: { x: 0, y: 0 },
+      action: () => openWindow("files", "File Manager", <FilesWindow />),
+    },
+    {
+      id: "trash",
+      name: "Trash",
+      icon: (
+        <div className="w-6 h-6 flex items-center justify-center">
+          <svg viewBox="0 0 24 24" className="w-6 h-6 text-gray-400">
+            <path fill="currentColor" d="M19 4h-3.5l-1-1h-5l-1 1H5v2h14M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12z" />
+          </svg>
+        </div>
+      ),
+      position: { x: 0, y: 0 },
+      action: () => openWindow("trash", "Trash", <TrashWindow />),
+    },
+  ])
+
+  useEffect(() => {
+    // Set client-side flag to prevent hydration mismatch
+    setIsClient(true)
+
+    // Set initial time
+    setCurrentTime(
+      new Date().toLocaleString("en-US", {
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false,
+      }),
+    )
+
+    const timer = setInterval(() => {
+      setCurrentTime(
+        new Date().toLocaleString("en-US", {
+          weekday: "short",
+          month: "short",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: false,
+        }),
+      )
+    }, 1000)
+
+    return () => clearInterval(timer)
+  }, [])
+
+  // Performance optimization: Memoize expensive calculations
+  const memoizedDesktopIcons = useMemo(() => desktopIcons, [desktopIcons])
+  const memoizedWindows = useMemo(() => windows, [windows])
+
+  // Error boundary for graceful error handling
+  const [hasError, setHasError] = useState(false)
+
+  useEffect(() => {
+    const handleError = (error: ErrorEvent) => {
+      console.error('Ubuntu Portfolio Error:', error)
+      setHasError(true)
+    }
+
+    window.addEventListener('error', handleError)
+    return () => window.removeEventListener('error', handleError)
+  }, [])
+
+  useEffect(() => {
+    if (windows.find((w) => w.id === "terminal") && terminalInputRef.current) {
+      setTimeout(() => {
+        terminalInputRef.current?.focus()
+      }, 100)
+    }
+  }, [windows])
+
+  const snapToGrid = (x: number, y: number) => {
+    // Ubuntu-style grid snapping - but allow free movement
+    const gridSize = 80
+    const startX = 100
+    const startY = 100
+
+    // Calculate grid position
+    const gridX = Math.round((x - startX) / gridSize)
+    const gridY = Math.round((y - startY) / gridSize)
+
+    // Allow movement anywhere, just snap to grid
+    const clampedY = Math.max(0, gridY)
+
+    return {
+      x: startX + gridX * gridSize,
+      y: startY + clampedY * gridSize
+    }
+  }
+
+  const checkCollision = (iconId: string, newX: number, newY: number) => {
+    const snapPos = snapToGrid(newX, newY)
+
+    // Check if position is already occupied
+    return desktopIcons.some(icon =>
+      icon.id !== iconId &&
+      Math.abs(icon.position.x - snapPos.x) < 80 &&
+      Math.abs(icon.position.y - snapPos.y) < 80
+    )
+  }
+
+  const handleIconMouseDown = (e: React.MouseEvent<HTMLDivElement>, iconId: string) => {
+    e.preventDefault()
+    const rect = e.currentTarget.getBoundingClientRect()
+    setDraggedIcon(iconId)
+    setDragOffset({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    })
+  }
+
+  const handleWindowMouseDown = (e: React.MouseEvent<HTMLDivElement>, windowId: string) => {
+    e.preventDefault()
+    const rect = e.currentTarget.getBoundingClientRect()
+    setDraggedWindow(windowId)
+    setWindowDragOffset({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    })
+    bringToFront(windowId)
+  }
+
+  useEffect(() => {
+    const handleGlobalMouseMove = (e: MouseEvent) => {
+      // Handle icon dragging with Ubuntu-style snapping
+      if (draggedIcon) {
+        const newX = e.clientX - dragOffset.x
+        const newY = e.clientY - dragOffset.y
+
+        const constrainedX = Math.max(80, Math.min(newX, window.innerWidth - 100))
+        const constrainedY = Math.max(48, Math.min(newY, window.innerHeight - 150))
+
+        // Snap to grid position
+        const snapPos = snapToGrid(constrainedX, constrainedY)
+
+        // Check for collisions and find next available position
+        let finalPos = snapPos
+        if (checkCollision(draggedIcon, constrainedX, constrainedY)) {
+          // Find next available position in grid - search from current position outward
+          const gridSize = 80
+          const startX = 100
+          const startY = 100
+
+          // Start from the intended position and search outward
+          const intendedCol = Math.round((constrainedX - startX) / gridSize)
+          const intendedRow = Math.round((constrainedY - startY) / gridSize)
+
+          // Search in expanding radius
+          for (let radius = 0; radius < 10; radius++) {
+            for (let colOffset = -radius; colOffset <= radius; colOffset++) {
+              for (let rowOffset = -radius; rowOffset <= radius; rowOffset++) {
+                if (Math.abs(colOffset) === radius || Math.abs(rowOffset) === radius) {
+                  const testX = startX + (intendedCol + colOffset) * gridSize
+                  const testY = startY + (intendedRow + rowOffset) * gridSize
+
+                  // Only check positions that are within bounds
+                  if (testX >= startX && testY >= startY) {
+                    if (!checkCollision(draggedIcon, testX, testY)) {
+                      finalPos = { x: testX, y: testY }
+                      break
+                    }
+                  }
+                }
+              }
+              if (finalPos.x !== snapPos.x || finalPos.y !== snapPos.y) break
+            }
+            if (finalPos.x !== snapPos.x || finalPos.y !== snapPos.y) break
+          }
+        }
+
+        setDesktopIcons((prev) =>
+          prev.map((icon) =>
+            icon.id === draggedIcon ? { ...icon, position: finalPos } : icon,
+          ),
+        )
+      }
+
+      if (draggedWindow) {
+        const newX = e.clientX - windowDragOffset.x
+        const newY = e.clientY - windowDragOffset.y
+
+        const constrainedX = Math.max(0, Math.min(newX, window.innerWidth - 200))
+        const constrainedY = Math.max(48, Math.min(newY, window.innerHeight - 200))
+
+        setWindows((prev) =>
+          prev.map((win) =>
+            win.id === draggedWindow && !win.isMaximized
+              ? { ...win, position: { x: constrainedX, y: constrainedY } }
+              : win,
+          ),
+        )
+      }
+    }
+
+    const handleGlobalMouseUp = () => {
+      setDraggedIcon(null)
+      setDraggedWindow(null)
+    }
+
+    if (draggedIcon || draggedWindow) {
+      document.addEventListener("mousemove", handleGlobalMouseMove)
+      document.addEventListener("mouseup", handleGlobalMouseUp)
+    }
+
+    return () => {
+      document.removeEventListener("mousemove", handleGlobalMouseMove)
+      document.removeEventListener("mouseup", handleGlobalMouseUp)
+    }
+  }, [draggedIcon, dragOffset, draggedWindow, windowDragOffset])
+
+  const openWindow = (id: string, title: string, component: React.ReactNode) => {
+    const existingWindow = windows.find((w) => w.id === id)
+    if (existingWindow) {
+      bringToFront(id)
+      return
+    }
+
+    const newWindow = {
+      id,
+      title,
+      component,
+      position: { x: 50 + windows.length * 20, y: 50 + windows.length * 20 },
+      size: { width: 640, height: 400 },
+      isMinimized: false,
+      isMaximized: false,
+      zIndex: nextZIndex,
+    }
+    setWindows((prev) => [...prev, newWindow])
+    setNextZIndex((prev) => prev + 1)
+  }
+
+  const closeWindow = (id: string) => {
+    setWindows((prev) => prev.filter((w) => w.id !== id))
+  }
+
+  const minimizeWindow = (id: string) => {
+    setWindows((prev) => prev.map((w) => (w.id === id ? { ...w, isMinimized: true } : w)))
+  }
+
+  const restoreWindow = (id: string) => {
+    setWindows((prev) => prev.map((w) => (w.id === id ? { ...w, isMinimized: false } : w)))
+    bringToFront(id)
+  }
+
+  const maximizeWindow = (id: string) => {
+    setWindows((prev) =>
+      prev.map((w) =>
+        w.id === id
+          ? {
+            ...w,
+            isMaximized: !w.isMaximized,
+            position: w.isMaximized ? { x: 50, y: 50 } : { x: 0, y: 48 },
+            size: w.isMaximized
+              ? { width: 640, height: 400 }
+              : { width: window.innerWidth, height: window.innerHeight - 96 },
+          }
+          : w,
+      ),
+    )
+  }
+
+  const bringToFront = (id: string) => {
+    setWindows((prev) => prev.map((w) => (w.id === id ? { ...w, zIndex: nextZIndex, isMinimized: false } : w)))
+    setNextZIndex((prev) => prev + 1)
+  }
+
+  const handleTerminalCommand = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      const command = currentCommand.trim()
+      setCurrentCommand("")
+
+      if (command === "help") {
+        setTerminalHistory((prev) => [
+          ...prev,
+          `ubuntu-developer@portfolio:~$ ${command}`,
+          "Available commands:",
+          "  help - Show this help message",
+          "  clear - Clear terminal",
+          "  ls - List directory contents",
+          "  pwd - Print working directory",
+          "  whoami - Display current user",
+          "  date - Show current date and time",
+          "  neofetch - Display system information",
+          "  fortune - Get a random quote",
+          "  open [app] - Open application",
+          "  ./[project] - Launch specific project",
+          "  cat [file] - Display file contents",
+          "  tree - Show directory tree",
+          "  history - Show command history",
+          "  exit - Close terminal",
+          "",
+        ])
+      } else if (command === "clear") {
+        setTerminalHistory([])
+      } else if (command === "ls") {
+        setTerminalHistory((prev) => [
+          ...prev,
+          `ubuntu-developer@portfolio:~$ ${command}`,
+          "projects/",
+          "about.txt",
+          "contact.txt",
+          "skills.txt",
+          "ecommerce*",
+          "taskmanager*",
+          "apigateway*",
+          "portfolio*",
+          "",
+        ])
+      } else if (command === "pwd") {
+        setTerminalHistory((prev) => [
+          ...prev,
+          `ubuntu-developer@portfolio:~$ ${command}`,
+          "/home/ubuntu-developer",
+          "",
+        ])
+      } else if (command === "whoami") {
+        setTerminalHistory((prev) => [...prev, `ubuntu-developer@portfolio:~$ ${command}`, "ubuntu-developer", ""])
+      } else if (command === "date") {
+        setTerminalHistory((prev) => [...prev, `ubuntu-developer@portfolio:~$ ${command}`, new Date().toString(), ""])
+      } else if (command === "neofetch") {
+        setTerminalHistory((prev) => [
+          ...prev,
+          `ubuntu-developer@portfolio:~$ ${command}`,
+          "                    .-/+oossssoo+/-.",
+          "                `:+ssssssssssssssssss+:`",
+          "              -+ssssssssssssssssssyyssss+-",
+          "            .ossssssssssssssssss+:::::+ys:",
+          "           /ssssssssssshdmmNNmmyNMMMMh+sss/",
+          "          +ssssssssshmydMMMMMMMNddddyssssss+",
+          "         /sssssssshNMMMyhhyyyyhmNMMMNhssssss/",
+          "        .ssssssssdMMMNhsssssssssshNMMMdssssss.",
+          "        +sssshhhyNMMNyssssssssssssyNMMMysssss+",
+          "        ossyNMMMNyMMhsssssssssssssshmmmhssssso",
+          "        ossyNMMMNyMMhsssssssssssssshmmmhssssso",
+          "        +sssshhhyNMMNyssssssssssssyNMMMysssss+",
+          "        .ssssssssdMMMNhsssssssssshNMMMdssssss.",
+          "         /sssssssshNMMMyhhyyyyhdNMMMNhssssss/",
+          "          +sssssssssdmydMMMMMMMMddddyssssss+",
+          "           /ssssssssssshdmNNNNmyNMMMMhssss/",
+          "            .ossssssssssssssssss+:::::+ys:",
+          "              -+sssssssssssssssssyyssss+-",
+          "                `:+ssssssssssssssssss+:`",
+          "                    .-/+oossssoo+/-.",
+          "",
+          "ubuntu-developer@portfolio-desktop",
+          "OS: Ubuntu 22.04.3 LTS x86_64",
+          "Host: Portfolio Desktop",
+          "Kernel: 5.15.0-generic",
+          "Uptime: 2 hours, 34 mins",
+          "Packages: 2847 (dpkg), 63 (snap)",
+          "Shell: bash 5.1.16",
+          "Resolution: 1920x1080",
+          "DE: Portfolio Desktop Environment",
+          "WM: Portfolio WM",
+          "Theme: Ubuntu [GTK2/3]",
+          "Icons: Yaru [GTK2/3]",
+          "Terminal: portfolio-terminal",
+          "CPU: Intel i7-12700K (16) @ 3.600GHz",
+          "GPU: NVIDIA GeForce RTX 3080",
+          "Memory: 2847MiB / 32768MiB",
+          "",
+        ])
+      } else if (command === "fortune") {
+        const fortunes = [
+          "The best way to predict the future is to implement it.",
+          "Code is like humor. When you have to explain it, it's bad.",
+          "Programming isn't about what you know; it's about what you can figure out.",
+          "The most important property of a program is whether it accomplishes the intention of its user.",
+          "Ubuntu: Linux for human beings.",
+          "There are only two hard things in Computer Science: cache invalidation and naming things.",
+        ]
+        const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)]
+        setTerminalHistory((prev) => [...prev, `ubuntu-developer@portfolio:~$ ${command}`, randomFortune, ""])
+      } else if (command === "tree") {
+        setTerminalHistory((prev) => [
+          ...prev,
+          `ubuntu-developer@portfolio:~$ ${command}`,
+          ".",
+          "├── projects/",
+          "│   ├── ecommerce/",
+          "│   ├── taskmanager/",
+          "│   ├── apigateway/",
+          "│   └── portfolio/",
+          "├── about.txt",
+          "├── contact.txt",
+          "├── skills.txt",
+          "└── README.md",
+          "",
+          "4 directories, 4 files",
+          "",
+        ])
+      } else if (command === "history") {
+        setTerminalHistory((prev) => [
+          ...prev,
+          `ubuntu-developer@portfolio:~$ ${command}`,
+          "1  help",
+          "2  ls",
+          "3  pwd",
+          "4  whoami",
+          "5  neofetch",
+          "6  history",
+          "",
+        ])
+      } else if (command === "exit") {
+        closeWindow("terminal")
+        return
+      } else if (command.startsWith("cat ")) {
+        const fileName = command.split(" ")[1]
+        if (fileName === "about.txt") {
+          setTerminalHistory((prev) => [
+            ...prev,
+            `ubuntu-developer@portfolio:~$ ${command}`,
+            "# About Me",
+            "Full-Stack Developer & Linux Enthusiast",
+            "",
+            "Passionate about creating scalable web applications",
+            "and exploring the depths of Ubuntu/Linux systems.",
+            "Specializing in React, Next.js, Node.js, and DevOps.",
+            "",
+          ])
+        } else if (fileName === "contact.txt") {
+          setTerminalHistory((prev) => [
+            ...prev,
+            `ubuntu-developer@portfolio:~$ ${command}`,
+            "# Contact Information",
+            "Email: developer@ubuntu-portfolio.dev",
+            "GitHub: @ubuntu-developer",
+            "LinkedIn: /in/ubuntu-developer",
+            "",
+          ])
+        } else if (fileName === "skills.txt") {
+          setTerminalHistory((prev) => [
+            ...prev,
+            `ubuntu-developer@portfolio:~$ ${command}`,
+            "# Technical Skills",
+            "Frontend: React, Next.js, TypeScript, Tailwind CSS",
+            "Backend: Node.js, Express.js, Python, PostgreSQL",
+            "DevOps: Docker, Kubernetes, AWS, Ubuntu Server",
+            "Tools: Git, VS Code, Terminal, Postman",
+            "",
+          ])
+        } else {
+          setTerminalHistory((prev) => [
+            ...prev,
+            `ubuntu-developer@portfolio:~$ ${command}`,
+            `cat: ${fileName}: No such file or directory`,
+            "",
+          ])
+        }
+      } else if (command === "./ecommerce") {
+        openWindow("projects", "E-commerce Platform", <ProjectDetailWindow project="ecommerce" />)
+        setTerminalHistory((prev) => [
+          ...prev,
+          `ubuntu-developer@portfolio:~$ ${command}`,
+          "Launching E-commerce Platform...",
+          "Opening project details window...",
+          "",
+        ])
+      } else if (command === "./taskmanager") {
+        openWindow("projects", "Task Manager App", <ProjectDetailWindow project="taskmanager" />)
+        setTerminalHistory((prev) => [
+          ...prev,
+          `ubuntu-developer@portfolio:~$ ${command}`,
+          "Launching Task Manager App...",
+          "Opening project details window...",
+          "",
+        ])
+      } else if (command === "./apigateway") {
+        openWindow("projects", "API Gateway", <ProjectDetailWindow project="apigateway" />)
+        setTerminalHistory((prev) => [
+          ...prev,
+          `ubuntu-developer@portfolio:~$ ${command}`,
+          "Launching API Gateway...",
+          "Opening project details window...",
+          "",
+        ])
+      } else if (command === "./portfolio") {
+        openWindow("projects", "Portfolio Website", <ProjectDetailWindow project="portfolio" />)
+        setTerminalHistory((prev) => [
+          ...prev,
+          `ubuntu-developer@portfolio:~$ ${command}`,
+          "Launching Portfolio Website...",
+          "You're already here! 🐧",
+          "",
+        ])
+      } else if (command.startsWith("open")) {
+        const appName = command.split(" ")[1]
+        if (appName === "projects") {
+          openWindow("projects", "Projects", <ProjectsWindow />)
+          setTerminalHistory((prev) => [
+            ...prev,
+            `ubuntu-developer@portfolio:~$ ${command}`,
+            `Opening ${appName}...`,
+            "",
+          ])
+        } else if (appName === "about") {
+          openWindow("about", "About Me", <AboutWindow />)
+          setTerminalHistory((prev) => [
+            ...prev,
+            `ubuntu-developer@portfolio:~$ ${command}`,
+            `Opening ${appName}...`,
+            "",
+          ])
+        } else if (appName === "skills") {
+          openWindow("skills", "Skills", <SkillsWindow />)
+          setTerminalHistory((prev) => [
+            ...prev,
+            `ubuntu-developer@portfolio:~$ ${command}`,
+            `Opening ${appName}...`,
+            "",
+          ])
+        } else if (appName === "contact") {
+          openWindow("contact", "Contact", <ContactWindow />)
+          setTerminalHistory((prev) => [
+            ...prev,
+            `ubuntu-developer@portfolio:~$ ${command}`,
+            `Opening ${appName}...`,
+            "",
+          ])
+        } else if (appName === "gallery") {
+          openWindow("gallery", "Gallery", <GalleryWindow />)
+          setTerminalHistory((prev) => [
+            ...prev,
+            `ubuntu-developer@portfolio:~$ ${command}`,
+            `Opening ${appName}...`,
+            "",
+          ])
+        } else if (appName === "settings") {
+          openWindow("settings", "Settings", <SettingsWindow />)
+          setTerminalHistory((prev) => [
+            ...prev,
+            `ubuntu-developer@portfolio:~$ ${command}`,
+            `Opening ${appName}...`,
+            "",
+          ])
+        } else {
+          setTerminalHistory((prev) => [
+            ...prev,
+            `ubuntu-developer@portfolio:~$ ${command}`,
+            `Error: Application "${appName}" not found.`,
+            'Type "help" for available commands.',
+            "",
+          ])
+        }
+      } else if (command === "") {
+        setTerminalHistory((prev) => [...prev, "ubuntu-developer@portfolio:~$ ", ""])
+      } else {
+        setTerminalHistory((prev) => [
+          ...prev,
+          `ubuntu-developer@portfolio:~$ ${command}`,
+          `bash: ${command}: command not found`,
+          'Type "help" for available commands.',
+          "",
+        ])
+      }
+
+      setTimeout(() => {
+        if (terminalRef.current) {
+          terminalRef.current.scrollTop = terminalRef.current.scrollHeight
+        }
+      }, 100)
+    }
+  }
+
+  const TerminalWindow = () => (
+    <div className="h-full bg-[#000000] text-chart-3 font-mono text-sm p-4 overflow-hidden flex flex-col">
+      <div ref={terminalRef} className="flex-1 overflow-y-auto mb-4 space-y-1">
+        {terminalHistory.map((line, index) => (
+          <div
+            key={index}
+            className={
+              line.startsWith("ubuntu-developer@portfolio")
+                ? "text-chart-3"
+                : line.includes("command not found")
+                  ? "text-destructive"
+                  : line.includes("Opening") || line.includes("Launching")
+                    ? "text-chart-5"
+                    : "text-muted-foreground"
+            }
+          >
+            {line}
+          </div>
+        ))}
+      </div>
+      <div className="flex items-center">
+        <span className="text-chart-3 mr-2">ubuntu-developer@portfolio:~$</span>
+        <input
+          ref={terminalInputRef}
+          type="text"
+          value={currentCommand}
+          onChange={(e) => setCurrentCommand(e.target.value)}
+          onKeyDown={handleTerminalCommand}
+          className="flex-1 bg-transparent text-chart-3 outline-none font-mono caret-chart-3"
+          placeholder="Type a command..."
+          autoFocus
+          onBlur={(e) => {
+            setTimeout(() => {
+              if (windows.find((w) => w.id === "terminal")) {
+                e.target.focus()
+              }
+            }, 10)
+          }}
+          onClick={() => terminalInputRef.current?.focus()}
+        />
+      </div>
+    </div>
+  )
+
+  const ProjectsWindow = () => (
+    <div className="h-full bg-card p-6 overflow-y-auto">
+      <h2 className="text-2xl font-bold text-foreground mb-6">My Projects</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {[
+          {
+            title: "E-commerce Platform",
+            description: "Full-stack e-commerce solution with React, Node.js, and MongoDB",
+            tech: ["React", "Node.js", "MongoDB", "Stripe"],
+            status: "Completed",
+          },
+          {
+            title: "Task Management App",
+            description: "Collaborative task management with real-time updates",
+            tech: ["Next.js", "Socket.io", "PostgreSQL"],
+            status: "In Progress",
+          },
+          {
+            title: "API Gateway",
+            description: "Microservices API gateway with advanced features",
+            features: [
+              "Request routing and load balancing",
+              "Authentication and authorization",
+              "Rate limiting and throttling",
+              "Request/response transformation",
+              "Monitoring and analytics",
+              "Circuit breaker pattern",
+              "Docker containerization",
+            ],
+            tech: ["Express.js", "Redis", "JWT", "Docker", "Nginx", "Prometheus"],
+            status: "Production Ready",
+          },
+          {
+            title: "Portfolio Website",
+            description: "Interactive Ubuntu desktop simulation as a portfolio website",
+            features: [
+              "Full Ubuntu desktop simulation",
+              "Draggable windows and icons",
+              "Working terminal with commands",
+              "Responsive design",
+              "Project showcases",
+              "Contact integration",
+              "Loading screen animation",
+            ],
+            tech: ["Next.js", "TypeScript", "Tailwind CSS", "Lucide Icons"],
+            status: "Live",
+          },
+        ].map((project, index) => (
+          <div key={index} className="border border-border rounded-lg p-4 hover:shadow-md transition-shadow">
+            <h3 className="text-lg font-semibold text-foreground mb-2">{project.title}</h3>
+            <p className="text-card-foreground mb-3">{project.description}</p>
+            <div className="mt-4">
+              <span
+                className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${project.status === "Completed" || project.status === "Live"
+                  ? "bg-chart-3/20 text-chart-3"
+                  : "bg-chart-5/20 text-chart-5"
+                  }`}
+              >
+                {project.status}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+
+  const NotepadWindow = () => (
+    <div className="h-full bg-card p-4 font-mono text-sm">
+      <div className="h-full overflow-y-auto whitespace-pre-wrap text-foreground">
+        {`# Ubuntu Portfolio Commands Guide
+# Welcome to my interactive portfolio!
+
+## Quick Start Commands:
+Copy and paste these commands into the terminal:
+
+./ecommerce     - View my e-commerce platform project
+./taskmanager   - Explore the task management app
+./apigateway    - Check out the API gateway system
+./portfolio     - About this portfolio website
+
+## Window Commands:
+open projects   - Open projects folder (GUI way)
+open about      - Learn more about me
+open skills     - View my technical skills
+open contact    - Get in touch with me
+open gallery    - View project screenshots
+open settings   - System preferences
+
+## Navigation Commands:
+help           - Show this help guide
+clear          - Clear terminal history
+ls             - List available projects
+pwd            - Show current directory
+whoami         - Display user information
+
+## Fun Commands:
+neofetch       - Display system information
+fortune        - Get a random quote
+date           - Show current date and time
+
+## Tips:
+- Double-click desktop icons for GUI access
+- Use Tab for command completion
+- All commands are case-sensitive
+- Type 'exit' to close terminal
+
+Happy exploring! 🐧`}
+      </div>
+    </div>
+  )
+
+  const AboutWindow = () => (
+    <div className="h-full bg-card p-6 overflow-y-auto">
+      <div className="max-w-2xl mx-auto">
+        <div className="text-center mb-6">
+          <div className="w-24 h-24 bg-gradient-to-br from-chart-4 to-primary rounded-full mx-auto mb-4 flex items-center justify-center">
+            <User className="w-12 h-12 text-primary-foreground" />
+          </div>
+          <h2 className="text-2xl font-bold text-foreground">Ubuntu Developer</h2>
+          <p className="text-card-foreground">Full-Stack Developer & Linux Enthusiast</p>
+        </div>
+        <div className="space-y-4 text-card-foreground">
+          <p>
+            Passionate full-stack developer with expertise in modern web technologies and a deep love for Ubuntu/Linux
+            systems. I specialize in building scalable applications using React, Next.js, Node.js, and various backend
+            technologies.
+          </p>
+          <p>
+            My journey in software development spans over 5 years, during which I've worked on everything from
+            e-commerce platforms to API gateways. I'm particularly interested in DevOps, containerization, and creating
+            seamless user experiences.
+          </p>
+          <p>
+            When I'm not coding, you'll find me contributing to open-source projects, exploring new Linux distributions,
+            or sharing knowledge with the developer community.
+          </p>
+        </div>
+        <div className="flex space-x-2 pt-6">
+          <Button size="sm" className="bg-primary hover:bg-primary/90 text-primary-foreground">
+            <Github className="w-4 h-4 mr-2" />
+            GitHub
+          </Button>
+          <Button size="sm" variant="outline">
+            <Linkedin className="w-4 h-4 mr-2" />
+            LinkedIn
+          </Button>
+          <Button size="sm" variant="outline">
+            <Download className="w-4 h-4 mr-2" />
+            Resume
+          </Button>
+        </div>
+      </div>
+    </div>
+  )
+
+  const SkillsWindow = () => {
+    const skills = [
+      { category: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Vue.js"] },
+      { category: "Backend", items: ["Node.js", "Express.js", "Python", "PostgreSQL", "MongoDB"] },
+      { category: "DevOps", items: ["Docker", "Kubernetes", "AWS", "Ubuntu Server", "Nginx"] },
+      { category: "Tools", items: ["Git", "VS Code", "Terminal", "Postman", "Figma"] },
+    ]
+
+    return (
+      <div className="h-full bg-card p-6 overflow-y-auto">
+        <h2 className="text-2xl font-bold text-foreground mb-6">Technical Skills</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {skills.map((skillGroup) => (
+            <div key={skillGroup.category} className="border border-border rounded-lg p-4">
+              <h3 className="text-lg font-semibold text-foreground mb-3">{skillGroup.category}</h3>
+              <div className="flex flex-wrap gap-2">
+                {skillGroup.items.map((skill) => (
+                  <span key={skill} className="px-3 py-1 bg-primary/20 text-primary text-sm rounded-full">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  const ContactWindow = () => (
+    <div className="h-full bg-card p-6 overflow-y-auto">
+      <div className="max-w-md mx-auto">
+        <h2 className="text-2xl font-bold text-foreground mb-6 text-center">Get In Touch</h2>
+        <div className="space-y-4">
+          <div className="flex items-center space-x-3 p-3 border border-border rounded-lg">
+            <Mail className="w-5 h-5 text-primary" />
+            <div>
+              <p className="font-medium text-foreground">Email</p>
+              <p className="text-card-foreground">developer@ubuntu-portfolio.dev</p>
+            </div>
+          </div>
+          <div className="flex items-center space-x-3 p-3 border border-border rounded-lg">
+            <Github className="w-5 h-5 text-primary" />
+            <div>
+              <p className="font-medium text-foreground">GitHub</p>
+              <p className="text-card-foreground">@ubuntu-developer</p>
+            </div>
+          </div>
+          <div className="flex items-center space-x-3 p-3 border border-border rounded-lg">
+            <Linkedin className="w-5 h-5 text-primary" />
+            <div>
+              <p className="font-medium text-foreground">LinkedIn</p>
+              <p className="text-card-foreground">/in/ubuntu-developer</p>
+            </div>
+          </div>
+        </div>
+        <div className="mt-6">
+          <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+            <Mail className="w-4 h-4 mr-2" />
+            Send Message
+          </Button>
+        </div>
+      </div>
+    </div>
+  )
+
+  const GalleryWindow = () => (
+    <div className="h-full bg-card p-6 overflow-y-auto">
+      <h2 className="text-2xl font-bold text-foreground mb-6">Project Gallery</h2>
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {Array.from({ length: 6 }, (_, i) => (
+          <div
+            key={i}
+            className="aspect-square bg-muted rounded-lg flex items-center justify-center border border-border"
+          >
+            <ImageIcon className="w-8 h-8 text-muted-foreground" />
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+
+  const SettingsWindow = () => (
+    <div className="h-full bg-card p-6 overflow-y-auto">
+      <h2 className="text-2xl font-bold text-foreground mb-6">System Settings</h2>
+      <div className="space-y-4">
+        <div className="border border-border rounded-lg p-4">
+          <h3 className="font-semibold text-foreground mb-2">Display</h3>
+          <p className="text-card-foreground text-sm">Resolution: 1920x1080</p>
+          <p className="text-card-foreground text-sm">Theme: Ubuntu Default</p>
+        </div>
+        <div className="border border-border rounded-lg p-4">
+          <h3 className="font-semibold text-foreground mb-2">System Info</h3>
+          <p className="text-card-foreground text-sm">OS: Ubuntu 22.04 LTS</p>
+          <p className="text-card-foreground text-sm">Kernel: 5.15.0-generic</p>
+          <p className="text-card-foreground text-sm">Desktop: Portfolio Desktop</p>
+        </div>
+      </div>
+    </div>
+  )
+
+  const SoftwareCenterWindow = () => (
+    <div className="h-full bg-card p-6 overflow-y-auto">
+      <h2 className="text-2xl font-bold text-foreground mb-6">Software Center</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {[
+          { name: "Terminal", description: "Command line interface", icon: <Terminal className="w-8 h-8" /> },
+          { name: "File Manager", description: "Browse and manage files", icon: <Folder className="w-8 h-8" /> },
+          { name: "Text Editor", description: "Edit text files", icon: <FileText className="w-8 h-8" /> },
+          { name: "Settings", description: "System preferences", icon: <Settings className="w-8 h-8" /> },
+        ].map((app, index) => (
+          <div key={index} className="border border-border rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer">
+            <div className="flex items-center space-x-3">
+              {app.icon}
+              <div>
+                <h3 className="font-semibold text-foreground">{app.name}</h3>
+                <p className="text-sm text-card-foreground">{app.description}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+
+  const HelpWindow = () => (
+    <div className="h-full bg-card p-6 overflow-y-auto">
+      <h2 className="text-2xl font-bold text-foreground mb-6">Help & Support</h2>
+      <div className="space-y-4">
+        <div className="border border-border rounded-lg p-4">
+          <h3 className="font-semibold text-foreground mb-2">Getting Started</h3>
+          <p className="text-card-foreground">Welcome to Ubuntu Portfolio Desktop! This is an interactive portfolio showcasing development projects.</p>
+        </div>
+        <div className="border border-border rounded-lg p-4">
+          <h3 className="font-semibold text-foreground mb-2">Desktop Icons</h3>
+          <p className="text-card-foreground">Double-click any desktop icon to open applications. Drag icons to reposition them.</p>
+        </div>
+        <div className="border border-border rounded-lg p-4">
+          <h3 className="font-semibold text-foreground mb-2">Terminal Commands</h3>
+          <p className="text-card-foreground">Open the Terminal and type 'help' to see available commands.</p>
+        </div>
+      </div>
+    </div>
+  )
+
+  const FilesWindow = () => (
+    <div className="h-full bg-card p-6 overflow-y-auto">
+      <h2 className="text-2xl font-bold text-foreground mb-6">File Manager</h2>
+      <div className="space-y-2">
+        {[
+          { name: "📁 Documents", type: "folder", size: "2.3 GB" },
+          { name: "📁 Downloads", type: "folder", size: "1.1 GB" },
+          { name: "📁 Pictures", type: "folder", size: "856 MB" },
+          { name: "📁 Music", type: "folder", size: "3.2 GB" },
+          { name: "📁 Videos", type: "folder", size: "12.4 GB" },
+          { name: "📄 README.md", type: "file", size: "7.8 KB" },
+          { name: "📄 portfolio.txt", type: "file", size: "1.2 KB" },
+        ].map((item, index) => (
+          <div key={index} className="flex items-center justify-between p-2 hover:bg-muted rounded cursor-pointer">
+            <div className="flex items-center space-x-3">
+              <span className="text-lg">{item.name}</span>
+            </div>
+            <span className="text-sm text-muted-foreground">{item.size}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+
+  const TrashWindow = () => (
+    <div className="h-full bg-card p-6 overflow-y-auto">
+      <h2 className="text-2xl font-bold text-foreground mb-6">Trash</h2>
+      <div className="text-center py-12">
+        <Trash2 className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+        <p className="text-card-foreground">Trash is empty</p>
+        <p className="text-sm text-muted-foreground mt-2">Items you delete will appear here</p>
+      </div>
+    </div>
+  )
+
+  const ProjectDetailWindow = ({ project }: { project: string }) => {
+    const projectDetails = {
+      ecommerce: {
+        title: "E-commerce Platform",
+        description: "A full-featured e-commerce solution built with modern web technologies",
+        features: [
+          "User authentication and authorization",
+          "Product catalog with search and filtering",
+          "Shopping cart and checkout process",
+          "Payment integration with Stripe",
+          "Admin dashboard for inventory management",
+          "Order tracking and history",
+          "Responsive design for all devices",
+        ],
+        tech: ["React", "Node.js", "MongoDB", "Stripe API", "JWT", "Express.js"],
+        status: "Production Ready",
+        github: "https://github.com/ubuntu-developer/ecommerce-platform",
+        demo: "https://ecommerce-demo.ubuntu-portfolio.dev",
+      },
+      taskmanager: {
+        title: "Task Management App",
+        description: "Collaborative task management application with real-time updates",
+        features: [
+          "Real-time collaboration with Socket.io",
+          "Project and task organization",
+          "Team member assignment",
+          "Progress tracking and analytics",
+          "File attachments and comments",
+          "Deadline notifications",
+          "Kanban board interface",
+        ],
+        tech: ["Next.js", "Socket.io", "PostgreSQL", "Prisma", "TypeScript"],
+        status: "In Development",
+        github: "https://github.com/ubuntu-developer/task-manager",
+        demo: "https://tasks-demo.ubuntu-portfolio.dev",
+      },
+      apigateway: {
+        title: "API Gateway",
+        description: "Microservices API gateway with advanced features",
+        features: [
+          "Request routing and load balancing",
+          "Authentication and authorization",
+          "Rate limiting and throttling",
+          "Request/response transformation",
+          "Monitoring and analytics",
+          "Circuit breaker pattern",
+          "Docker containerization",
+        ],
+        tech: ["Express.js", "Redis", "JWT", "Docker", "Nginx", "Prometheus"],
+        status: "Production Ready",
+        github: "https://github.com/ubuntu-developer/api-gateway",
+        demo: "https://api-gateway-demo.ubuntu-portfolio.dev",
+      },
+      portfolio: {
+        title: "Ubuntu Portfolio Website",
+        description: "Interactive Ubuntu desktop simulation as a portfolio website",
+        features: [
+          "Full Ubuntu desktop simulation",
+          "Draggable windows and icons",
+          "Working terminal with commands",
+          "Responsive design",
+          "Project showcases",
+          "Contact integration",
+          "Loading screen animation",
+        ],
+        tech: ["Next.js", "TypeScript", "Tailwind CSS", "Lucide Icons"],
+        status: "Live",
+        github: "https://github.com/ubuntu-developer/portfolio",
+        demo: "https://ubuntu-portfolio.dev",
+      },
+    }
+
+    const details = projectDetails[project as keyof typeof projectDetails]
+
+    return (
+      <div className="h-full bg-card p-6 overflow-y-auto">
+        <div className="max-w-4xl mx-auto">
+          <div className="mb-6">
+            <h2 className="text-3xl font-bold text-foreground mb-2">{details.title}</h2>
+            <p className="text-card-foreground text-lg">{details.description}</p>
+            <div className="mt-4">
+              <span
+                className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${details.status === "Production Ready" || details.status === "Live"
+                  ? "bg-chart-3/20 text-chart-3"
+                  : "bg-chart-5/20 text-chart-5"
+                  }`}
+              >
+                {details.status}
+              </span>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-xl font-semibold text-foreground mb-4">Key Features</h3>
+              <ul className="space-y-2">
+                {details.features.map((feature, index) => (
+                  <li key={index} className="flex items-start">
+                    <span className="text-chart-3 mr-2">✓</span>
+                    <span className="text-card-foreground">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold text-foreground mb-4">Technologies Used</h3>
+              <div className="flex flex-wrap gap-2 mb-6">
+                {details.tech.map((tech) => (
+                  <span key={tech} className="px-3 py-1 bg-chart-2/20 text-chart-2 text-sm rounded-full">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              <div className="space-y-3">
+                <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+                  <ExternalLink className="w-4 h-4 mr-2" />
+                  View Live Demo
+                </Button>
+                <Button variant="outline" className="w-full bg-transparent">
+                  <Github className="w-4 h-4 mr-2" />
+                  View Source Code
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (hasError) {
+    return (
+      <div className="h-screen w-screen bg-gradient-to-br from-red-900 to-red-800 flex items-center justify-center">
+        <div className="text-center text-white">
+          <div className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span className="text-2xl">⚠️</span>
+          </div>
+          <h2 className="text-2xl font-bold mb-2">System Error</h2>
+          <p className="text-red-200 mb-4">Ubuntu Portfolio encountered an error</p>
+          <Button
+            onClick={() => window.location.reload()}
+            className="bg-white text-red-800 hover:bg-red-100"
+          >
+            Restart System
+          </Button>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="h-screen w-screen overflow-hidden relative bg-gradient-to-br from-purple-900 via-purple-800 to-orange-600">
+      {/* Desktop Wallpaper */}
+      <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url(/ubuntu-wallpaper.jpg)" }} />
+
+      {/* Ubuntu Top Panel - Authentic Ubuntu Style */}
+      <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-[#2C2C2C] to-[#1A1A1A] backdrop-blur-md text-white px-4 py-2 flex items-center justify-between z-50 h-12 border-b border-gray-600/30">
+        <div className="flex items-center space-x-4">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="text-white hover:bg-white/10 h-8 px-3 rounded-md transition-all duration-200"
+          >
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-white rounded-full"></div>
+              <span className="text-sm font-medium">Activities</span>
+            </div>
+          </Button>
+          <div className="h-6 w-px bg-gray-600"></div>
+          <div className="text-sm font-medium text-gray-200">Portfolio Desktop</div>
+        </div>
+
+        <div className="flex items-center space-x-4">
+          {/* System indicators */}
+          <div className="flex items-center space-x-2">
+            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+            <span className="text-xs text-gray-300">Online</span>
+          </div>
+
+          {/* Time display */}
+          <div className="text-sm text-white font-mono bg-black/20 px-3 py-1 rounded-md">
+            {isClient ? currentTime : "--:--:--"}
+          </div>
+
+          {/* System menu */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="text-white hover:bg-white/10 h-8 w-8 rounded-md transition-all duration-200"
+          >
+            <Settings className="w-4 h-4" />
+          </Button>
+        </div>
+      </div>
+
+      {/* Ubuntu Sidebar - Authentic Ubuntu Dock */}
+      <div className="absolute left-0 top-12 bottom-12 w-16 bg-gradient-to-b from-black/40 to-black/60 backdrop-blur-lg border-r border-white/10 z-40 shadow-2xl">
+        <div className="flex flex-col items-center py-6 space-y-4">
+          {sidebarIcons.map((icon, index) => (
+            <div
+              key={icon.id}
+              className="w-12 h-12 flex items-center justify-center rounded-xl hover:bg-white/20 transition-all duration-300 cursor-pointer group hover:scale-110 relative"
+              onClick={() => {
+                playClickSound()
+                icon.action()
+              }}
+              title={icon.name}
+            >
+              {/* Active indicator */}
+              <div className="absolute -left-1 w-1 h-8 bg-white rounded-r-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+              {/* Icon with glow effect */}
+              <div className="group-hover:drop-shadow-lg transition-all duration-300 group-hover:brightness-110">
+                {icon.icon}
+              </div>
+
+              {/* Tooltip */}
+              <div className="absolute left-16 bg-black/90 text-white text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap">
+                {icon.name}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Desktop Icons */}
+      <div className="absolute inset-0 p-4" style={{ paddingTop: "64px", paddingBottom: "64px", paddingLeft: "80px" }}>
+        {memoizedDesktopIcons.map((icon) => (
+          <div
+            key={icon.id}
+            className={`absolute cursor-pointer select-none ${draggedIcon === icon.id ? "opacity-50" : ""}`}
+            style={{
+              left: icon.position.x,
+              top: icon.position.y,
+            }}
+            onMouseDown={(e) => {
+              playClickSound()
+              handleIconMouseDown(e, icon.id)
+            }}
+            onDoubleClick={icon.action}
+          >
+            <div className={`flex flex-col items-center space-y-2 p-3 rounded-lg transition-all duration-300 ${draggedIcon === icon.id
+              ? "bg-white/20 scale-110 shadow-2xl backdrop-blur-sm"
+              : "hover:bg-white/10 hover:scale-105 hover:shadow-lg"
+              }`}>
+              <div className="drop-shadow-lg">
+                {icon.icon}
+              </div>
+              <span className="text-white text-xs text-center max-w-16 truncate font-medium drop-shadow-md">{icon.name}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Windows */}
+      {memoizedWindows
+        .filter((w) => !w.isMinimized)
+        .map((window) => (
+          <div
+            key={window.id}
+            className="absolute bg-white rounded-lg shadow-2xl border border-gray-200 overflow-hidden"
+            style={{
+              left: window.isMaximized ? 0 : window.position.x,
+              top: window.isMaximized ? 48 : window.position.y,
+              width: window.size.width,
+              height: window.size.height,
+              zIndex: window.zIndex,
+            }}
+            onClick={() => bringToFront(window.id)}
+          >
+            <div
+              className="bg-gradient-to-r from-gray-100 to-gray-200 border-b border-gray-300 px-4 py-2 flex items-center justify-between cursor-move select-none"
+              onMouseDown={(e) => handleWindowMouseDown(e, window.id)}
+            >
+              <div className="flex items-center space-x-2">
+                <div className="flex space-x-1">
+                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                  <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                </div>
+                <span className="text-sm font-medium text-gray-700 ml-2">{window.title}</span>
+              </div>
+              <div className="flex space-x-2">
+                <button
+                  className="w-4 h-4 bg-destructive rounded-full hover:bg-destructive/80 transition-colors flex items-center justify-center"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    closeWindow(window.id)
+                  }}
+                  title="Close"
+                  aria-label="Close window"
+                >
+                  <X className="w-3 h-3 text-destructive-foreground" />
+                </button>
+                <button
+                  className="w-4 h-4 bg-chart-5 rounded-full hover:bg-chart-5/80 transition-colors flex items-center justify-center"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    minimizeWindow(window.id)
+                  }}
+                  title="Minimize"
+                  aria-label="Minimize window"
+                >
+                  <Minus className="w-3 h-3 text-foreground" />
+                </button>
+                <button
+                  className="w-4 h-4 bg-chart-3 rounded-full hover:bg-chart-3/80 transition-colors flex items-center justify-center"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    maximizeWindow(window.id)
+                  }}
+                  title="Maximize"
+                  aria-label="Maximize window"
+                >
+                  <Square className="w-3 h-3 text-foreground" />
+                </button>
+              </div>
+            </div>
+
+            {/* Window Content */}
+            <div className="h-full bg-white" style={{ height: "calc(100% - 40px)" }}>
+              {window.component}
+            </div>
+          </div>
+        ))}
+
+      {/* Ubuntu Bottom Taskbar */}
+      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-[#2C2C2C] to-[#1A1A1A] backdrop-blur-lg text-white px-4 py-2 flex items-center justify-between z-50 h-12 border-t border-gray-600/30 shadow-2xl">
+        <div className="flex items-center space-x-3">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="text-white hover:bg-white/10 px-3 py-2 rounded-md transition-all duration-200"
+          >
+            <div className="flex items-center space-x-2">
+              <div className="w-6 h-6 bg-gradient-to-br from-[#E95420] to-[#F7A072] rounded-md flex items-center justify-center">
+                <span className="text-xs font-bold text-white">U</span>
+              </div>
+              <span className="text-sm font-medium">Show Applications</span>
+            </div>
+          </Button>
+
+          <div className="w-px h-6 bg-gray-600"></div>
+
+          {/* Window buttons */}
+          <div className="flex items-center space-x-1">
+            {memoizedWindows.map((window) => (
+              <Button
+                key={window.id}
+                variant="ghost"
+                size="sm"
+                className={`text-white hover:bg-white/10 px-3 py-2 rounded-md transition-all duration-200 ${window.isMinimized
+                  ? "opacity-60 bg-white/5"
+                  : "bg-white/10 shadow-md"
+                  }`}
+                onClick={() => (window.isMinimized ? restoreWindow(window.id) : bringToFront(window.id))}
+              >
+                <span className="text-sm font-medium">{window.title}</span>
+              </Button>
+            ))}
+          </div>
+        </div>
+
+        {/* System tray */}
+        <div className="flex items-center space-x-2">
+          <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+          <span className="text-xs text-gray-300">Connected</span>
+        </div>
+      </div>
+    </div>
+  )
+}
