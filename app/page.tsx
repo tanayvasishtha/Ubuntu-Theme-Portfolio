@@ -1559,11 +1559,11 @@ Happy exploring! 🐧`}
         default:
           result = secondValue
       }
-      
+
       // Add to history
       const historyEntry = `${firstValue} ${operation} ${secondValue} = ${result}`
       setHistory(prev => [historyEntry, ...prev.slice(0, 9)]) // Keep last 10 entries
-      
+
       return result
     }
 
@@ -1629,9 +1629,8 @@ Happy exploring! 🐧`}
               <div className="flex items-center space-x-2">
                 <button
                   onClick={() => setIsScientific(!isScientific)}
-                  className={`px-3 py-1 rounded text-sm font-medium ${
-                    isScientific ? "bg-orange-500 text-white" : "bg-gray-200 text-gray-700"
-                  }`}
+                  className={`px-3 py-1 rounded text-sm font-medium ${isScientific ? "bg-orange-500 text-white" : "bg-gray-200 text-gray-700"
+                    }`}
                 >
                   {isScientific ? "Scientific" : "Basic"}
                 </button>
@@ -1908,17 +1907,16 @@ Happy exploring! 🐧`}
 
     const playlists = {
       favorites: {
-        name: "Your Favorites",
-        description: "Songs you love",
+        name: "Build Inc.",
+        description: "The worst thing you can do is know what you need to do and not do it",
         tracks: [
-          { id: 1, title: "Skyfall", artist: "Adele", duration: "4:46", album: "Skyfall", year: "2012", cover: "🎵", audioUrl: "https://www.bensound.com/bensound-music/bensound-sunny.mp3" },
-          { id: 2, title: "God's Plan", artist: "Drake", duration: "3:18", album: "Scorpion", year: "2018", cover: "🎵", audioUrl: "https://www.bensound.com/bensound-music/bensound-creativeminds.mp3" },
-          { id: 3, title: "Happy Nation", artist: "Ace of Base", duration: "4:16", album: "Happy Nation", year: "1992", cover: "🎵", audioUrl: "https://www.bensound.com/bensound-music/bensound-happiness.mp3" },
-          { id: 4, title: "Stronger", artist: "Kanye West", duration: "5:11", album: "Graduation", year: "2007", cover: "🎵", audioUrl: "https://www.bensound.com/bensound-music/bensound-energy.mp3" },
-          { id: 5, title: "I Wonder", artist: "Kanye West", duration: "4:03", album: "Graduation", year: "2007", cover: "🎵", audioUrl: "https://www.bensound.com/bensound-music/bensound-dreams.mp3" },
-          { id: 6, title: "Good Life", artist: "Kanye West ft. T-Pain", duration: "3:27", album: "Graduation", year: "2007", cover: "🎵", audioUrl: "https://www.bensound.com/bensound-music/bensound-sweet.mp3" },
-          { id: 7, title: "Runaway", artist: "Kanye West", duration: "9:08", album: "My Beautiful Dark Twisted Fantasy", year: "2010", cover: "🎵", audioUrl: "https://www.bensound.com/bensound-music/bensound-epic.mp3" },
-          { id: 8, title: "Power", artist: "Kanye West", duration: "4:52", album: "My Beautiful Dark Twisted Fantasy", year: "2010", cover: "🎵", audioUrl: "https://www.bensound.com/bensound-music/bensound-power.mp3" }
+          { id: 1, title: "Father Stretch My Hands Pt. 1", artist: "Kanye West", duration: "2:15", album: "The Life of Pablo", year: "2016", cover: "🎵", audioUrl: "https://www.bensound.com/bensound-music/bensound-sunny.mp3" },
+          { id: 2, title: "Heartless", artist: "Kanye West", duration: "3:31", album: "808s & Heartbreak", year: "2008", cover: "🎵", audioUrl: "https://www.bensound.com/bensound-music/bensound-creativeminds.mp3" },
+          { id: 3, title: "Flashing Lights", artist: "Kanye West, Dwele", duration: "3:57", album: "Graduation", year: "2007", cover: "🎵", audioUrl: "https://www.bensound.com/bensound-music/bensound-happiness.mp3" },
+          { id: 4, title: "I Wonder", artist: "Kanye West", duration: "4:03", album: "Graduation", year: "2007", cover: "🎵", audioUrl: "https://www.bensound.com/bensound-music/bensound-energy.mp3" },
+          { id: 5, title: "Good Life", artist: "Kanye West, T-Pain", duration: "3:27", album: "Graduation", year: "2007", cover: "🎵", audioUrl: "https://www.bensound.com/bensound-music/bensound-dreams.mp3" },
+          { id: 6, title: "Skyfall", artist: "Adele", duration: "4:46", album: "Skyfall", year: "2012", cover: "🎵", audioUrl: "https://www.bensound.com/bensound-music/bensound-sweet.mp3" },
+          { id: 7, title: "Happy Nation - 2015 Remastered", artist: "Ace of Base", duration: "4:16", album: "Happy Nation", year: "2015", cover: "🎵", audioUrl: "https://www.bensound.com/bensound-music/bensound-epic.mp3" }
         ]
       },
       topHits: {
@@ -2044,7 +2042,7 @@ Happy exploring! 🐧`}
                   : "text-gray-400 hover:text-white hover:bg-gray-800"
                   }`}
               >
-                🎵 Your Favorites
+                🔱 Build Inc.
               </button>
               <button
                 onClick={() => setCurrentPlaylist("topHits")}
@@ -2112,6 +2110,26 @@ Happy exploring! 🐧`}
             >
               <span className="text-2xl text-black">{isPlaying ? "⏸" : "▶"}</span>
             </button>
+          </div>
+
+          {/* Spotify Embed Section */}
+          <div className="px-6 mb-6">
+            <div className="bg-gray-800 rounded-lg p-4">
+              <h3 className="text-white font-semibold mb-2">🔗 Real Spotify Playlist</h3>
+              <p className="text-gray-300 text-sm mb-3">Listen to the actual playlist on Spotify:</p>
+              <div className="bg-black rounded-lg overflow-hidden">
+                <iframe
+                  title="Spotify Embed: Build Inc. Playlist"
+                  src="https://open.spotify.com/embed/playlist/6pEbErhMyNati1TEcZ8jsz?utm_source=generator&theme=0"
+                  width="100%"
+                  height="152"
+                  frameBorder="0"
+                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                  loading="lazy"
+                  className="rounded-lg"
+                />
+              </div>
+            </div>
           </div>
 
           {/* Track List */}
