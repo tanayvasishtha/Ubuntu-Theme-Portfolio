@@ -1941,6 +1941,14 @@ Happy exploring! 🐧`}
       { id: 2, title: "New Tab", url: "about:blank", active: false }
     ])
     const [searchQuery, setSearchQuery] = useState("")
+    const [bookmarks, setBookmarks] = useState([
+      { title: "Google", url: "https://www.google.com", favicon: "🔍" },
+      { title: "GitHub", url: "https://github.com", favicon: "🐙" },
+      { title: "Stack Overflow", url: "https://stackoverflow.com", favicon: "📚" },
+      { title: "MDN Web Docs", url: "https://developer.mozilla.org", favicon: "🌐" },
+      { title: "Ubuntu", url: "https://ubuntu.com", favicon: "🐧" }
+    ])
+    const [showBookmarks, setShowBookmarks] = useState(false)
     
     const handleSearchSubmit = (e: React.FormEvent) => {
       e.preventDefault()
@@ -2065,10 +2073,21 @@ Happy exploring! 🐧`}
 
             {/* Firefox Menu */}
             <div className="flex space-x-1">
-              <button className="p-1 hover:bg-gray-200 rounded text-gray-600 hover:text-gray-800">
+              <button 
+                onClick={() => {
+                  const newBookmark = { title: urlInput, url: currentUrl, favicon: "⭐" }
+                  setBookmarks(prev => [...prev, newBookmark])
+                }}
+                className="p-1 hover:bg-gray-200 rounded text-gray-600 hover:text-gray-800"
+                title="Bookmark this page"
+              >
                 ⭐
               </button>
-              <button className="p-1 hover:bg-gray-200 rounded text-gray-600 hover:text-gray-800">
+              <button 
+                onClick={() => setShowBookmarks(!showBookmarks)}
+                className="p-1 hover:bg-gray-200 rounded text-gray-600 hover:text-gray-800"
+                title="Bookmarks"
+              >
                 📚
               </button>
               <button className="p-1 hover:bg-gray-200 rounded text-gray-600 hover:text-gray-800">
@@ -2077,6 +2096,24 @@ Happy exploring! 🐧`}
             </div>
           </div>
         </div>
+
+        {/* Bookmarks Bar */}
+        {showBookmarks && (
+          <div className="bg-gray-100 border-b border-gray-200 p-2">
+            <div className="flex space-x-2">
+              {bookmarks.map((bookmark, index) => (
+                <button
+                  key={index}
+                  onClick={() => navigateTo(bookmark.url, bookmark.title)}
+                  className="flex items-center space-x-1 px-2 py-1 hover:bg-gray-200 rounded text-sm"
+                >
+                  <span>{bookmark.favicon}</span>
+                  <span>{bookmark.title}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Tab Bar */}
         <div className="bg-gray-100 border-b border-gray-200 flex items-center px-2">
