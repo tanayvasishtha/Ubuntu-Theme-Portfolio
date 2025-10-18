@@ -1238,7 +1238,7 @@ export default function UbuntuPortfolio() {
           </div>
         ))}
       </div>
-      <div className="flex items-center">
+      <div className="flex items-center" onClick={() => terminalInputRef.current?.focus()}>
         <span className="text-chart-3 mr-2">ubuntu-developer@portfolio:~$</span>
         <input
           ref={terminalInputRef}
@@ -1246,7 +1246,7 @@ export default function UbuntuPortfolio() {
           value={currentCommand}
           onChange={(e) => setCurrentCommand(e.target.value)}
           onKeyDown={handleTerminalCommand}
-          className="flex-1 bg-transparent text-chart-3 outline-none font-mono caret-chart-3"
+          className="flex-1 bg-transparent text-white outline-none font-mono caret-white"
           placeholder="Type a command..."
           autoFocus
           onBlur={(e) => {
