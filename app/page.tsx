@@ -48,9 +48,9 @@ const UbuntuLoadingScreen = ({ onLoadingComplete }: { onLoadingComplete: () => v
         setLoadingText(step.text)
         currentStep++
       } else {
-          clearInterval(progressTimer)
+        clearInterval(progressTimer)
         setTimeout(() => onLoadingComplete(), 800)
-        }
+      }
     }, 300)
 
     return () => {
@@ -86,7 +86,7 @@ const UbuntuLoadingScreen = ({ onLoadingComplete }: { onLoadingComplete: () => v
           className="h-full bg-gradient-to-r from-[#E95420] to-[#F7A072] transition-all duration-300 ease-out"
           style={{ width: `${loadingProgress}%` }}
         />
-        </div>
+      </div>
 
       {/* Loading text */}
       <p className="text-white text-lg font-light mb-2">{loadingText}</p>
@@ -663,13 +663,13 @@ export default function UbuntuPortfolio() {
       prev.map((w) =>
         w.id === id
           ? {
-              ...w,
-              isMaximized: !w.isMaximized,
-              position: w.isMaximized ? { x: 50, y: 50 } : { x: 0, y: 48 },
-              size: w.isMaximized
-                ? { width: 640, height: 400 }
-                : { width: window.innerWidth, height: window.innerHeight - 96 },
-            }
+            ...w,
+            isMaximized: !w.isMaximized,
+            position: w.isMaximized ? { x: 50, y: 50 } : { x: 0, y: 48 },
+            size: w.isMaximized
+              ? { width: 640, height: 400 }
+              : { width: window.innerWidth, height: window.innerHeight - 96 },
+          }
           : w,
       ),
     )
@@ -1076,9 +1076,9 @@ export default function UbuntuPortfolio() {
             <div className="mt-4">
               <span
                 className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${project.status === "Completed" || project.status === "Live"
-                    ? "bg-chart-3/20 text-chart-3"
-                    : "bg-chart-5/20 text-chart-5"
-                }`}
+                  ? "bg-chart-3/20 text-chart-3"
+                  : "bg-chart-5/20 text-chart-5"
+                  }`}
               >
                 {project.status}
               </span>
@@ -1275,7 +1275,7 @@ Happy exploring! 🐧`}
                     </div>
                     <span className="text-xs text-card-foreground text-center leading-tight">
                       {skill.name}
-                  </span>
+                    </span>
                   </div>
                 ))}
               </div>
@@ -1358,8 +1358,8 @@ Happy exploring! 🐧`}
     }
 
     return (
-    <div className="h-full bg-card p-6 overflow-y-auto">
-      <h2 className="text-2xl font-bold text-foreground mb-6">System Settings</h2>
+      <div className="h-full bg-card p-6 overflow-y-auto">
+        <h2 className="text-2xl font-bold text-foreground mb-6">System Settings</h2>
         <div className="space-y-6">
           <div>
             <h3 className="text-lg font-semibold text-foreground mb-3">Wallpaper</h3>
@@ -1387,20 +1387,20 @@ Happy exploring! 🐧`}
               ))}
             </div>
           </div>
-        <div className="border border-border rounded-lg p-4">
-          <h3 className="font-semibold text-foreground mb-2">Display</h3>
-          <p className="text-card-foreground text-sm">Resolution: 1920x1080</p>
-          <p className="text-card-foreground text-sm">Theme: Ubuntu Default</p>
-        </div>
-        <div className="border border-border rounded-lg p-4">
-          <h3 className="font-semibold text-foreground mb-2">System Info</h3>
-          <p className="text-card-foreground text-sm">OS: Ubuntu 22.04 LTS</p>
-          <p className="text-card-foreground text-sm">Kernel: 5.15.0-generic</p>
-          <p className="text-card-foreground text-sm">Desktop: Portfolio Desktop</p>
+          <div className="border border-border rounded-lg p-4">
+            <h3 className="font-semibold text-foreground mb-2">Display</h3>
+            <p className="text-card-foreground text-sm">Resolution: 1920x1080</p>
+            <p className="text-card-foreground text-sm">Theme: Ubuntu Default</p>
+          </div>
+          <div className="border border-border rounded-lg p-4">
+            <h3 className="font-semibold text-foreground mb-2">System Info</h3>
+            <p className="text-card-foreground text-sm">OS: Ubuntu 22.04 LTS</p>
+            <p className="text-card-foreground text-sm">Kernel: 5.15.0-generic</p>
+            <p className="text-card-foreground text-sm">Desktop: Portfolio Desktop</p>
+          </div>
         </div>
       </div>
-    </div>
-  )
+    )
   }
 
   const SoftwareCenterWindow = () => (
@@ -1657,11 +1657,35 @@ Happy exploring! 🐧`}
       { id: 1, title: "Google", url: "https://www.google.com", active: true },
       { id: 2, title: "New Tab", url: "about:blank", active: false }
     ])
+    const [searchQuery, setSearchQuery] = useState("")
+    
+    const handleSearchSubmit = (e: React.FormEvent) => {
+      e.preventDefault()
+      if (searchQuery.trim()) {
+        setIsLoading(true)
+        const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`
+        setCurrentUrl(searchUrl)
+        setUrlInput(searchUrl)
+        setTimeout(() => setIsLoading(false), 1000)
+      }
+    }
 
     const handleUrlSubmit = (e: React.FormEvent) => {
       e.preventDefault()
       setIsLoading(true)
-      setCurrentUrl(urlInput)
+      
+      // Check if it's a URL or search query
+      let targetUrl = urlInput
+      if (!urlInput.startsWith('http://') && !urlInput.startsWith('https://') && !urlInput.includes('.')) {
+        // It's a search query, redirect to Google search
+        targetUrl = `https://www.google.com/search?q=${encodeURIComponent(urlInput)}`
+      } else if (!urlInput.startsWith('http://') && !urlInput.startsWith('https://')) {
+        // Add https:// if missing
+        targetUrl = `https://${urlInput}`
+      }
+      
+      setCurrentUrl(targetUrl)
+      setUrlInput(targetUrl)
       setTimeout(() => setIsLoading(false), 1000)
     }
 
@@ -1711,21 +1735,21 @@ Happy exploring! 🐧`}
           <div className="flex items-center space-x-2">
             {/* Navigation buttons */}
             <div className="flex space-x-1">
-              <button 
+              <button
                 onClick={() => navigateTo("https://www.google.com", "Google")}
                 className="p-1 hover:bg-gray-200 rounded text-gray-600 hover:text-gray-800"
                 title="Back"
               >
                 ←
               </button>
-              <button 
+              <button
                 onClick={() => navigateTo("https://www.google.com", "Google")}
                 className="p-1 hover:bg-gray-200 rounded text-gray-600 hover:text-gray-800"
                 title="Forward"
               >
                 →
               </button>
-              <button 
+              <button
                 onClick={() => navigateTo(currentUrl, "Refresh")}
                 className="p-1 hover:bg-gray-200 rounded text-gray-600 hover:text-gray-800"
                 title="Refresh"
@@ -1750,7 +1774,7 @@ Happy exploring! 🐧`}
                   type="text"
                   value={urlInput}
                   onChange={(e) => setUrlInput(e.target.value)}
-                  className="flex-1 text-sm outline-none"
+                  className="flex-1 text-sm outline-none text-gray-800"
                   placeholder="Search or enter address"
                 />
               </div>
@@ -1776,9 +1800,8 @@ Happy exploring! 🐧`}
           {tabs.map((tab) => (
             <div
               key={tab.id}
-              className={`flex items-center px-3 py-2 mr-1 rounded-t-md cursor-pointer ${
-                tab.active ? 'bg-white border-t border-l border-r border-gray-300' : 'hover:bg-gray-200'
-              }`}
+              className={`flex items-center px-3 py-2 mr-1 rounded-t-md cursor-pointer ${tab.active ? 'bg-white border-t border-l border-r border-gray-300' : 'hover:bg-gray-200'
+                }`}
               onClick={() => {
                 setCurrentUrl(tab.url)
                 setUrlInput(tab.url)
@@ -1823,41 +1846,73 @@ Happy exploring! 🐧`}
                   <h1 className="text-2xl font-bold text-gray-800 mb-4">Firefox Web Browser</h1>
                   <div className="max-w-md mx-auto">
                     <div className="mb-4">
-                      <input
-                        type="text"
-                        placeholder="Search Google or type a URL"
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                      />
+                      <form onSubmit={handleSearchSubmit}>
+                        <input
+                          type="text"
+                          value={searchQuery}
+                          onChange={(e) => setSearchQuery(e.target.value)}
+                          placeholder="Search Google or type a URL"
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 text-gray-800"
+                        />
+                      </form>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
-                      <button 
-                        onClick={() => navigateTo("https://github.com", "GitHub")} 
+                      <button
+                        onClick={() => navigateTo("https://github.com", "GitHub")}
                         className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
                       >
                         <div className="text-lg mb-2">🐙</div>
                         <div className="text-sm font-medium">GitHub</div>
                       </button>
-                      <button 
-                        onClick={() => navigateTo("https://stackoverflow.com", "Stack Overflow")} 
+                      <button
+                        onClick={() => navigateTo("https://stackoverflow.com", "Stack Overflow")}
                         className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
                       >
                         <div className="text-lg mb-2">📚</div>
                         <div className="text-sm font-medium">Stack Overflow</div>
                       </button>
-                      <button 
-                        onClick={() => navigateTo("https://developer.mozilla.org", "MDN Web Docs")} 
+                      <button
+                        onClick={() => navigateTo("https://developer.mozilla.org", "MDN Web Docs")}
                         className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
                       >
                         <div className="text-lg mb-2">🌐</div>
                         <div className="text-sm font-medium">MDN Web Docs</div>
                       </button>
-                      <button 
-                        onClick={() => navigateTo("https://ubuntu.com", "Ubuntu")} 
+                      <button
+                        onClick={() => navigateTo("https://ubuntu.com", "Ubuntu")}
                         className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
                       >
                         <div className="text-lg mb-2">🐧</div>
                         <div className="text-sm font-medium">Ubuntu</div>
                       </button>
+                    </div>
+                  </div>
+                </div>
+              ) : currentUrl.includes("google.com/search") ? (
+                <div className="text-center">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-blue-500 rounded-lg flex items-center justify-center">
+                    <span className="text-white text-2xl">🔍</span>
+                  </div>
+                  <h1 className="text-2xl font-bold mb-4">Google Search Results</h1>
+                  <p className="text-gray-600 mb-4">Search results for: "{urlInput.split('q=')[1]?.replace(/\+/g, ' ') || 'your query'}"</p>
+                  <div className="bg-gray-50 p-4 rounded-lg text-left">
+                    <h3 className="font-semibold mb-2">Search Results</h3>
+                    <div className="space-y-3">
+                      <div className="border-l-4 border-blue-500 pl-3">
+                        <h4 className="font-medium text-blue-600">Example Result 1</h4>
+                        <p className="text-sm text-gray-600">This is a sample search result that would appear in a real Google search...</p>
+                        <p className="text-xs text-green-600">https://example.com</p>
+                      </div>
+                      <div className="border-l-4 border-blue-500 pl-3">
+                        <h4 className="font-medium text-blue-600">Example Result 2</h4>
+                        <p className="text-sm text-gray-600">Another sample search result with relevant information...</p>
+                        <p className="text-xs text-green-600">https://another-example.com</p>
+                      </div>
+                      <div className="border-l-4 border-blue-500 pl-3">
+                        <h4 className="font-medium text-blue-600">Example Result 3</h4>
+                        <p className="text-sm text-gray-600">More search results would appear here in a real browser...</p>
+                        <p className="text-xs text-green-600">https://more-examples.com</p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -2103,9 +2158,9 @@ Happy exploring! 🐧`}
             <div className="mt-4">
               <span
                 className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${details.status === "Production Ready" || details.status === "Live"
-                    ? "bg-chart-3/20 text-chart-3"
-                    : "bg-chart-5/20 text-chart-5"
-                }`}
+                  ? "bg-chart-3/20 text-chart-3"
+                  : "bg-chart-5/20 text-chart-5"
+                  }`}
               >
                 {details.status}
               </span>
@@ -2269,7 +2324,7 @@ Happy exploring! 🐧`}
               : "hover:bg-white/10 hover:scale-105 hover:shadow-lg"
               }`}>
               <div className="drop-shadow-lg">
-              {icon.icon}
+                {icon.icon}
               </div>
               <span className="text-white text-xs text-center max-w-16 truncate font-medium drop-shadow-md">{icon.name}</span>
             </div>
@@ -2357,10 +2412,10 @@ Happy exploring! 🐧`}
             size="sm"
             className="text-white hover:bg-white/10 px-3 py-2 rounded-md transition-all duration-200"
           >
-        <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2">
               <div className="w-6 h-6 bg-gradient-to-br from-[#E95420] to-[#F7A072] rounded-md flex items-center justify-center">
                 <span className="text-xs font-bold text-white">U</span>
-            </div>
+              </div>
               <span className="text-sm font-medium">Show Applications</span>
             </div>
           </Button>
@@ -2370,20 +2425,20 @@ Happy exploring! 🐧`}
           {/* Window buttons */}
           <div className="flex items-center space-x-1">
             {memoizedWindows.map((window) => (
-            <Button
-              key={window.id}
-              variant="ghost"
-              size="sm"
+              <Button
+                key={window.id}
+                variant="ghost"
+                size="sm"
                 className={`text-white hover:bg-white/10 px-3 py-2 rounded-md transition-all duration-200 ${window.isMinimized
                   ? "opacity-60 bg-white/5"
                   : "bg-white/10 shadow-md"
                   }`}
-              onClick={() => (window.isMinimized ? restoreWindow(window.id) : bringToFront(window.id))}
-            >
+                onClick={() => (window.isMinimized ? restoreWindow(window.id) : bringToFront(window.id))}
+              >
                 <span className="text-sm font-medium">{window.title}</span>
-            </Button>
-          ))}
-        </div>
+              </Button>
+            ))}
+          </div>
         </div>
 
         {/* System tray */}
