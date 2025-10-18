@@ -725,14 +725,32 @@ export default function UbuntuPortfolio() {
           "  ls - List directory contents",
           "  pwd - Print working directory",
           "  whoami - Display current user",
+          "  email - Show email address",
           "  date - Show current date and time",
           "  neofetch - Display system information",
           "  fortune - Get a random quote",
-          "  open [app] - Open application",
-          "  ./[project] - Launch specific project",
-          "  cat [file] - Display file contents",
+          "",
+          "Application Commands:",
+          "  open [app] - Open application (about, skills, contact, gallery, settings, projects)",
+          "  ./[project] - Launch specific project (debtrix, weloveqr, synthralabs, portfolio)",
+          "",
+          "File Commands:",
+          "  cat [file] - Display file contents (about.txt, contact.txt, skills.txt)",
           "  tree - Show directory tree",
           "  history - Show command history",
+          "",
+          "Social Media & Projects:",
+          "  visit github - Open GitHub profile",
+          "  visit linkedin - Open LinkedIn profile", 
+          "  visit x - Open X (Twitter) profile",
+          "  visit medium - Open Medium profile",
+          "  visit producthunt - Open Product Hunt profile",
+          "  visit peerlist - Open Peerlist profile",
+          "  visit coffee - Open Buy Me a Coffee",
+          "  visit debtrix - Open Debtrix project",
+          "  visit weloveqr - Open WeLoveQR project",
+          "  visit synthralabs - Open SynthraLabs organization",
+          "",
           "  exit - Close terminal",
           "",
         ])
@@ -988,6 +1006,132 @@ export default function UbuntuPortfolio() {
             "",
           ])
         }
+      } else if (command.startsWith("visit")) {
+        const site = command.split(" ")[1]
+        if (site === "github") {
+          window.open('https://github.com/tanayvasishtha', '_blank')
+          setTerminalHistory((prev) => [
+            ...prev,
+            `ubuntu-developer@portfolio:~$ ${command}`,
+            "Opening GitHub profile...",
+            "Redirecting to https://github.com/tanayvasishtha",
+            "",
+          ])
+        } else if (site === "linkedin") {
+          window.open('https://www.linkedin.com/in/tanayvasishtha/', '_blank')
+          setTerminalHistory((prev) => [
+            ...prev,
+            `ubuntu-developer@portfolio:~$ ${command}`,
+            "Opening LinkedIn profile...",
+            "Redirecting to https://www.linkedin.com/in/tanayvasishtha/",
+            "",
+          ])
+        } else if (site === "x" || site === "twitter") {
+          window.open('https://x.com/TanayVasishtha', '_blank')
+          setTerminalHistory((prev) => [
+            ...prev,
+            `ubuntu-developer@portfolio:~$ ${command}`,
+            "Opening X (Twitter) profile...",
+            "Redirecting to https://x.com/TanayVasishtha",
+            "",
+          ])
+        } else if (site === "medium") {
+          window.open('https://medium.com/@tanayvasishtha', '_blank')
+          setTerminalHistory((prev) => [
+            ...prev,
+            `ubuntu-developer@portfolio:~$ ${command}`,
+            "Opening Medium profile...",
+            "Redirecting to https://medium.com/@tanayvasishtha",
+            "",
+          ])
+        } else if (site === "producthunt") {
+          window.open('https://www.producthunt.com/@tanayvasishtha', '_blank')
+          setTerminalHistory((prev) => [
+            ...prev,
+            `ubuntu-developer@portfolio:~$ ${command}`,
+            "Opening Product Hunt profile...",
+            "Redirecting to https://www.producthunt.com/@tanayvasishtha",
+            "",
+          ])
+        } else if (site === "peerlist") {
+          window.open('https://peerlist.io/tanayvasishtha', '_blank')
+          setTerminalHistory((prev) => [
+            ...prev,
+            `ubuntu-developer@portfolio:~$ ${command}`,
+            "Opening Peerlist profile...",
+            "Redirecting to https://peerlist.io/tanayvasishtha",
+            "",
+          ])
+        } else if (site === "coffee") {
+          window.open('https://buymeacoffee.com/tanayvasishtha', '_blank')
+          setTerminalHistory((prev) => [
+            ...prev,
+            `ubuntu-developer@portfolio:~$ ${command}`,
+            "Opening Buy Me a Coffee...",
+            "Redirecting to https://buymeacoffee.com/tanayvasishtha",
+            "",
+          ])
+        } else if (site === "debtrix") {
+          window.open('https://debtrix-nine.vercel.app', '_blank')
+          setTerminalHistory((prev) => [
+            ...prev,
+            `ubuntu-developer@portfolio:~$ ${command}`,
+            "Opening Debtrix project...",
+            "Redirecting to https://debtrix-nine.vercel.app",
+            "",
+          ])
+        } else if (site === "weloveqr") {
+          window.open('https://weloveqr.netlify.app/', '_blank')
+          setTerminalHistory((prev) => [
+            ...prev,
+            `ubuntu-developer@portfolio:~$ ${command}`,
+            "Opening WeLoveQR project...",
+            "Redirecting to https://weloveqr.netlify.app/",
+            "",
+          ])
+        } else if (site === "synthralabs") {
+          window.open('https://github.com/orgs/SynthraLabs', '_blank')
+          setTerminalHistory((prev) => [
+            ...prev,
+            `ubuntu-developer@portfolio:~$ ${command}`,
+            "Opening SynthraLabs organization...",
+            "Redirecting to https://github.com/orgs/SynthraLabs",
+            "",
+          ])
+        } else {
+          setTerminalHistory((prev) => [
+            ...prev,
+            `ubuntu-developer@portfolio:~$ ${command}`,
+            `Error: Site "${site}" not found.`,
+            'Available sites: github, linkedin, x, medium, producthunt, peerlist, coffee, debtrix, weloveqr, synthralabs',
+            "",
+          ])
+        }
+      } else if (command === "clear") {
+        setTerminalHistory([])
+        return
+      } else if (command === "date") {
+        const now = new Date()
+        setTerminalHistory((prev) => [
+          ...prev,
+          `ubuntu-developer@portfolio:~$ ${command}`,
+          now.toLocaleString(),
+          "",
+        ])
+      } else if (command === "whoami") {
+        setTerminalHistory((prev) => [
+          ...prev,
+          `ubuntu-developer@portfolio:~$ ${command}`,
+          "tanayvasishtha",
+          "",
+        ])
+      } else if (command === "email") {
+        setTerminalHistory((prev) => [
+          ...prev,
+          `ubuntu-developer@portfolio:~$ ${command}`,
+          "edgepersonal2004@gmail.com",
+          "",
+        ])
       } else if (command === "") {
         setTerminalHistory((prev) => [...prev, "ubuntu-developer@portfolio:~$ ", ""])
       } else {
@@ -2281,21 +2425,21 @@ Happy exploring! 🐧`}
             <span className="text-sm font-medium text-gray-700">Firefox</span>
           </div>
           <div className="flex items-center space-x-2">
-            <button 
+            <button
               className="w-3 h-3 bg-yellow-500 rounded-full hover:bg-yellow-600 flex items-center justify-center"
               onClick={() => minimizeWindow("firefox")}
               title="Minimize"
             >
               <Minus className="w-2 h-2 text-white" />
             </button>
-            <button 
+            <button
               className="w-3 h-3 bg-green-500 rounded-full hover:bg-green-600 flex items-center justify-center"
               onClick={() => maximizeWindow("firefox")}
               title="Maximize"
             >
               <Square className="w-2 h-2 text-white" />
             </button>
-            <button 
+            <button
               className="w-3 h-3 bg-red-500 rounded-full hover:bg-red-600 flex items-center justify-center"
               onClick={() => closeWindow("firefox")}
               title="Close"
