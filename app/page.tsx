@@ -222,7 +222,7 @@ export default function UbuntuPortfolio() {
       name: "Commands",
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
-          <img src="/assets/program-icons/text-markdown.png" alt="Commands" className="w-8 h-8 drop-shadow-lg" />
+          <img src="/assets/system-icons/folder-documents.png" alt="Commands" className="w-8 h-8 drop-shadow-lg" />
         </div>
       ),
       position: { x: 100, y: 260 },
@@ -233,7 +233,7 @@ export default function UbuntuPortfolio() {
       name: "About Me",
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
-          <img src="/assets/program-icons/text-x-python.png" alt="About Me" className="w-8 h-8 drop-shadow-lg" />
+          <img src="/assets/system-icons/folder-publicshare.png" alt="About Me" className="w-8 h-8 drop-shadow-lg" />
         </div>
       ),
       position: { x: 100, y: 340 },
@@ -244,7 +244,7 @@ export default function UbuntuPortfolio() {
       name: "Skills",
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
-          <img src="/assets/program-icons/text-x-javascript.png" alt="Skills" className="w-8 h-8 drop-shadow-lg" />
+          <img src="/assets/system-icons/folder-download.png" alt="Skills" className="w-8 h-8 drop-shadow-lg" />
         </div>
       ),
       position: { x: 100, y: 420 },
@@ -255,7 +255,7 @@ export default function UbuntuPortfolio() {
       name: "Contact",
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
-          <img src="/assets/program-icons/text-x-c.png" alt="Contact" className="w-8 h-8 drop-shadow-lg" />
+          <img src="/assets/system-icons/folder-music.png" alt="Contact" className="w-8 h-8 drop-shadow-lg" />
         </div>
       ),
       position: { x: 250, y: 100 },
@@ -266,7 +266,7 @@ export default function UbuntuPortfolio() {
       name: "Gallery",
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
-          <img src="/assets/program-icons/image-viewer-app.png" alt="Gallery" className="w-8 h-8 drop-shadow-lg" />
+          <img src="/assets/system-icons/folder-pictures.png" alt="Gallery" className="w-8 h-8 drop-shadow-lg" />
         </div>
       ),
       position: { x: 250, y: 180 },
