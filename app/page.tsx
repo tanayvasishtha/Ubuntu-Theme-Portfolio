@@ -1247,8 +1247,15 @@ export default function UbuntuPortfolio() {
           ref={terminalInputRef}
           type="text"
           value={currentCommand}
-          onChange={(e) => setCurrentCommand(e.target.value)}
-          onKeyDown={handleTerminalCommand}
+          onChange={(e) => {
+            console.log('Input changed:', e.target.value)
+            setCurrentCommand(e.target.value)
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleTerminalCommand(e)
+            }
+          }}
           className="flex-1 bg-transparent text-white outline-none font-mono caret-white border-none"
           placeholder="Type a command..."
           autoFocus
