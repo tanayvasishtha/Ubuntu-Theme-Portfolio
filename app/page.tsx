@@ -1030,13 +1030,6 @@ export default function UbuntuPortfolio() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {[
           {
-            title: "Debtrix",
-            description: "AI-powered personal debt management platform with real-time tracking and personalized payoff strategies",
-            tech: ["Next.js", "TypeScript", "Supabase", "Perplexity AI", "Tailwind CSS"],
-            status: "Live",
-            link: "https://debtrix-nine.vercel.app"
-          },
-          {
             title: "WeLoveQR",
             description: "Modern QR code generator with advanced customization, analytics, and bulk generation features",
             tech: ["React", "Node.js", "MongoDB", "QR Code API"],
