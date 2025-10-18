@@ -24,7 +24,29 @@ import {
   HardDrive,
   HelpCircle,
   Monitor,
-  Twitter
+  Twitter,
+  Coffee,
+  BookOpen,
+  Zap,
+  Star,
+  Calculator,
+  Music,
+  Image,
+  Globe,
+  Camera,
+  ChevronLeft,
+  ChevronRight,
+  Play,
+  Pause,
+  SkipBack,
+  SkipForward,
+  Volume2,
+  Shuffle,
+  Repeat,
+  Bookmark,
+  BookmarkCheck,
+  Phone,
+  MapPin
 } from "lucide-react"
 
 const UbuntuLoadingScreen = ({ onLoadingComplete }: { onLoadingComplete: () => void }) => {
@@ -1157,26 +1179,31 @@ Happy exploring! 🐧`}
           <div className="w-24 h-24 bg-gradient-to-br from-chart-4 to-primary rounded-full mx-auto mb-4 flex items-center justify-center">
             <User className="w-12 h-12 text-primary-foreground" />
           </div>
-          <h2 className="text-2xl font-bold text-foreground">Ubuntu Developer</h2>
-          <p className="text-card-foreground">Full-Stack Developer & Linux Enthusiast</p>
+          <h2 className="text-2xl font-bold text-foreground">Tanay Vasishtha</h2>
+          <p className="text-card-foreground">B-Tech Student & Tech Enthusiast</p>
         </div>
         <div className="space-y-4 text-card-foreground">
           <p>
-            Passionate full-stack developer with expertise in modern web technologies and a deep love for Ubuntu/Linux
-            systems. I specialize in building scalable applications using React, Next.js, Node.js, and various backend
-            technologies.
+            As a fourth year B-Tech student, I am driven by passion for exploring the intersection of technology and society. 
+            With a strong foundation in mathematics and science, I am constantly seeking new challenges to enhance my skills and knowledge.
           </p>
           <p>
-            My journey in software development spans over 5 years, during which I've worked on everything from
-            e-commerce platforms to API gateways. I'm particularly interested in DevOps, containerization, and creating
-            seamless user experiences.
+            During my leisure time at college, I have been actively involved in various extracurricular activities, including 
+            graphic designing, video editing and photography, which have helped me develop a creative approach to problem-solving. 
+            I have also taken on creative roles in student organizations, which have taught me valuable skills in communication and teamwork.
           </p>
           <p>
-            When I'm not coding, you'll find me contributing to open-source projects, exploring new Linux distributions,
-            or sharing knowledge with the developer community.
+            With a keen interest in emerging technologies such as artificial intelligence and blockchain, I am eager to contribute 
+            my knowledge and skills to the tech industry. I am seeking opportunities to gain hands-on experience through internships 
+            or projects, and I am excited to connect with professionals in the field.
+          </p>
+          <p>
+            My ultimate goal is to use my technical expertise to create innovative solutions that positively impact society. 
+            I am committed to lifelong learning and constantly pushing myself to grow both personally and professionally. 
+            Let's connect and explore the possibilities together.
           </p>
         </div>
-        <div className="flex space-x-2 pt-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 pt-6">
           <Button size="sm" className="bg-primary hover:bg-primary/90 text-primary-foreground">
             <Github className="w-4 h-4 mr-2" />
             GitHub
@@ -1184,6 +1211,30 @@ Happy exploring! 🐧`}
           <Button size="sm" variant="outline">
             <Linkedin className="w-4 h-4 mr-2" />
             LinkedIn
+          </Button>
+          <Button size="sm" variant="outline">
+            <Twitter className="w-4 h-4 mr-2" />
+            X
+          </Button>
+          <Button size="sm" variant="outline">
+            <BookOpen className="w-4 h-4 mr-2" />
+            Medium
+          </Button>
+          <Button size="sm" variant="outline">
+            <Zap className="w-4 h-4 mr-2" />
+            Product Hunt
+          </Button>
+          <Button size="sm" variant="outline">
+            <User className="w-4 h-4 mr-2" />
+            Peerlist
+          </Button>
+          <Button size="sm" variant="outline">
+            <FileText className="w-4 h-4 mr-2" />
+            Substack
+          </Button>
+          <Button size="sm" variant="outline">
+            <Coffee className="w-4 h-4 mr-2" />
+            Buy me a coffee
           </Button>
           <Button size="sm" variant="outline">
             <Download className="w-4 h-4 mr-2" />
