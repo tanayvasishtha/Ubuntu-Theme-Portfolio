@@ -135,6 +135,8 @@ export default function UbuntuPortfolio() {
   const [isLoading, setIsLoading] = useState(true)
   const [currentTime, setCurrentTime] = useState("")
   const [isClient, setIsClient] = useState(false)
+  const [currentWallpaper, setCurrentWallpaper] = useState("ubuntu-wallpaper.jpg")
+  const [notifications, setNotifications] = useState<Array<{id: string, message: string, type: 'info' | 'success' | 'warning' | 'error'}>>([])
 
   // Ubuntu-style sound effects (visual feedback)
   const playClickSound = () => {
@@ -153,6 +155,15 @@ export default function UbuntuPortfolio() {
     hoverEffect.innerHTML = '<div class="w-1 h-1 bg-white/50 rounded-full animate-pulse absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>'
     document.body.appendChild(hoverEffect)
     setTimeout(() => hoverEffect.remove(), 200)
+  }
+
+  // Ubuntu-style notification system
+  const showNotification = (message: string, type: 'info' | 'success' | 'warning' | 'error' = 'info') => {
+    const id = Date.now().toString()
+    setNotifications(prev => [...prev, { id, message, type }])
+    setTimeout(() => {
+      setNotifications(prev => prev.filter(n => n.id !== id))
+    }, 4000)
   }
   const [windows, setWindows] = useState<Window[]>([])
   const [nextZIndex, setNextZIndex] = useState(1000)
@@ -247,8 +258,8 @@ export default function UbuntuPortfolio() {
       id: "home",
       name: "Home",
       icon: (
-        <div className="w-6 h-6 flex items-center justify-center">
-          <svg viewBox="0 0 24 24" className="w-6 h-6 text-white">
+        <div className="w-8 h-8 flex items-center justify-center">
+          <svg viewBox="0 0 24 24" className="w-8 h-8 text-white drop-shadow-lg">
             <path fill="currentColor" d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
           </svg>
         </div>
@@ -260,12 +271,27 @@ export default function UbuntuPortfolio() {
       },
     },
     {
+      id: "firefox",
+      name: "Firefox",
+      icon: (
+        <div className="w-8 h-8 flex items-center justify-center">
+          <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
+            <path fill="#FF7139" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+            <path fill="#FF7139" d="M12 4c-4.41 0-8 3.59-8 8s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8zm0 14c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/>
+            <circle cx="12" cy="12" r="3" fill="#FF7139"/>
+          </svg>
+        </div>
+      ),
+      position: { x: 0, y: 0 },
+      action: () => openWindow("firefox", "Firefox Web Browser", <div className="p-4 text-center">Firefox Web Browser</div>),
+    },
+    {
       id: "software-center",
       name: "Software Center",
       icon: (
-        <div className="w-6 h-6 bg-[#E95420] rounded flex items-center justify-center">
-          <svg viewBox="0 0 24 24" className="w-4 h-4 text-white">
-            <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+        <div className="w-8 h-8 flex items-center justify-center">
+          <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
+            <path fill="#E95420" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
           </svg>
         </div>
       ),
@@ -289,9 +315,9 @@ export default function UbuntuPortfolio() {
       id: "files",
       name: "Files",
       icon: (
-        <div className="w-6 h-6 flex items-center justify-center">
-          <svg viewBox="0 0 24 24" className="w-6 h-6 text-gray-300">
-            <path fill="currentColor" d="M20 6h-2l-2-2H8L6 6H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z" />
+        <div className="w-8 h-8 flex items-center justify-center">
+          <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
+            <path fill="#7C3AED" d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
           </svg>
         </div>
       ),
@@ -299,12 +325,38 @@ export default function UbuntuPortfolio() {
       action: () => openWindow("files", "File Manager", <FilesWindow />),
     },
     {
+      id: "terminal",
+      name: "Terminal",
+      icon: (
+        <div className="w-8 h-8 flex items-center justify-center">
+          <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
+            <path fill="#2D3748" d="M4,4H20A2,2 0 0,1 22,6V18A2,2 0 0,1 20,20H4A2,2 0 0,1 2,18V6A2,2 0 0,1 4,4M4,6V18H20V6H4M6,8H18V10H6V8M6,12H16V14H6V12Z" />
+          </svg>
+        </div>
+      ),
+      position: { x: 0, y: 0 },
+      action: () => openWindow("terminal", "Terminal", <TerminalWindow />),
+    },
+    {
+      id: "settings",
+      name: "Settings",
+      icon: (
+        <div className="w-8 h-8 flex items-center justify-center">
+          <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
+            <path fill="#718096" d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.22,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.22,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" />
+          </svg>
+        </div>
+      ),
+      position: { x: 0, y: 0 },
+      action: () => openWindow("settings", "Settings", <SettingsWindow />),
+    },
+    {
       id: "trash",
       name: "Trash",
       icon: (
-        <div className="w-6 h-6 flex items-center justify-center">
-          <svg viewBox="0 0 24 24" className="w-6 h-6 text-gray-400">
-            <path fill="currentColor" d="M19 4h-3.5l-1-1h-5l-1 1H5v2h14M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12z" />
+        <div className="w-8 h-8 flex items-center justify-center">
+          <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
+            <path fill="#9CA3AF" d="M19 4h-3.5l-1-1h-5l-1 1H5v2h14M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12z" />
           </svg>
         </div>
       ),
@@ -430,7 +482,7 @@ export default function UbuntuPortfolio() {
         const newX = e.clientX - dragOffset.x
         const newY = e.clientY - dragOffset.y
 
-        const constrainedX = Math.max(80, Math.min(newX, window.innerWidth - 100))
+        const constrainedX = Math.max(100, Math.min(newX, window.innerWidth - 100))
         const constrainedY = Math.max(48, Math.min(newY, window.innerHeight - 150))
 
         // Snap to grid position
@@ -1400,7 +1452,7 @@ Happy exploring! 🐧`}
   return (
     <div className="h-screen w-screen overflow-hidden relative bg-gradient-to-br from-purple-900 via-purple-800 to-orange-600">
       {/* Desktop Wallpaper */}
-      <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url(/ubuntu-wallpaper.jpg)" }} />
+      <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(/${currentWallpaper})` }} />
 
       {/* Ubuntu Top Panel - Authentic Ubuntu Style */}
       <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-[#2C2C2C] to-[#1A1A1A] backdrop-blur-md text-white px-4 py-2 flex items-center justify-between z-50 h-12 border-b border-gray-600/30">
@@ -1443,12 +1495,12 @@ Happy exploring! 🐧`}
       </div>
 
       {/* Ubuntu Sidebar - Authentic Ubuntu Dock */}
-      <div className="absolute left-0 top-12 bottom-12 w-16 bg-gradient-to-b from-black/40 to-black/60 backdrop-blur-lg border-r border-white/10 z-40 shadow-2xl">
-        <div className="flex flex-col items-center py-6 space-y-4">
+      <div className="absolute left-0 top-12 bottom-12 w-20 bg-gradient-to-b from-gray-800/90 to-gray-900/90 backdrop-blur-xl border-r border-gray-600/30 z-40 shadow-2xl">
+        <div className="flex flex-col items-center py-4 space-y-3">
           {sidebarIcons.map((icon, index) => (
             <div
               key={icon.id}
-              className="w-12 h-12 flex items-center justify-center rounded-xl hover:bg-white/20 transition-all duration-300 cursor-pointer group hover:scale-110 relative"
+              className="w-14 h-14 flex items-center justify-center rounded-2xl hover:bg-white/10 transition-all duration-300 cursor-pointer group hover:scale-105 relative"
               onClick={() => {
                 playClickSound()
                 icon.action()
@@ -1456,15 +1508,15 @@ Happy exploring! 🐧`}
               title={icon.name}
             >
               {/* Active indicator */}
-              <div className="absolute -left-1 w-1 h-8 bg-white rounded-r-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
+              <div className="absolute -left-1 w-1 h-10 bg-white rounded-r-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              
               {/* Icon with glow effect */}
-              <div className="group-hover:drop-shadow-lg transition-all duration-300 group-hover:brightness-110">
+              <div className="group-hover:drop-shadow-xl transition-all duration-300 group-hover:brightness-125">
                 {icon.icon}
               </div>
-
+              
               {/* Tooltip */}
-              <div className="absolute left-16 bg-black/90 text-white text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap">
+              <div className="absolute left-20 bg-gray-900/95 text-white text-sm px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap shadow-lg border border-gray-700">
                 {icon.name}
               </div>
             </div>
@@ -1473,7 +1525,7 @@ Happy exploring! 🐧`}
       </div>
 
       {/* Desktop Icons */}
-      <div className="absolute inset-0 p-4" style={{ paddingTop: "64px", paddingBottom: "64px", paddingLeft: "80px" }}>
+      <div className="absolute inset-0 p-4" style={{ paddingTop: "64px", paddingBottom: "64px", paddingLeft: "100px" }}>
         {memoizedDesktopIcons.map((icon) => (
           <div
             key={icon.id}
@@ -1518,16 +1570,16 @@ Happy exploring! 🐧`}
             onClick={() => bringToFront(window.id)}
           >
             <div
-              className="bg-gradient-to-r from-gray-100 to-gray-200 border-b border-gray-300 px-4 py-2 flex items-center justify-between cursor-move select-none"
+              className="bg-gradient-to-r from-gray-200 to-gray-300 border-b border-gray-400 px-4 py-3 flex items-center justify-between cursor-move select-none shadow-sm"
               onMouseDown={(e) => handleWindowMouseDown(e, window.id)}
             >
-              <div className="flex items-center space-x-2">
-                <div className="flex space-x-1">
-                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                  <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+              <div className="flex items-center space-x-3">
+                <div className="flex space-x-2">
+                  <div className="w-4 h-4 bg-red-500 rounded-full hover:bg-red-600 transition-colors cursor-pointer"></div>
+                  <div className="w-4 h-4 bg-yellow-500 rounded-full hover:bg-yellow-600 transition-colors cursor-pointer"></div>
+                  <div className="w-4 h-4 bg-green-500 rounded-full hover:bg-green-600 transition-colors cursor-pointer"></div>
                 </div>
-                <span className="text-sm font-medium text-gray-700 ml-2">{window.title}</span>
+                <span className="text-sm font-semibold text-gray-800 ml-2">{window.title}</span>
               </div>
               <div className="flex space-x-2">
                 <button
@@ -1615,6 +1667,31 @@ Happy exploring! 🐧`}
           <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
           <span className="text-xs text-gray-300">Connected</span>
         </div>
+      </div>
+
+      {/* Ubuntu-style Notifications */}
+      <div className="fixed top-16 right-4 z-50 space-y-2">
+        {notifications.map((notification) => (
+          <div
+            key={notification.id}
+            className={`bg-white/95 backdrop-blur-md rounded-lg shadow-lg border-l-4 px-4 py-3 max-w-sm transform transition-all duration-300 ${
+              notification.type === 'error' ? 'border-red-500' :
+              notification.type === 'warning' ? 'border-yellow-500' :
+              notification.type === 'success' ? 'border-green-500' :
+              'border-blue-500'
+            }`}
+          >
+            <div className="flex items-center space-x-2">
+              <div className={`w-2 h-2 rounded-full ${
+                notification.type === 'error' ? 'bg-red-500' :
+                notification.type === 'warning' ? 'bg-yellow-500' :
+                notification.type === 'success' ? 'bg-green-500' :
+                'bg-blue-500'
+              }`}></div>
+              <span className="text-sm font-medium text-gray-800">{notification.message}</span>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   )
