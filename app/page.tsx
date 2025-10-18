@@ -1764,7 +1764,6 @@ Happy exploring! 🐧`}
   const ImageViewerWindow = () => {
     const [currentImage, setCurrentImage] = useState(0)
     const images = [
-      "/ubuntu-wallpaper.jpg",
       "/assets/wallpapers/clouds.jpg",
       "/assets/wallpapers/valley.jpg",
       "/assets/wallpapers/south-france.jpg",
@@ -1776,8 +1775,7 @@ Happy exploring! 🐧`}
       "/assets/wallpapers/crown-light.png",
       "/assets/wallpapers/crown-dark-2.png",
       "/assets/wallpapers/crown-light-2.png",
-      "/assets/wallpapers/lightbulb.png",
-      "/assets/wallpapers/wallpaper-custom.jpg"
+      "/assets/wallpapers/lightbulb.png"
     ]
 
     return (
