@@ -1027,7 +1027,7 @@ export default function UbuntuPortfolio() {
   const ProjectsWindow = () => (
     <div className="h-full bg-card p-6 overflow-y-auto">
       <h2 className="text-2xl font-bold text-foreground mb-6">My Projects</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {[
           {
             title: "Debtrix",
@@ -1044,10 +1044,24 @@ export default function UbuntuPortfolio() {
             link: "https://weloveqr.netlify.app"
           },
           {
-            title: "SynthraLabs",
-            description: "Multi-repository organization featuring dark mode, volume control, and speed optimization projects",
-            tech: ["React", "TypeScript", "Advanced UI/UX", "Performance Optimization"],
-            status: "Active Development",
+            title: "Dark Mode Bang",
+            description: "Chrome & Firefox extension that instantly applies dark mode to any website with one click",
+            tech: ["JavaScript", "Chrome Extension API", "Firefox WebExtensions", "CSS"],
+            status: "Live",
+            link: "https://github.com/orgs/SynthraLabs"
+          },
+          {
+            title: "Volume Bang",
+            description: "Browser extension for instant volume control and audio management across all tabs",
+            tech: ["JavaScript", "Web Audio API", "Chrome Extension API", "Firefox WebExtensions"],
+            status: "Live",
+            link: "https://github.com/orgs/SynthraLabs"
+          },
+          {
+            title: "Speed Bang",
+            description: "Performance optimization extension that accelerates web browsing and reduces loading times",
+            tech: ["JavaScript", "Performance API", "Chrome Extension API", "Firefox WebExtensions"],
+            status: "Live",
             link: "https://github.com/orgs/SynthraLabs"
           },
           {
@@ -1071,9 +1085,9 @@ export default function UbuntuPortfolio() {
             <p className="text-card-foreground mb-3">{project.description}</p>
             {project.link && (
               <div className="mb-3">
-                <a 
-                  href={project.link} 
-                  target="_blank" 
+                <a
+                  href={project.link}
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary hover:text-primary/80 text-sm font-medium flex items-center gap-1"
                 >
