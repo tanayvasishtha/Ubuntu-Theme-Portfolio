@@ -48,9 +48,9 @@ const UbuntuLoadingScreen = ({ onLoadingComplete }: { onLoadingComplete: () => v
         setLoadingText(step.text)
         currentStep++
       } else {
-        clearInterval(progressTimer)
+          clearInterval(progressTimer)
         setTimeout(() => onLoadingComplete(), 800)
-      }
+        }
     }, 300)
 
     return () => {
@@ -86,7 +86,7 @@ const UbuntuLoadingScreen = ({ onLoadingComplete }: { onLoadingComplete: () => v
           className="h-full bg-gradient-to-r from-[#E95420] to-[#F7A072] transition-all duration-300 ease-out"
           style={{ width: `${loadingProgress}%` }}
         />
-      </div>
+        </div>
 
       {/* Loading text */}
       <p className="text-white text-lg font-light mb-2">{loadingText}</p>
@@ -275,11 +275,7 @@ export default function UbuntuPortfolio() {
       name: "Firefox",
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
-          <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
-            <path fill="#FF7139" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
-            <path fill="#FF7139" d="M12 4c-4.41 0-8 3.59-8 8s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8zm0 14c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/>
-            <circle cx="12" cy="12" r="3" fill="#FF7139"/>
-          </svg>
+          <img src="/assets/program-icons/firefox.png" alt="Firefox" className="w-8 h-8 drop-shadow-lg" />
         </div>
       ),
       position: { x: 0, y: 0 },
@@ -316,9 +312,7 @@ export default function UbuntuPortfolio() {
       name: "Files",
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
-          <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
-            <path fill="#7C3AED" d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
-          </svg>
+          <img src="/assets/system-icons/filemanager-app.png" alt="Files" className="w-8 h-8 drop-shadow-lg" />
         </div>
       ),
       position: { x: 0, y: 0 },
@@ -329,9 +323,7 @@ export default function UbuntuPortfolio() {
       name: "Terminal",
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
-          <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
-            <path fill="#2D3748" d="M4,4H20A2,2 0 0,1 22,6V18A2,2 0 0,1 20,20H4A2,2 0 0,1 2,18V6A2,2 0 0,1 4,4M4,6V18H20V6H4M6,8H18V10H6V8M6,12H16V14H6V12Z" />
-          </svg>
+          <img src="/assets/program-icons/terminal-app.png" alt="Terminal" className="w-8 h-8 drop-shadow-lg" />
         </div>
       ),
       position: { x: 0, y: 0 },
@@ -342,26 +334,44 @@ export default function UbuntuPortfolio() {
       name: "Settings",
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
-          <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
-            <path fill="#718096" d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.22,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.22,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" />
-          </svg>
+          <img src="/assets/program-icons/system-settings.png" alt="Settings" className="w-8 h-8 drop-shadow-lg" />
         </div>
       ),
       position: { x: 0, y: 0 },
       action: () => openWindow("settings", "Settings", <SettingsWindow />),
     },
     {
-      id: "trash",
-      name: "Trash",
+      id: "calculator",
+      name: "Calculator",
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
-          <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
-            <path fill="#9CA3AF" d="M19 4h-3.5l-1-1h-5l-1 1H5v2h14M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12z" />
-          </svg>
+          <img src="/assets/program-icons/calculator-app.png" alt="Calculator" className="w-8 h-8 drop-shadow-lg" />
         </div>
       ),
       position: { x: 0, y: 0 },
-      action: () => openWindow("trash", "Trash", <TrashWindow />),
+      action: () => openWindow("calculator", "Calculator", <CalculatorWindow />),
+    },
+    {
+      id: "music",
+      name: "Music Player",
+      icon: (
+        <div className="w-8 h-8 flex items-center justify-center">
+          <img src="/assets/program-icons/spotify-client.png" alt="Music" className="w-8 h-8 drop-shadow-lg" />
+        </div>
+      ),
+      position: { x: 0, y: 0 },
+      action: () => openWindow("music", "Music Player", <MusicPlayerWindow />),
+    },
+    {
+      id: "image-viewer",
+      name: "Image Viewer",
+      icon: (
+        <div className="w-8 h-8 flex items-center justify-center">
+          <img src="/assets/program-icons/image-viewer-app.png" alt="Image Viewer" className="w-8 h-8 drop-shadow-lg" />
+        </div>
+      ),
+      position: { x: 0, y: 0 },
+      action: () => openWindow("image-viewer", "Image Viewer", <ImageViewerWindow />),
     },
   ])
 
@@ -602,13 +612,13 @@ export default function UbuntuPortfolio() {
       prev.map((w) =>
         w.id === id
           ? {
-            ...w,
-            isMaximized: !w.isMaximized,
-            position: w.isMaximized ? { x: 50, y: 50 } : { x: 0, y: 48 },
-            size: w.isMaximized
-              ? { width: 640, height: 400 }
-              : { width: window.innerWidth, height: window.innerHeight - 96 },
-          }
+              ...w,
+              isMaximized: !w.isMaximized,
+              position: w.isMaximized ? { x: 50, y: 50 } : { x: 0, y: 48 },
+              size: w.isMaximized
+                ? { width: 640, height: 400 }
+                : { width: window.innerWidth, height: window.innerHeight - 96 },
+            }
           : w,
       ),
     )
@@ -1015,9 +1025,9 @@ export default function UbuntuPortfolio() {
             <div className="mt-4">
               <span
                 className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${project.status === "Completed" || project.status === "Live"
-                  ? "bg-chart-3/20 text-chart-3"
-                  : "bg-chart-5/20 text-chart-5"
-                  }`}
+                    ? "bg-chart-3/20 text-chart-3"
+                    : "bg-chart-5/20 text-chart-5"
+                }`}
               >
                 {project.status}
               </span>
@@ -1292,12 +1302,219 @@ Happy exploring! 🐧`}
       <div className="text-center py-12">
         <Trash2 className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
         <p className="text-card-foreground">Trash is empty</p>
-        <p className="text-sm text-muted-foreground mt-2">Items you delete will appear here</p>
-      </div>
     </div>
   )
 
-  const ProjectDetailWindow = ({ project }: { project: string }) => {
+  const CalculatorWindow = () => {
+    const [display, setDisplay] = useState("0")
+    const [previousValue, setPreviousValue] = useState<number | null>(null)
+    const [operation, setOperation] = useState<string | null>(null)
+    const [waitingForOperand, setWaitingForOperand] = useState(false)
+
+    const inputNumber = (num: string) => {
+      if (waitingForOperand) {
+        setDisplay(num)
+        setWaitingForOperand(false)
+      } else {
+        setDisplay(display === "0" ? num : display + num)
+      }
+    }
+
+    const inputOperation = (nextOperation: string) => {
+      const inputValue = parseFloat(display)
+
+      if (previousValue === null) {
+        setPreviousValue(inputValue)
+      } else if (operation) {
+        const currentValue = previousValue || 0
+        const newValue = calculate(currentValue, inputValue, operation)
+
+        setDisplay(String(newValue))
+        setPreviousValue(newValue)
+      }
+
+      setWaitingForOperand(true)
+      setOperation(nextOperation)
+    }
+
+    const calculate = (firstValue: number, secondValue: number, operation: string): number => {
+      switch (operation) {
+        case "+": return firstValue + secondValue
+        case "-": return firstValue - secondValue
+        case "×": return firstValue * secondValue
+        case "÷": return firstValue / secondValue
+        case "=": return secondValue
+        default: return secondValue
+      }
+    }
+
+    const performCalculation = () => {
+      const inputValue = parseFloat(display)
+
+      if (previousValue !== null && operation) {
+        const newValue = calculate(previousValue, inputValue, operation)
+        setDisplay(String(newValue))
+        setPreviousValue(null)
+        setOperation(null)
+        setWaitingForOperand(true)
+      }
+    }
+
+    const clear = () => {
+      setDisplay("0")
+      setPreviousValue(null)
+      setOperation(null)
+      setWaitingForOperand(false)
+    }
+
+    return (
+      <div className="w-full h-full bg-gray-100 p-4">
+        <div className="bg-white rounded-lg shadow-lg p-4 max-w-sm mx-auto">
+          <div className="mb-4">
+            <div className="bg-gray-800 text-white text-right p-4 rounded text-2xl font-mono min-h-[60px] flex items-center justify-end">
+              {display}
+            </div>
+          </div>
+          <div className="grid grid-cols-4 gap-2">
+            <button onClick={clear} className="col-span-2 bg-red-500 text-white p-3 rounded hover:bg-red-600">
+              Clear
+            </button>
+            <button onClick={() => inputOperation("÷")} className="bg-orange-500 text-white p-3 rounded hover:bg-orange-600">
+              ÷
+            </button>
+            <button onClick={() => inputOperation("×")} className="bg-orange-500 text-white p-3 rounded hover:bg-orange-600">
+              ×
+            </button>
+            
+            <button onClick={() => inputNumber("7")} className="bg-gray-300 p-3 rounded hover:bg-gray-400">7</button>
+            <button onClick={() => inputNumber("8")} className="bg-gray-300 p-3 rounded hover:bg-gray-400">8</button>
+            <button onClick={() => inputNumber("9")} className="bg-gray-300 p-3 rounded hover:bg-gray-400">9</button>
+            <button onClick={() => inputOperation("-")} className="bg-orange-500 text-white p-3 rounded hover:bg-orange-600">-</button>
+            
+            <button onClick={() => inputNumber("4")} className="bg-gray-300 p-3 rounded hover:bg-gray-400">4</button>
+            <button onClick={() => inputNumber("5")} className="bg-gray-300 p-3 rounded hover:bg-gray-400">5</button>
+            <button onClick={() => inputNumber("6")} className="bg-gray-300 p-3 rounded hover:bg-gray-400">6</button>
+            <button onClick={() => inputOperation("+")} className="bg-orange-500 text-white p-3 rounded hover:bg-orange-600">+</button>
+            
+            <button onClick={() => inputNumber("1")} className="bg-gray-300 p-3 rounded hover:bg-gray-400">1</button>
+            <button onClick={() => inputNumber("2")} className="bg-gray-300 p-3 rounded hover:bg-gray-400">2</button>
+            <button onClick={() => inputNumber("3")} className="bg-gray-300 p-3 rounded hover:bg-gray-400">3</button>
+            <button onClick={performCalculation} className="row-span-2 bg-orange-500 text-white p-3 rounded hover:bg-orange-600">
+              =
+            </button>
+            
+            <button onClick={() => inputNumber("0")} className="col-span-2 bg-gray-300 p-3 rounded hover:bg-gray-400">0</button>
+            <button onClick={() => inputNumber(".")} className="bg-gray-300 p-3 rounded hover:bg-gray-400">.</button>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  const MusicPlayerWindow = () => {
+    const [isPlaying, setIsPlaying] = useState(false)
+    const [currentTrack, setCurrentTrack] = useState("Ubuntu Theme Music")
+    const [volume, setVolume] = useState(50)
+
+    return (
+      <div className="w-full h-full bg-gradient-to-br from-purple-900 to-blue-900 p-4">
+        <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 max-w-md mx-auto">
+          <h3 className="text-white text-xl font-bold mb-4">Music Player</h3>
+          <div className="text-center mb-6">
+            <div className="w-32 h-32 bg-white/20 rounded-full mx-auto mb-4 flex items-center justify-center">
+              <div className="w-16 h-16 bg-white/30 rounded-full flex items-center justify-center">
+                <span className="text-white text-2xl">♪</span>
+              </div>
+            </div>
+            <p className="text-white font-medium">{currentTrack}</p>
+          </div>
+          <div className="space-y-4">
+            <div className="flex justify-center space-x-4">
+              <button className="bg-white/20 text-white p-3 rounded-full hover:bg-white/30">
+                ⏮
+              </button>
+              <button 
+                onClick={() => setIsPlaying(!isPlaying)}
+                className="bg-orange-500 text-white p-4 rounded-full hover:bg-orange-600 text-xl"
+              >
+                {isPlaying ? "⏸" : "▶"}
+              </button>
+              <button className="bg-white/20 text-white p-3 rounded-full hover:bg-white/30">
+                ⏭
+              </button>
+            </div>
+            <div className="space-y-2">
+              <div className="flex justify-between text-white text-sm">
+                <span>0:00</span>
+                <span>3:45</span>
+              </div>
+              <div className="w-full bg-white/20 rounded-full h-2">
+                <div className="bg-orange-500 h-2 rounded-full w-1/3"></div>
+              </div>
+            </div>
+            <div className="space-y-2">
+              <div className="flex justify-between text-white text-sm">
+                <span>Volume</span>
+                <span>{volume}%</span>
+              </div>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={volume}
+                onChange={(e) => setVolume(Number(e.target.value))}
+                className="w-full"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  const ImageViewerWindow = () => {
+    const [currentImage, setCurrentImage] = useState(0)
+    const images = [
+      "/ubuntu-wallpaper.jpg",
+      "/assets/wallpapers/clouds.jpg",
+      "/assets/wallpapers/valley.jpg",
+      "/assets/wallpapers/south-france.jpg"
+    ]
+
+    return (
+      <div className="w-full h-full bg-gray-900 p-4">
+        <div className="h-full flex flex-col">
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-white text-lg font-semibold">Image Viewer</h3>
+            <div className="flex space-x-2">
+              <button 
+                onClick={() => setCurrentImage(Math.max(0, currentImage - 1))}
+                className="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-600"
+              >
+                ←
+              </button>
+              <span className="text-white text-sm px-2 py-1">
+                {currentImage + 1} / {images.length}
+              </span>
+              <button 
+                onClick={() => setCurrentImage(Math.min(images.length - 1, currentImage + 1))}
+                className="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-600"
+              >
+                →
+              </button>
+            </div>
+          </div>
+          <div className="flex-1 bg-black rounded-lg overflow-hidden">
+            <img 
+              src={images[currentImage]} 
+              alt={`Image ${currentImage + 1}`}
+              className="w-full h-full object-contain"
+            />
+          </div>
+        </div>
+      </div>
+    )
+  }
     const projectDetails = {
       ecommerce: {
         title: "E-commerce Platform",
@@ -1380,9 +1597,9 @@ Happy exploring! 🐧`}
             <div className="mt-4">
               <span
                 className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${details.status === "Production Ready" || details.status === "Live"
-                  ? "bg-chart-3/20 text-chart-3"
-                  : "bg-chart-5/20 text-chart-5"
-                  }`}
+                    ? "bg-chart-3/20 text-chart-3"
+                    : "bg-chart-5/20 text-chart-5"
+                }`}
               >
                 {details.status}
               </span>
@@ -1545,7 +1762,7 @@ Happy exploring! 🐧`}
               : "hover:bg-white/10 hover:scale-105 hover:shadow-lg"
               }`}>
               <div className="drop-shadow-lg">
-                {icon.icon}
+              {icon.icon}
               </div>
               <span className="text-white text-xs text-center max-w-16 truncate font-medium drop-shadow-md">{icon.name}</span>
             </div>
@@ -1633,10 +1850,10 @@ Happy exploring! 🐧`}
             size="sm"
             className="text-white hover:bg-white/10 px-3 py-2 rounded-md transition-all duration-200"
           >
-            <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2">
               <div className="w-6 h-6 bg-gradient-to-br from-[#E95420] to-[#F7A072] rounded-md flex items-center justify-center">
                 <span className="text-xs font-bold text-white">U</span>
-              </div>
+            </div>
               <span className="text-sm font-medium">Show Applications</span>
             </div>
           </Button>
@@ -1646,20 +1863,20 @@ Happy exploring! 🐧`}
           {/* Window buttons */}
           <div className="flex items-center space-x-1">
             {memoizedWindows.map((window) => (
-              <Button
-                key={window.id}
-                variant="ghost"
-                size="sm"
+            <Button
+              key={window.id}
+              variant="ghost"
+              size="sm"
                 className={`text-white hover:bg-white/10 px-3 py-2 rounded-md transition-all duration-200 ${window.isMinimized
                   ? "opacity-60 bg-white/5"
                   : "bg-white/10 shadow-md"
                   }`}
-                onClick={() => (window.isMinimized ? restoreWindow(window.id) : bringToFront(window.id))}
-              >
+              onClick={() => (window.isMinimized ? restoreWindow(window.id) : bringToFront(window.id))}
+            >
                 <span className="text-sm font-medium">{window.title}</span>
-              </Button>
-            ))}
-          </div>
+            </Button>
+          ))}
+        </div>
         </div>
 
         {/* System tray */}
