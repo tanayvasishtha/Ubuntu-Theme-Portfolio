@@ -203,7 +203,7 @@ export default function UbuntuPortfolio() {
           <img src="/assets/program-icons/terminal-app.png" alt="Terminal" className="w-8 h-8 drop-shadow-lg" />
         </div>
       ),
-      position: { x: 100, y: 100 },
+      position: { x: 120, y: 100 },
       action: () => openWindow("terminal", "Terminal", <TerminalWindow />),
     },
     {
@@ -217,7 +217,7 @@ export default function UbuntuPortfolio() {
           </svg>
         </div>
       ),
-      position: { x: 100, y: 180 },
+      position: { x: 120, y: 180 },
       action: () => openWindow("projects", "Projects", <ProjectsWindow />),
     },
     {
@@ -231,7 +231,7 @@ export default function UbuntuPortfolio() {
           </svg>
         </div>
       ),
-      position: { x: 100, y: 260 },
+      position: { x: 120, y: 260 },
       action: () => openWindow("notepad", "Commands Guide", <NotepadWindow />),
     },
     {
@@ -246,7 +246,7 @@ export default function UbuntuPortfolio() {
           </svg>
         </div>
       ),
-      position: { x: 100, y: 340 },
+      position: { x: 120, y: 340 },
       action: () => openWindow("about", "About Me", <AboutWindow />),
     },
     {
@@ -260,7 +260,7 @@ export default function UbuntuPortfolio() {
           </svg>
         </div>
       ),
-      position: { x: 100, y: 420 },
+      position: { x: 120, y: 420 },
       action: () => openWindow("skills", "Skills", <SkillsWindow />),
     },
     {
@@ -274,7 +274,7 @@ export default function UbuntuPortfolio() {
           </svg>
         </div>
       ),
-      position: { x: 250, y: 100 },
+      position: { x: 270, y: 100 },
       action: () => openWindow("contact", "Contact", <ContactWindow />),
     },
     {
@@ -288,7 +288,7 @@ export default function UbuntuPortfolio() {
           </svg>
         </div>
       ),
-      position: { x: 250, y: 180 },
+      position: { x: 270, y: 180 },
       action: () => openWindow("gallery", "Gallery", <GalleryWindow />),
     },
     {
@@ -299,7 +299,7 @@ export default function UbuntuPortfolio() {
           <img src="/assets/program-icons/system-settings.png" alt="Settings" className="w-8 h-8 drop-shadow-lg" />
         </div>
       ),
-      position: { x: 250, y: 260 },
+      position: { x: 270, y: 260 },
       action: () => openWindow("settings", "Settings", <SettingsWindow />),
     },
   ])
