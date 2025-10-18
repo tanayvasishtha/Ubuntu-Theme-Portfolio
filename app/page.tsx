@@ -270,7 +270,7 @@ export default function UbuntuPortfolio() {
       icon: (
         <div className="w-12 h-12 flex items-center justify-center">
           <svg viewBox="0 0 24 24" className="w-10 h-10 drop-shadow-lg">
-            <path fill="#16A34A" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+            <circle fill="#16A34A" cx="12" cy="12" r="10" />
             <circle fill="#FFFFFF" cx="12" cy="8" r="2" />
             <path fill="#FFFFFF" d="M12 12c-2.5 0-4.5 2-4.5 4.5h9c0-2.5-2-4.5-4.5-4.5z" />
           </svg>
