@@ -2059,7 +2059,7 @@ Happy exploring! 🐧`}
       </div>
 
       {/* Desktop Icons */}
-      <div className="absolute inset-0 p-4" style={{ paddingTop: "64px", paddingBottom: "64px", paddingLeft: "100px" }}>
+      <div className="absolute inset-0 p-4" style={{ paddingTop: "64px", paddingBottom: "64px", paddingLeft: "120px" }}>
         {memoizedDesktopIcons.map((icon) => (
           <div
             key={icon.id}
