@@ -1486,6 +1486,10 @@ Happy exploring! 🐧`}
     const [previousValue, setPreviousValue] = useState<number | null>(null)
     const [operation, setOperation] = useState<string | null>(null)
     const [waitingForOperand, setWaitingForOperand] = useState(false)
+    const [isScientific, setIsScientific] = useState(false)
+    const [history, setHistory] = useState<string[]>([])
+    const [memory, setMemory] = useState(0)
+    const [angleMode, setAngleMode] = useState("DEG") // DEG or RAD
 
     const inputNumber = (num: string) => {
       if (waitingForOperand) {
@@ -1514,14 +1518,63 @@ Happy exploring! 🐧`}
     }
 
     const calculate = (firstValue: number, secondValue: number, operation: string): number => {
+      let result = 0
       switch (operation) {
-        case "+": return firstValue + secondValue
-        case "-": return firstValue - secondValue
-        case "×": return firstValue * secondValue
-        case "÷": return firstValue / secondValue
-        case "=": return secondValue
-        default: return secondValue
+        case "+":
+          result = firstValue + secondValue
+          break
+        case "-":
+          result = firstValue - secondValue
+          break
+        case "×":
+          result = firstValue * secondValue
+          break
+        case "÷":
+          result = firstValue / secondValue
+          break
+        case "^":
+          result = Math.pow(firstValue, secondValue)
+          break
+        case "√":
+          result = Math.sqrt(firstValue)
+          break
+        case "sin":
+          result = Math.sin(angleMode === "DEG" ? firstValue * Math.PI / 180 : firstValue)
+          break
+        case "cos":
+          result = Math.cos(angleMode === "DEG" ? firstValue * Math.PI / 180 : firstValue)
+          break
+        case "tan":
+          result = Math.tan(angleMode === "DEG" ? firstValue * Math.PI / 180 : firstValue)
+          break
+        case "log":
+          result = Math.log10(firstValue)
+          break
+        case "ln":
+          result = Math.log(firstValue)
+          break
+        case "!":
+          result = factorial(firstValue)
+          break
+        default:
+          result = secondValue
       }
+      
+      // Add to history
+      const historyEntry = `${firstValue} ${operation} ${secondValue} = ${result}`
+      setHistory(prev => [historyEntry, ...prev.slice(0, 9)]) // Keep last 10 entries
+      
+      return result
+    }
+
+    const factorial = (n: number) => {
+      if (n < 0) return NaN
+      if (n === 0 || n === 1) return 1
+      let result = 1
+      for (let i = 2; i <= n; i++) {
+        result *= i
+      }
+      return result
     }
 
     const performCalculation = () => {
@@ -1543,45 +1596,301 @@ Happy exploring! 🐧`}
       setWaitingForOperand(false)
     }
 
+    const clearEntry = () => {
+      setDisplay("0")
+    }
+
+    const backspace = () => {
+      if (display.length > 1) {
+        setDisplay(display.slice(0, -1))
+      } else {
+        setDisplay("0")
+      }
+    }
+
+    const memoryClear = () => setMemory(0)
+    const memoryRecall = () => setDisplay(String(memory))
+    const memoryAdd = () => setMemory(memory + parseFloat(display))
+    const memorySubtract = () => setMemory(memory - parseFloat(display))
+    const memoryStore = () => setMemory(parseFloat(display))
+
+    const toggleAngleMode = () => {
+      setAngleMode(angleMode === "DEG" ? "RAD" : "DEG")
+    }
+
     return (
-      <div className="w-full h-full bg-gray-100 p-4">
-        <div className="bg-white rounded-lg shadow-lg p-4 max-w-sm mx-auto">
-          <div className="mb-4">
-            <div className="bg-gray-800 text-white text-right p-4 rounded text-2xl font-mono min-h-[60px] flex items-center justify-end">
-              {display}
+      <div className="h-full bg-gray-100 flex">
+        {/* Main Calculator */}
+        <div className="flex-1 p-4">
+          <div className="max-w-md mx-auto">
+            {/* Header */}
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-semibold text-gray-800">Calculator</h2>
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={() => setIsScientific(!isScientific)}
+                  className={`px-3 py-1 rounded text-sm font-medium ${
+                    isScientific ? "bg-orange-500 text-white" : "bg-gray-200 text-gray-700"
+                  }`}
+                >
+                  {isScientific ? "Scientific" : "Basic"}
+                </button>
+                <button
+                  onClick={toggleAngleMode}
+                  className="px-3 py-1 rounded text-sm font-medium bg-gray-200 text-gray-700"
+                >
+                  {angleMode}
+                </button>
+              </div>
             </div>
+
+            {/* Display */}
+            <div className="bg-gray-800 text-white text-right text-2xl font-mono p-4 rounded-lg mb-4 min-h-[80px] flex items-center justify-end shadow-inner">
+              <div className="break-all">{display}</div>
+            </div>
+
+            {/* Memory Display */}
+            {memory !== 0 && (
+              <div className="text-sm text-gray-600 mb-2 text-center">
+                Memory: {memory}
+              </div>
+            )}
+
+            {/* Basic Calculator */}
+            {!isScientific ? (
+              <div className="grid grid-cols-4 gap-2">
+                {/* Row 1 */}
+                <button onClick={clear} className="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-lg transition-colors">
+                  C
+                </button>
+                <button onClick={clearEntry} className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-lg transition-colors">
+                  CE
+                </button>
+                <button onClick={backspace} className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-lg transition-colors">
+                  ⌫
+                </button>
+                <button onClick={() => inputOperation("÷")} className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-lg transition-colors">
+                  ÷
+                </button>
+
+                {/* Row 2 */}
+                <button onClick={() => inputNumber("7")} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-4 rounded-lg transition-colors">
+                  7
+                </button>
+                <button onClick={() => inputNumber("8")} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-4 rounded-lg transition-colors">
+                  8
+                </button>
+                <button onClick={() => inputNumber("9")} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-4 rounded-lg transition-colors">
+                  9
+                </button>
+                <button onClick={() => inputOperation("×")} className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-lg transition-colors">
+                  ×
+                </button>
+
+                {/* Row 3 */}
+                <button onClick={() => inputNumber("4")} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-4 rounded-lg transition-colors">
+                  4
+                </button>
+                <button onClick={() => inputNumber("5")} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-4 rounded-lg transition-colors">
+                  5
+                </button>
+                <button onClick={() => inputNumber("6")} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-4 rounded-lg transition-colors">
+                  6
+                </button>
+                <button onClick={() => inputOperation("-")} className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-lg transition-colors">
+                  -
+                </button>
+
+                {/* Row 4 */}
+                <button onClick={() => inputNumber("1")} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-4 rounded-lg transition-colors">
+                  1
+                </button>
+                <button onClick={() => inputNumber("2")} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-4 rounded-lg transition-colors">
+                  2
+                </button>
+                <button onClick={() => inputNumber("3")} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-4 rounded-lg transition-colors">
+                  3
+                </button>
+                <button onClick={() => inputOperation("+")} className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-lg transition-colors">
+                  +
+                </button>
+
+                {/* Row 5 */}
+                <button onClick={() => inputNumber("0")} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-4 rounded-lg transition-colors col-span-2">
+                  0
+                </button>
+                <button onClick={() => setDisplay(display + ".")} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-4 rounded-lg transition-colors">
+                  .
+                </button>
+                <button onClick={performCalculation} className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-lg transition-colors">
+                  =
+                </button>
+              </div>
+            ) : (
+              /* Scientific Calculator */
+              <div className="grid grid-cols-5 gap-2">
+                {/* Row 1 - Scientific Functions */}
+                <button onClick={() => { setDisplay(String(Math.sin(angleMode === "DEG" ? parseFloat(display) * Math.PI / 180 : parseFloat(display)))) }} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  sin
+                </button>
+                <button onClick={() => { setDisplay(String(Math.cos(angleMode === "DEG" ? parseFloat(display) * Math.PI / 180 : parseFloat(display)))) }} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  cos
+                </button>
+                <button onClick={() => { setDisplay(String(Math.tan(angleMode === "DEG" ? parseFloat(display) * Math.PI / 180 : parseFloat(display)))) }} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  tan
+                </button>
+                <button onClick={() => { setDisplay(String(Math.log10(parseFloat(display)))) }} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  log
+                </button>
+                <button onClick={() => { setDisplay(String(Math.log(parseFloat(display)))) }} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  ln
+                </button>
+
+                {/* Row 2 - More Functions */}
+                <button onClick={() => { setDisplay(String(Math.sqrt(parseFloat(display)))) }} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  √
+                </button>
+                <button onClick={() => { setDisplay(String(Math.pow(parseFloat(display), 2))) }} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  x²
+                </button>
+                <button onClick={() => { setDisplay(String(Math.pow(parseFloat(display), 3))) }} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  x³
+                </button>
+                <button onClick={() => { setDisplay(String(factorial(parseFloat(display)))) }} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  x!
+                </button>
+                <button onClick={() => { setDisplay(String(Math.pow(10, parseFloat(display)))) }} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  10ˣ
+                </button>
+
+                {/* Row 3 - Constants and Operations */}
+                <button onClick={() => setDisplay(String(Math.PI))} className="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  π
+                </button>
+                <button onClick={() => setDisplay(String(Math.E))} className="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  e
+                </button>
+                <button onClick={() => inputOperation("^")} className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  xʸ
+                </button>
+                <button onClick={() => { setDisplay(String(1 / parseFloat(display))) }} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  1/x
+                </button>
+                <button onClick={() => { setDisplay(String(Math.abs(parseFloat(display)))) }} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  |x|
+                </button>
+
+                {/* Row 4 - Memory Functions */}
+                <button onClick={memoryClear} className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  MC
+                </button>
+                <button onClick={memoryRecall} className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  MR
+                </button>
+                <button onClick={memoryAdd} className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  M+
+                </button>
+                <button onClick={memorySubtract} className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  M-
+                </button>
+                <button onClick={memoryStore} className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  MS
+                </button>
+
+                {/* Row 5 - Basic Operations */}
+                <button onClick={clear} className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  C
+                </button>
+                <button onClick={clearEntry} className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  CE
+                </button>
+                <button onClick={backspace} className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  ⌫
+                </button>
+                <button onClick={() => inputOperation("÷")} className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  ÷
+                </button>
+                <button onClick={() => inputOperation("×")} className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  ×
+                </button>
+
+                {/* Row 6 - Numbers */}
+                <button onClick={() => inputNumber("7")} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  7
+                </button>
+                <button onClick={() => inputNumber("8")} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  8
+                </button>
+                <button onClick={() => inputNumber("9")} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  9
+                </button>
+                <button onClick={() => inputOperation("-")} className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  -
+                </button>
+                <button onClick={() => inputOperation("+")} className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  +
+                </button>
+
+                {/* Row 7 - More Numbers */}
+                <button onClick={() => inputNumber("4")} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  4
+                </button>
+                <button onClick={() => inputNumber("5")} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  5
+                </button>
+                <button onClick={() => inputNumber("6")} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  6
+                </button>
+                <button onClick={() => setDisplay(display + ".")} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  .
+                </button>
+                <button onClick={() => { setDisplay(String(-parseFloat(display))) }} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  ±
+                </button>
+
+                {/* Row 8 - Final Row */}
+                <button onClick={() => inputNumber("1")} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  1
+                </button>
+                <button onClick={() => inputNumber("2")} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  2
+                </button>
+                <button onClick={() => inputNumber("3")} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  3
+                </button>
+                <button onClick={() => inputNumber("0")} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  0
+                </button>
+                <button onClick={performCalculation} className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-3 rounded-lg transition-colors text-sm">
+                  =
+                </button>
+              </div>
+            )}
           </div>
-          <div className="grid grid-cols-4 gap-2">
-            <button onClick={clear} className="col-span-2 bg-red-500 text-white p-3 rounded hover:bg-red-600">
-              Clear
-            </button>
-            <button onClick={() => inputOperation("÷")} className="bg-orange-500 text-white p-3 rounded hover:bg-orange-600">
-              ÷
-            </button>
-            <button onClick={() => inputOperation("×")} className="bg-orange-500 text-white p-3 rounded hover:bg-orange-600">
-              ×
-            </button>
+        </div>
 
-            <button onClick={() => inputNumber("7")} className="bg-gray-300 p-3 rounded hover:bg-gray-400">7</button>
-            <button onClick={() => inputNumber("8")} className="bg-gray-300 p-3 rounded hover:bg-gray-400">8</button>
-            <button onClick={() => inputNumber("9")} className="bg-gray-300 p-3 rounded hover:bg-gray-400">9</button>
-            <button onClick={() => inputOperation("-")} className="bg-orange-500 text-white p-3 rounded hover:bg-orange-600">-</button>
-
-            <button onClick={() => inputNumber("4")} className="bg-gray-300 p-3 rounded hover:bg-gray-400">4</button>
-            <button onClick={() => inputNumber("5")} className="bg-gray-300 p-3 rounded hover:bg-gray-400">5</button>
-            <button onClick={() => inputNumber("6")} className="bg-gray-300 p-3 rounded hover:bg-gray-400">6</button>
-            <button onClick={() => inputOperation("+")} className="bg-orange-500 text-white p-3 rounded hover:bg-orange-600">+</button>
-
-            <button onClick={() => inputNumber("1")} className="bg-gray-300 p-3 rounded hover:bg-gray-400">1</button>
-            <button onClick={() => inputNumber("2")} className="bg-gray-300 p-3 rounded hover:bg-gray-400">2</button>
-            <button onClick={() => inputNumber("3")} className="bg-gray-300 p-3 rounded hover:bg-gray-400">3</button>
-            <button onClick={performCalculation} className="row-span-2 bg-orange-500 text-white p-3 rounded hover:bg-orange-600">
-              =
-            </button>
-
-            <button onClick={() => inputNumber("0")} className="col-span-2 bg-gray-300 p-3 rounded hover:bg-gray-400">0</button>
-            <button onClick={() => inputNumber(".")} className="bg-gray-300 p-3 rounded hover:bg-gray-400">.</button>
+        {/* History Panel */}
+        <div className="w-64 bg-gray-200 border-l border-gray-300 p-4">
+          <h3 className="text-lg font-semibold text-gray-800 mb-3">History</h3>
+          <div className="space-y-2 max-h-96 overflow-y-auto">
+            {history.length === 0 ? (
+              <p className="text-gray-500 text-sm">No calculations yet</p>
+            ) : (
+              history.map((entry, index) => (
+                <div key={index} className="bg-white p-2 rounded text-sm font-mono text-gray-700">
+                  {entry}
+                </div>
+              ))
+            )}
           </div>
+          {history.length > 0 && (
+            <button
+              onClick={() => setHistory([])}
+              className="mt-3 w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded text-sm"
+            >
+              Clear History
+            </button>
+          )}
         </div>
       </div>
     )
@@ -1731,8 +2040,8 @@ Happy exploring! 🐧`}
               <button
                 onClick={() => setCurrentPlaylist("favorites")}
                 className={`w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${currentPlaylist === "favorites"
-                    ? "bg-gray-800 text-white"
-                    : "text-gray-400 hover:text-white hover:bg-gray-800"
+                  ? "bg-gray-800 text-white"
+                  : "text-gray-400 hover:text-white hover:bg-gray-800"
                   }`}
               >
                 🎵 Your Favorites
@@ -1740,8 +2049,8 @@ Happy exploring! 🐧`}
               <button
                 onClick={() => setCurrentPlaylist("topHits")}
                 className={`w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${currentPlaylist === "topHits"
-                    ? "bg-gray-800 text-white"
-                    : "text-gray-400 hover:text-white hover:bg-gray-800"
+                  ? "bg-gray-800 text-white"
+                  : "text-gray-400 hover:text-white hover:bg-gray-800"
                   }`}
               >
                 🔥 Top Hits
@@ -1749,8 +2058,8 @@ Happy exploring! 🐧`}
               <button
                 onClick={() => setCurrentPlaylist("classics")}
                 className={`w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${currentPlaylist === "classics"
-                    ? "bg-gray-800 text-white"
-                    : "text-gray-400 hover:text-white hover:bg-gray-800"
+                  ? "bg-gray-800 text-white"
+                  : "text-gray-400 hover:text-white hover:bg-gray-800"
                   }`}
               >
                 🎭 Classics
