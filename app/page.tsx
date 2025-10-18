@@ -48,9 +48,9 @@ const UbuntuLoadingScreen = ({ onLoadingComplete }: { onLoadingComplete: () => v
         setLoadingText(step.text)
         currentStep++
       } else {
-        clearInterval(progressTimer)
+          clearInterval(progressTimer)
         setTimeout(() => onLoadingComplete(), 800)
-      }
+        }
     }, 300)
 
     return () => {
@@ -86,7 +86,7 @@ const UbuntuLoadingScreen = ({ onLoadingComplete }: { onLoadingComplete: () => v
           className="h-full bg-gradient-to-r from-[#E95420] to-[#F7A072] transition-all duration-300 ease-out"
           style={{ width: `${loadingProgress}%` }}
         />
-      </div>
+        </div>
 
       {/* Loading text */}
       <p className="text-white text-lg font-light mb-2">{loadingText}</p>
@@ -200,8 +200,8 @@ export default function UbuntuPortfolio() {
       id: "terminal",
       name: "Terminal",
       icon: (
-        <div className="w-8 h-8 flex items-center justify-center">
-          <img src="/assets/program-icons/terminal-app.png" alt="Terminal" className="w-8 h-8 drop-shadow-lg" />
+        <div className="w-12 h-12 flex items-center justify-center">
+          <img src="/assets/program-icons/terminal-app.png" alt="Terminal" className="w-10 h-10 drop-shadow-lg" />
         </div>
       ),
       position: { x: 100, y: 100 },
@@ -211,8 +211,8 @@ export default function UbuntuPortfolio() {
       id: "projects",
       name: "Projects",
       icon: (
-        <div className="w-8 h-8 flex items-center justify-center">
-          <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
+        <div className="w-12 h-12 flex items-center justify-center">
+          <svg viewBox="0 0 24 24" className="w-10 h-10 drop-shadow-lg">
             <path fill="#E95420" d="M10 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2h-8l-2-2z" />
             <path fill="#FFFFFF" d="M12 8v8l4-4-4-4z" />
           </svg>
@@ -225,8 +225,8 @@ export default function UbuntuPortfolio() {
       id: "notepad",
       name: "Commands",
       icon: (
-        <div className="w-8 h-8 flex items-center justify-center">
-          <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
+        <div className="w-12 h-12 flex items-center justify-center">
+          <svg viewBox="0 0 24 24" className="w-10 h-10 drop-shadow-lg">
             <path fill="#7C3AED" d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
             <path fill="#FFFFFF" d="M8 12h8v2H8v-2zm0 4h8v2H8v-2zm0-8h5v5H8V8z" />
           </svg>
@@ -239,8 +239,8 @@ export default function UbuntuPortfolio() {
       id: "about",
       name: "About Me",
       icon: (
-        <div className="w-8 h-8 flex items-center justify-center">
-          <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
+        <div className="w-12 h-12 flex items-center justify-center">
+          <svg viewBox="0 0 24 24" className="w-10 h-10 drop-shadow-lg">
             <path fill="#16A34A" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
             <circle fill="#FFFFFF" cx="12" cy="8" r="2" />
             <path fill="#FFFFFF" d="M12 12c-2.5 0-4.5 2-4.5 4.5h9c0-2.5-2-4.5-4.5-4.5z" />
@@ -254,8 +254,8 @@ export default function UbuntuPortfolio() {
       id: "skills",
       name: "Skills",
       icon: (
-        <div className="w-8 h-8 flex items-center justify-center">
-          <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
+        <div className="w-12 h-12 flex items-center justify-center">
+          <svg viewBox="0 0 24 24" className="w-10 h-10 drop-shadow-lg">
             <path fill="#DC2626" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
             <path fill="#FFFFFF" d="M12 6l1.5 3L17 10l-2.5 2.5L15 17l-3-1.5L9 17l.5-4.5L7 10l3.5-1L12 6z" />
           </svg>
@@ -268,8 +268,8 @@ export default function UbuntuPortfolio() {
       id: "contact",
       name: "Contact",
       icon: (
-        <div className="w-8 h-8 flex items-center justify-center">
-          <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
+        <div className="w-12 h-12 flex items-center justify-center">
+          <svg viewBox="0 0 24 24" className="w-10 h-10 drop-shadow-lg">
             <path fill="#0891B2" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
             <path fill="#FFFFFF" d="M12 11l8-5H4l8 5z" />
           </svg>
@@ -282,8 +282,8 @@ export default function UbuntuPortfolio() {
       id: "gallery",
       name: "Gallery",
       icon: (
-        <div className="w-8 h-8 flex items-center justify-center">
-          <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
+        <div className="w-12 h-12 flex items-center justify-center">
+          <svg viewBox="0 0 24 24" className="w-10 h-10 drop-shadow-lg">
             <path fill="#9333EA" d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z" />
             <circle fill="#FFFFFF" cx="8.5" cy="8.5" r="1.5" />
           </svg>
@@ -296,8 +296,8 @@ export default function UbuntuPortfolio() {
       id: "settings",
       name: "Settings",
       icon: (
-        <div className="w-8 h-8 flex items-center justify-center">
-          <img src="/assets/program-icons/system-settings.png" alt="Settings" className="w-8 h-8 drop-shadow-lg" />
+        <div className="w-12 h-12 flex items-center justify-center">
+          <img src="/assets/program-icons/system-settings.png" alt="Settings" className="w-10 h-10 drop-shadow-lg" />
         </div>
       ),
       position: { x: 200, y: 260 },
@@ -664,13 +664,13 @@ export default function UbuntuPortfolio() {
       prev.map((w) =>
         w.id === id
           ? {
-            ...w,
-            isMaximized: !w.isMaximized,
-            position: w.isMaximized ? { x: 50, y: 50 } : { x: 0, y: 48 },
-            size: w.isMaximized
-              ? { width: 640, height: 400 }
-              : { width: window.innerWidth, height: window.innerHeight - 96 },
-          }
+              ...w,
+              isMaximized: !w.isMaximized,
+              position: w.isMaximized ? { x: 50, y: 50 } : { x: 0, y: 48 },
+              size: w.isMaximized
+                ? { width: 640, height: 400 }
+                : { width: window.innerWidth, height: window.innerHeight - 96 },
+            }
           : w,
       ),
     )
@@ -1077,9 +1077,9 @@ export default function UbuntuPortfolio() {
             <div className="mt-4">
               <span
                 className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${project.status === "Completed" || project.status === "Live"
-                  ? "bg-chart-3/20 text-chart-3"
-                  : "bg-chart-5/20 text-chart-5"
-                  }`}
+                    ? "bg-chart-3/20 text-chart-3"
+                    : "bg-chart-5/20 text-chart-5"
+                }`}
               >
                 {project.status}
               </span>
@@ -1276,7 +1276,7 @@ Happy exploring! 🐧`}
                     </div>
                     <span className="text-xs text-card-foreground text-center leading-tight">
                       {skill.name}
-                    </span>
+                  </span>
                   </div>
                 ))}
               </div>
@@ -1359,8 +1359,8 @@ Happy exploring! 🐧`}
     }
 
     return (
-      <div className="h-full bg-card p-6 overflow-y-auto">
-        <h2 className="text-2xl font-bold text-foreground mb-6">System Settings</h2>
+    <div className="h-full bg-card p-6 overflow-y-auto">
+      <h2 className="text-2xl font-bold text-foreground mb-6">System Settings</h2>
         <div className="space-y-6">
           <div>
             <h3 className="text-lg font-semibold text-foreground mb-3">Wallpaper</h3>
@@ -1388,20 +1388,20 @@ Happy exploring! 🐧`}
               ))}
             </div>
           </div>
-          <div className="border border-border rounded-lg p-4">
-            <h3 className="font-semibold text-foreground mb-2">Display</h3>
-            <p className="text-card-foreground text-sm">Resolution: 1920x1080</p>
-            <p className="text-card-foreground text-sm">Theme: Ubuntu Default</p>
-          </div>
-          <div className="border border-border rounded-lg p-4">
-            <h3 className="font-semibold text-foreground mb-2">System Info</h3>
-            <p className="text-card-foreground text-sm">OS: Ubuntu 22.04 LTS</p>
-            <p className="text-card-foreground text-sm">Kernel: 5.15.0-generic</p>
-            <p className="text-card-foreground text-sm">Desktop: Portfolio Desktop</p>
-          </div>
+        <div className="border border-border rounded-lg p-4">
+          <h3 className="font-semibold text-foreground mb-2">Display</h3>
+          <p className="text-card-foreground text-sm">Resolution: 1920x1080</p>
+          <p className="text-card-foreground text-sm">Theme: Ubuntu Default</p>
+        </div>
+        <div className="border border-border rounded-lg p-4">
+          <h3 className="font-semibold text-foreground mb-2">System Info</h3>
+          <p className="text-card-foreground text-sm">OS: Ubuntu 22.04 LTS</p>
+          <p className="text-card-foreground text-sm">Kernel: 5.15.0-generic</p>
+          <p className="text-card-foreground text-sm">Desktop: Portfolio Desktop</p>
         </div>
       </div>
-    )
+    </div>
+  )
   }
 
   const SoftwareCenterWindow = () => (
@@ -2582,9 +2582,9 @@ Happy exploring! 🐧`}
             <div className="mt-4">
               <span
                 className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${details.status === "Production Ready" || details.status === "Live"
-                  ? "bg-chart-3/20 text-chart-3"
-                  : "bg-chart-5/20 text-chart-5"
-                  }`}
+                    ? "bg-chart-3/20 text-chart-3"
+                    : "bg-chart-5/20 text-chart-5"
+                }`}
               >
                 {details.status}
               </span>
@@ -2743,14 +2743,14 @@ Happy exploring! 🐧`}
             }}
             onDoubleClick={icon.action}
           >
-            <div className={`flex flex-col items-center space-y-2 p-3 rounded-lg transition-all duration-300 ${draggedIcon === icon.id
+            <div className={`flex flex-col items-center space-y-2 p-4 rounded-lg transition-all duration-300 w-20 h-20 ${draggedIcon === icon.id
               ? "bg-white/20 scale-110 shadow-2xl backdrop-blur-sm"
               : "hover:bg-white/10 hover:scale-105 hover:shadow-lg"
               }`}>
-              <div className="drop-shadow-lg">
-                {icon.icon}
+              <div className="drop-shadow-lg w-12 h-12 flex items-center justify-center">
+              {icon.icon}
               </div>
-              <span className="text-white text-xs text-center max-w-16 truncate font-medium drop-shadow-md">{icon.name}</span>
+              <span className="text-white text-xs text-center w-full truncate font-medium drop-shadow-md leading-tight">{icon.name}</span>
             </div>
           </div>
         ))}
@@ -2836,10 +2836,10 @@ Happy exploring! 🐧`}
             size="sm"
             className="text-white hover:bg-white/10 px-3 py-2 rounded-md transition-all duration-200"
           >
-            <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2">
               <div className="w-6 h-6 bg-gradient-to-br from-[#E95420] to-[#F7A072] rounded-md flex items-center justify-center">
                 <span className="text-xs font-bold text-white">U</span>
-              </div>
+            </div>
               <span className="text-sm font-medium">Show Applications</span>
             </div>
           </Button>
@@ -2849,20 +2849,20 @@ Happy exploring! 🐧`}
           {/* Window buttons */}
           <div className="flex items-center space-x-1">
             {memoizedWindows.map((window) => (
-              <Button
-                key={window.id}
-                variant="ghost"
-                size="sm"
+            <Button
+              key={window.id}
+              variant="ghost"
+              size="sm"
                 className={`text-white hover:bg-white/10 px-3 py-2 rounded-md transition-all duration-200 ${window.isMinimized
                   ? "opacity-60 bg-white/5"
                   : "bg-white/10 shadow-md"
                   }`}
-                onClick={() => (window.isMinimized ? restoreWindow(window.id) : bringToFront(window.id))}
-              >
+              onClick={() => (window.isMinimized ? restoreWindow(window.id) : bringToFront(window.id))}
+            >
                 <span className="text-sm font-medium">{window.title}</span>
-              </Button>
-            ))}
-          </div>
+            </Button>
+          ))}
+        </div>
         </div>
 
         {/* System tray */}
