@@ -1,0 +1,49 @@
+# Ubuntu Portfolio Terminal Commands
+# Available commands for the portfolio terminal
+
+## Basic Commands
+help - Show all available commands
+clear - Clear terminal screen
+ls - List directory contents
+pwd - Print working directory
+whoami - Display current user
+email - Show email address
+date - Show current date and time
+neofetch - Display system information
+fortune - Get a random quote
+exit - Close terminal
+
+## Application Commands
+open about - Open About Me window
+open skills - Open Skills window
+open contact - Open Contact window
+open gallery - Open Gallery window
+open settings - Open Settings window
+open projects - Open Projects window
+
+## Social Media Commands
+visit github - Open GitHub profile (https://github.com/tanayvasishtha)
+visit linkedin - Open LinkedIn profile (https://www.linkedin.com/in/tanayvasishtha/)
+visit x - Open X (Twitter) profile (https://x.com/TanayVasishtha)
+visit medium - Open Medium profile (https://medium.com/@tanayvasishtha)
+visit producthunt - Open Product Hunt profile (https://www.producthunt.com/@tanayvasishtha)
+visit peerlist - Open Peerlist profile (https://peerlist.io/tanayvasishtha)
+visit coffee - Open Buy Me a Coffee (https://buymeacoffee.com/tanayvasishtha)
+
+## Project Commands
+visit debtrix - Open Debtrix project (https://debtrix-nine.vercel.app)
+visit weloveqr - Open WeLoveQR project (https://weloveqr.netlify.app/)
+visit synthralabs - Open SynthraLabs organization (https://github.com/orgs/SynthraLabs)
+
+## File Commands
+cat about.txt - Display About Me information
+cat contact.txt - Display contact information
+cat skills.txt - Display skills information
+tree - Show directory tree
+history - Show command history
+
+## Project Launch Commands
+./debtrix - Launch Debtrix project details
+./weloveqr - Launch WeLoveQR project details
+./synthralabs - Launch SynthraLabs project details
+./portfolio - Launch Portfolio project details
