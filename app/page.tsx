@@ -2428,6 +2428,9 @@ Happy exploring! 🐧`}
       { id: 2, title: "New Tab", url: "about:blank", active: false }
     ])
     const [searchQuery, setSearchQuery] = useState("")
+    const [realTimeSearch, setRealTimeSearch] = useState("")
+    const [searchResults, setSearchResults] = useState<any[]>([])
+    const [isSearching, setIsSearching] = useState(false)
     const [bookmarks, setBookmarks] = useState([
       { title: "Google", url: "https://www.google.com", favicon: "🔍" },
       { title: "GitHub", url: "https://github.com", favicon: "🐙" },
@@ -2436,6 +2439,54 @@ Happy exploring! 🐧`}
       { title: "Ubuntu", url: "https://ubuntu.com", favicon: "🐧" }
     ])
     const [showBookmarks, setShowBookmarks] = useState(false)
+
+    // Real-time search functionality
+    useEffect(() => {
+      if (realTimeSearch.trim().length > 2) {
+        setIsSearching(true)
+        // Simulate real-time search results
+        const mockResults = [
+          {
+            title: `${realTimeSearch} - Official Website`,
+            url: `https://www.${realTimeSearch.toLowerCase().replace(/\s+/g, '')}.com`,
+            description: `Official website for ${realTimeSearch}. Find information, resources, and more.`,
+            favicon: "🌐"
+          },
+          {
+            title: `${realTimeSearch} - Wikipedia`,
+            url: `https://en.wikipedia.org/wiki/${realTimeSearch.toLowerCase().replace(/\s+/g, '_')}`,
+            description: `Wikipedia article about ${realTimeSearch}. Comprehensive information and history.`,
+            favicon: "📚"
+          },
+          {
+            title: `${realTimeSearch} - GitHub`,
+            url: `https://github.com/search?q=${encodeURIComponent(realTimeSearch)}`,
+            description: `GitHub repositories related to ${realTimeSearch}. Open source projects and code.`,
+            favicon: "🐙"
+          },
+          {
+            title: `${realTimeSearch} - Stack Overflow`,
+            url: `https://stackoverflow.com/search?q=${encodeURIComponent(realTimeSearch)}`,
+            description: `Stack Overflow questions and answers about ${realTimeSearch}.`,
+            favicon: "❓"
+          },
+          {
+            title: `${realTimeSearch} - YouTube`,
+            url: `https://www.youtube.com/results?search_query=${encodeURIComponent(realTimeSearch)}`,
+            description: `YouTube videos about ${realTimeSearch}. Tutorials, reviews, and more.`,
+            favicon: "📺"
+          }
+        ]
+        
+        setTimeout(() => {
+          setSearchResults(mockResults)
+          setIsSearching(false)
+        }, 300)
+      } else {
+        setSearchResults([])
+        setIsSearching(false)
+      }
+    }, [realTimeSearch])
 
     const handleSearchSubmit = (e: React.FormEvent) => {
       e.preventDefault()
@@ -2681,6 +2732,49 @@ Happy exploring! 🐧`}
                         />
                       </form>
                     </div>
+                    
+                    {/* Real-time Search */}
+                    <div className="mb-6">
+                      <h3 className="text-lg font-semibold text-gray-800 mb-3">Real-time Search</h3>
+                      <input
+                        type="text"
+                        value={realTimeSearch}
+                        onChange={(e) => setRealTimeSearch(e.target.value)}
+                        placeholder="Type to search in real-time..."
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800"
+                      />
+                      {isSearching && (
+                        <div className="mt-2 text-sm text-gray-600">Searching...</div>
+                      )}
+                    </div>
+
+                    {/* Real-time Search Results */}
+                    {searchResults.length > 0 && (
+                      <div className="text-left mb-6">
+                        <h4 className="text-md font-semibold text-gray-800 mb-3">Search Results</h4>
+                        <div className="space-y-3">
+                          {searchResults.map((result, index) => (
+                            <div
+                              key={index}
+                              className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
+                              onClick={() => navigateTo(result.url, result.title)}
+                            >
+                              <div className="flex items-start space-x-3">
+                                <span className="text-lg">{result.favicon}</span>
+                                <div className="flex-1">
+                                  <h5 className="font-medium text-blue-600 hover:text-blue-800 text-sm">
+                                    {result.title}
+                                  </h5>
+                                  <p className="text-xs text-gray-600 mt-1">{result.url}</p>
+                                  <p className="text-sm text-gray-700 mt-1">{result.description}</p>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
                     <div className="grid grid-cols-2 gap-4">
                       <button
                         onClick={() => navigateTo("https://github.com", "GitHub")}
