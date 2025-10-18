@@ -203,7 +203,7 @@ export default function UbuntuPortfolio() {
           <img src="/assets/program-icons/terminal-app.png" alt="Terminal" className="w-8 h-8 drop-shadow-lg" />
         </div>
       ),
-      position: { x: 120, y: 100 },
+      position: { x: 100, y: 100 },
       action: () => openWindow("terminal", "Terminal", <TerminalWindow />),
     },
     {
@@ -217,7 +217,7 @@ export default function UbuntuPortfolio() {
           </svg>
         </div>
       ),
-      position: { x: 120, y: 160 },
+      position: { x: 100, y: 180 },
       action: () => openWindow("projects", "Projects", <ProjectsWindow />),
     },
     {
@@ -231,7 +231,7 @@ export default function UbuntuPortfolio() {
           </svg>
         </div>
       ),
-      position: { x: 120, y: 220 },
+      position: { x: 100, y: 260 },
       action: () => openWindow("notepad", "Commands Guide", <NotepadWindow />),
     },
     {
@@ -246,7 +246,7 @@ export default function UbuntuPortfolio() {
           </svg>
         </div>
       ),
-      position: { x: 120, y: 280 },
+      position: { x: 100, y: 340 },
       action: () => openWindow("about", "About Me", <AboutWindow />),
     },
     {
@@ -260,7 +260,7 @@ export default function UbuntuPortfolio() {
           </svg>
         </div>
       ),
-      position: { x: 120, y: 340 },
+      position: { x: 100, y: 420 },
       action: () => openWindow("skills", "Skills", <SkillsWindow />),
     },
     {
@@ -274,7 +274,7 @@ export default function UbuntuPortfolio() {
           </svg>
         </div>
       ),
-      position: { x: 270, y: 100 },
+      position: { x: 200, y: 100 },
       action: () => openWindow("contact", "Contact", <ContactWindow />),
     },
     {
@@ -288,7 +288,7 @@ export default function UbuntuPortfolio() {
           </svg>
         </div>
       ),
-      position: { x: 270, y: 160 },
+      position: { x: 200, y: 180 },
       action: () => openWindow("gallery", "Gallery", <GalleryWindow />),
     },
     {
@@ -299,7 +299,7 @@ export default function UbuntuPortfolio() {
           <img src="/assets/program-icons/system-settings.png" alt="Settings" className="w-8 h-8 drop-shadow-lg" />
         </div>
       ),
-      position: { x: 270, y: 220 },
+      position: { x: 200, y: 260 },
       action: () => openWindow("settings", "Settings", <SettingsWindow />),
     },
   ])
@@ -2059,7 +2059,7 @@ Happy exploring! 🐧`}
       </div>
 
       {/* Desktop Icons */}
-      <div className="absolute inset-0 p-4" style={{ paddingTop: "64px", paddingBottom: "64px", paddingLeft: "120px" }}>
+      <div className="absolute inset-0 p-4" style={{ paddingTop: "64px", paddingBottom: "64px", paddingLeft: "100px" }}>
         {memoizedDesktopIcons.map((icon) => (
           <div
             key={icon.id}
