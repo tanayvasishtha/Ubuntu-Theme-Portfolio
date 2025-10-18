@@ -2477,7 +2477,7 @@ Happy exploring! 🐧`}
             favicon: "📺"
           }
         ]
-        
+
         setTimeout(() => {
           setSearchResults(mockResults)
           setIsSearching(false)
@@ -2546,37 +2546,6 @@ Happy exploring! 🐧`}
 
     return (
       <div className="w-full h-full bg-white flex flex-col">
-        {/* Firefox Title Bar */}
-        <div className="bg-gradient-to-r from-gray-100 to-gray-200 border-b border-gray-300 p-2 flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <img src="/assets/program-icons/firefox.png" alt="Firefox" className="w-4 h-4" />
-            <span className="text-sm font-medium text-gray-700">Firefox</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <button
-              className="w-3 h-3 bg-yellow-500 rounded-full hover:bg-yellow-600 flex items-center justify-center"
-              onClick={() => minimizeWindow("firefox")}
-              title="Minimize"
-            >
-              <Minus className="w-2 h-2 text-white" />
-            </button>
-            <button
-              className="w-3 h-3 bg-green-500 rounded-full hover:bg-green-600 flex items-center justify-center"
-              onClick={() => maximizeWindow("firefox")}
-              title="Maximize"
-            >
-              <Square className="w-2 h-2 text-white" />
-            </button>
-            <button
-              className="w-3 h-3 bg-red-500 rounded-full hover:bg-red-600 flex items-center justify-center"
-              onClick={() => closeWindow("firefox")}
-              title="Close"
-            >
-              <X className="w-2 h-2 text-white" />
-            </button>
-          </div>
-        </div>
-
         {/* Firefox Toolbar */}
         <div className="bg-gray-50 border-b border-gray-200 p-2">
           <div className="flex items-center space-x-2">
@@ -2732,7 +2701,7 @@ Happy exploring! 🐧`}
                         />
                       </form>
                     </div>
-                    
+
                     {/* Real-time Search */}
                     <div className="mb-6">
                       <h3 className="text-lg font-semibold text-gray-800 mb-3">Real-time Search</h3>
