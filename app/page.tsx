@@ -1596,7 +1596,7 @@ Happy exploring! 🐧`}
           <div className="text-center p-6 border border-border rounded-lg bg-muted/50">
             <h3 className="text-lg font-semibold text-foreground mb-2">Ubuntu Developer</h3>
             <p className="text-card-foreground mb-4">For detailed contact information, please check the README.md file in the project repository.</p>
-            <Button 
+            <Button
               onClick={() => window.open('https://github.com/tanayvasishtha/Ubuntu-Theme-Portfolio/blob/main/README.md', '_blank')}
               className="w-full"
             >

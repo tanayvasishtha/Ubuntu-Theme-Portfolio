@@ -207,15 +207,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Radix UI** - For accessible component primitives
 - **Lucide** - For the beautiful icon library
 
-## Contact
-
-**Ubuntu Developer**
-- Email: developer@ubuntu-portfolio.dev
-- GitHub: [@ubuntu-developer](https://github.com/ubuntu-developer)
-- LinkedIn: [/in/ubuntu-developer](https://linkedin.com/in/ubuntu-developer)
-
----
-
 <div align="center">
   <p>Made with Ubuntu</p>
   <p>
