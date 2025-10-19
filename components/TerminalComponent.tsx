@@ -21,7 +21,7 @@ const TerminalComponent: React.FC<TerminalComponentProps> = ({ onClose }) => {
     const cursorRef = useRef<HTMLDivElement>(null)
     const didInitRef = useRef(false)
 
-    const secretPassword = "tanay2025"
+    const secretPassword = "Banger"
     const git = commandHistory.length
 
     // ASCII Art Banner
