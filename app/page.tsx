@@ -3060,12 +3060,12 @@ Happy exploring! 🐧`}
       </div>
 
       {/* Ubuntu Sidebar - Authentic Ubuntu Dock */}
-      <div className="absolute left-0 top-12 bottom-12 w-20 bg-gradient-to-b from-gray-900/40 to-black/50 backdrop-blur-xl border-r border-gray-700/20 z-40 shadow-2xl">
-        <div className="flex flex-col items-center py-4 space-y-3 h-full overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent hover:scrollbar-thumb-gray-500">
+      <div className="absolute left-0 top-12 bottom-12 w-16 sm:w-20 bg-gradient-to-b from-gray-900/40 to-black/50 backdrop-blur-xl border-r border-gray-700/20 z-40 shadow-2xl">
+        <div className="flex flex-col items-center justify-start py-2 sm:py-4 space-y-1 sm:space-y-2 h-full">
           {sidebarIcons.map((icon, index) => (
             <div
               key={icon.id}
-              className="w-14 h-14 flex items-center justify-center rounded-2xl hover:bg-orange-500/20 transition-all duration-300 cursor-pointer group hover:scale-105 relative"
+              className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center rounded-xl sm:rounded-2xl hover:bg-orange-500/20 transition-all duration-300 cursor-pointer group hover:scale-105 relative flex-shrink-0"
               onClick={() => {
                 playClickSound()
                 icon.action()
@@ -3073,7 +3073,7 @@ Happy exploring! 🐧`}
               title={icon.name}
             >
               {/* Active indicator */}
-              <div className="absolute -left-1 w-1 h-10 bg-orange-500 rounded-r-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute -left-1 w-1 h-8 sm:h-10 bg-orange-500 rounded-r-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
               {/* Icon with glow effect */}
               <div className="group-hover:drop-shadow-xl transition-all duration-300 group-hover:brightness-125">
@@ -3081,7 +3081,7 @@ Happy exploring! 🐧`}
               </div>
 
               {/* Tooltip */}
-              <div className="absolute left-20 bg-gray-900/95 text-white text-sm px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap shadow-lg border border-gray-700">
+              <div className="absolute left-16 sm:left-20 bg-gray-900/95 text-white text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap shadow-lg border border-gray-700">
                 {icon.name}
               </div>
             </div>
