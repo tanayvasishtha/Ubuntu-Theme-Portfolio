@@ -21,15 +21,15 @@ An interactive Ubuntu-themed portfolio website that simulates a complete desktop
 #### Ubuntu Dock Applications
 The left sidebar features essential Ubuntu applications:
 
-- **🏠 Home** - Return to desktop overview
-- **🌐 Google Chrome** - Web browser with search functionality
-- **❓ Help** - Interactive help and support system
-- **📁 Files** - File manager for browsing project assets
-- **💻 Terminal** - Command-line interface
-- **⚙️ Settings** - System preferences and configuration
-- **🧮 Calculator** - Built-in calculator application
-- **🎵 Spotify** - Music player with playlist integration
-- **🖼️ Image Viewer** - Gallery for viewing project screenshots
+- ** Home** - Return to desktop overview
+- ** Google Chrome** - Web browser with search functionality
+- ** Help** - Interactive help and support system
+- ** Files** - File manager for browsing project assets
+- ** Terminal** - Command-line interface
+- ** Settings** - System preferences and configuration
+- ** Calculator** - Built-in calculator application
+- ** Spotify** - Music player with playlist integration
+- ** Image Viewer** - Gallery for viewing project screenshots
 
 ### Interactive Terminal
 - **Working Terminal Commands** - Fully functional terminal with real commands
@@ -279,23 +279,23 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## What Makes This Portfolio Unique
 
-### 🎯 **Immersive Experience**
+### **Immersive Experience**
 This isn't just another portfolio website - it's a complete Ubuntu desktop simulation that allows visitors to interact with your work in a familiar, engaging environment. Users can explore your projects, skills, and personality through an authentic Ubuntu interface.
 
-### 🚀 **Interactive Features**
+### **Interactive Features**
 - **Real Terminal Commands** - Visitors can actually use terminal commands to navigate and explore
 - **Draggable Interface** - Desktop icons can be moved and repositioned like a real OS
 - **Window Management** - Full window controls with minimize, maximize, and close functionality
 - **Music Integration** - Spotify player for a complete desktop experience
 - **Secret Commands** - Hidden features and easter eggs for curious visitors
 
-### 💡 **Technical Innovation**
+### **Technical Innovation**
 - **Responsive Ubuntu Design** - Maintains Ubuntu aesthetics across all screen sizes
 - **Performance Optimized** - Smooth animations and interactions without lag
 - **Accessibility First** - Full keyboard navigation and screen reader support
 - **Modern Tech Stack** - Built with the latest web technologies for optimal performance
 
-### 🎨 **Visual Excellence**
+### **Visual Excellence**
 - **Authentic Ubuntu Theme** - Perfect recreation of Ubuntu's visual design language
 - **Consistent Iconography** - Professional icon system throughout the interface
 - **Smooth Animations** - Fluid transitions that enhance the user experience
@@ -315,4 +315,4 @@ This isn't just another portfolio website - it's a complete Ubuntu desktop simul
   <p>
     <a href="#ubuntu-portfolio-desktop">Back to Top</a>
   </p>
-</div>"# Ubuntu-Theme-Portfolio" 
+</div>
