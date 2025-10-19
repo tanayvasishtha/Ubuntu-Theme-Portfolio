@@ -1336,6 +1336,7 @@ whoami         - Who are you?
 social         - Display social networks
 projects       - View coding projects
 email          - Contact me
+sponsor me     - Support me on Buy Me a Coffee
 
 ## AI & Fun Commands:
 ai             - Ask the AI assistant

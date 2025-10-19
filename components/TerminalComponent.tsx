@@ -113,6 +113,7 @@ const TerminalComponent: React.FC<TerminalComponentProps> = ({ onClose }) => {
         '<span class="command">history</span>        View command history',
         '<span class="command">help</span>           You obviously already know what this does',
         '<span class="command">email</span>          Contact me',
+        '<span class="command">sponsor me</span>     Support me on Buy Me a Coffee',
         '<span class="command">clear</span>          Clear terminal',
         '<span class="command">banner</span>         Display the header',
         '<span class="command">matrix</span>         Enter the Matrix',
@@ -246,6 +247,12 @@ const TerminalComponent: React.FC<TerminalComponentProps> = ({ onClose }) => {
             case "email":
                 addLine('Opening mailto:<a href="mailto:tanay@example.com">tanay@example.com</a>...', "color2", 80)
                 newTab('mailto:tanay@example.com')
+                break
+            case "sponsor me":
+            case "sponsor":
+                addLine("Opening Buy Me a Coffee...", "color2", 80)
+                addLine("Thank you for supporting my work! ☕", "color2", 200)
+                newTab('https://buymeacoffee.com/tanayvasishtha')
                 break
             case "clear":
                 setTimeout(() => {
