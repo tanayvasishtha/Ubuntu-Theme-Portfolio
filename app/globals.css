@@ -5,77 +5,142 @@
 
 :root {
   /* Updated color tokens to match Ubuntu theme with orange primary and terminal aesthetics */
-  --background: oklch(1 0 0); /* White background */
-  --foreground: oklch(0.2 0 0); /* Dark gray text */
-  --card: oklch(0.97 0 0); /* Light gray card background */
-  --card-foreground: oklch(0.3 0 0); /* Medium gray card text */
-  --popover: oklch(1 0 0); /* White popover */
-  --popover-foreground: oklch(0.2 0 0); /* Dark gray popover text */
-  --primary: oklch(0.6 0.2 35); /* Ubuntu Orange #E95420 */
-  --primary-foreground: oklch(1 0 0); /* White text on orange */
-  --secondary: oklch(0.97 0 0); /* Light gray secondary */
-  --secondary-foreground: oklch(0.2 0 0); /* Dark gray secondary text */
-  --muted: oklch(0.97 0 0); /* Light gray muted */
-  --muted-foreground: oklch(0.3 0 0); /* Medium gray muted text */
-  --accent: oklch(0.3 0 0); /* Medium gray accent */
-  --accent-foreground: oklch(1 0 0); /* White accent text */
-  --destructive: oklch(0.6 0.2 15); /* Red destructive */
-  --destructive-foreground: oklch(1 0 0); /* White destructive text */
-  --border: oklch(0.9 0 0); /* Light border */
-  --input: oklch(1 0 0); /* White input */
-  --ring: oklch(0.6 0.2 35); /* Ubuntu Orange ring */
-  --chart-1: oklch(0.6 0.2 35); /* Ubuntu Orange chart */
-  --chart-2: oklch(0.97 0 0); /* Light gray chart */
-  --chart-3: oklch(0.2 0 0); /* Dark gray chart */
-  --chart-4: oklch(0.3 0 0); /* Medium gray chart */
-  --chart-5: oklch(1 0 0); /* White chart */
-  --radius: 0.5rem; /* Slightly smaller radius for terminal feel */
-  --sidebar: oklch(0.97 0 0); /* Light gray sidebar */
-  --sidebar-foreground: oklch(0.2 0 0); /* Dark gray sidebar text */
-  --sidebar-primary: oklch(0.6 0.2 35); /* Ubuntu Orange sidebar primary */
-  --sidebar-primary-foreground: oklch(1 0 0); /* White sidebar primary text */
-  --sidebar-accent: oklch(0.3 0 0); /* Medium gray sidebar accent */
-  --sidebar-accent-foreground: oklch(1 0 0); /* White sidebar accent text */
-  --sidebar-border: oklch(0.9 0 0); /* Light sidebar border */
-  --sidebar-ring: oklch(0.6 0.2 35); /* Ubuntu Orange sidebar ring */
+  --background: oklch(1 0 0);
+  /* White background */
+  --foreground: oklch(0.2 0 0);
+  /* Dark gray text */
+  --card: oklch(0.97 0 0);
+  /* Light gray card background */
+  --card-foreground: oklch(0.3 0 0);
+  /* Medium gray card text */
+  --popover: oklch(1 0 0);
+  /* White popover */
+  --popover-foreground: oklch(0.2 0 0);
+  /* Dark gray popover text */
+  --primary: oklch(0.6 0.2 35);
+  /* Ubuntu Orange #E95420 */
+  --primary-foreground: oklch(1 0 0);
+  /* White text on orange */
+  --secondary: oklch(0.97 0 0);
+  /* Light gray secondary */
+  --secondary-foreground: oklch(0.2 0 0);
+  /* Dark gray secondary text */
+  --muted: oklch(0.97 0 0);
+  /* Light gray muted */
+  --muted-foreground: oklch(0.3 0 0);
+  /* Medium gray muted text */
+  --accent: oklch(0.3 0 0);
+  /* Medium gray accent */
+  --accent-foreground: oklch(1 0 0);
+  /* White accent text */
+  --destructive: oklch(0.6 0.2 15);
+  /* Red destructive */
+  --destructive-foreground: oklch(1 0 0);
+  /* White destructive text */
+  --border: oklch(0.9 0 0);
+  /* Light border */
+  --input: oklch(1 0 0);
+  /* White input */
+  --ring: oklch(0.6 0.2 35);
+  /* Ubuntu Orange ring */
+  --chart-1: oklch(0.6 0.2 35);
+  /* Ubuntu Orange chart */
+  --chart-2: oklch(0.97 0 0);
+  /* Light gray chart */
+  --chart-3: oklch(0.2 0 0);
+  /* Dark gray chart */
+  --chart-4: oklch(0.3 0 0);
+  /* Medium gray chart */
+  --chart-5: oklch(1 0 0);
+  /* White chart */
+  --radius: 0.5rem;
+  /* Slightly smaller radius for terminal feel */
+  --sidebar: oklch(0.97 0 0);
+  /* Light gray sidebar */
+  --sidebar-foreground: oklch(0.2 0 0);
+  /* Dark gray sidebar text */
+  --sidebar-primary: oklch(0.6 0.2 35);
+  /* Ubuntu Orange sidebar primary */
+  --sidebar-primary-foreground: oklch(1 0 0);
+  /* White sidebar primary text */
+  --sidebar-accent: oklch(0.3 0 0);
+  /* Medium gray sidebar accent */
+  --sidebar-accent-foreground: oklch(1 0 0);
+  /* White sidebar accent text */
+  --sidebar-border: oklch(0.9 0 0);
+  /* Light sidebar border */
+  --sidebar-ring: oklch(0.6 0.2 35);
+  /* Ubuntu Orange sidebar ring */
   --font-ubuntu: "Ubuntu", sans-serif;
   --font-mono: "Ubuntu Mono", monospace;
 }
 
 .dark {
   /* Updated dark mode colors for Ubuntu terminal aesthetic */
-  --background: oklch(0.15 0 0); /* Dark terminal background */
-  --foreground: oklch(0.95 0 0); /* Light terminal text */
-  --card: oklch(0.18 0 0); /* Slightly lighter card background */
-  --card-foreground: oklch(0.95 0 0); /* Light card text */
-  --popover: oklch(0.15 0 0); /* Dark popover */
-  --popover-foreground: oklch(0.95 0 0); /* Light popover text */
-  --primary: oklch(0.6 0.2 35); /* Ubuntu Orange remains same */
-  --primary-foreground: oklch(1 0 0); /* White text on orange */
-  --secondary: oklch(0.25 0 0); /* Dark gray secondary */
-  --secondary-foreground: oklch(0.95 0 0); /* Light secondary text */
-  --muted: oklch(0.25 0 0); /* Dark gray muted */
-  --muted-foreground: oklch(0.7 0 0); /* Medium light muted text */
-  --accent: oklch(0.25 0 0); /* Dark gray accent */
-  --accent-foreground: oklch(0.95 0 0); /* Light accent text */
-  --destructive: oklch(0.5 0.2 15); /* Darker red destructive */
-  --destructive-foreground: oklch(0.95 0 0); /* Light destructive text */
-  --border: oklch(0.25 0 0); /* Dark border */
-  --input: oklch(0.25 0 0); /* Dark input */
-  --ring: oklch(0.6 0.2 35); /* Ubuntu Orange ring */
-  --chart-1: oklch(0.6 0.2 35); /* Ubuntu Orange chart */
-  --chart-2: oklch(0.7 0.15 180); /* Blue chart */
-  --chart-3: oklch(0.8 0.15 120); /* Green chart */
-  --chart-4: oklch(0.65 0.2 300); /* Purple chart */
-  --chart-5: oklch(0.7 0.2 60); /* Yellow chart */
-  --sidebar: oklch(0.18 0 0); /* Dark sidebar */
-  --sidebar-foreground: oklch(0.95 0 0); /* Light sidebar text */
-  --sidebar-primary: oklch(0.6 0.2 35); /* Ubuntu Orange sidebar primary */
-  --sidebar-primary-foreground: oklch(1 0 0); /* White sidebar primary text */
-  --sidebar-accent: oklch(0.25 0 0); /* Dark sidebar accent */
-  --sidebar-accent-foreground: oklch(0.95 0 0); /* Light sidebar accent text */
-  --sidebar-border: oklch(0.25 0 0); /* Dark sidebar border */
-  --sidebar-ring: oklch(0.6 0.2 35); /* Ubuntu Orange sidebar ring */
+  --background: oklch(0.15 0 0);
+  /* Dark terminal background */
+  --foreground: oklch(0.95 0 0);
+  /* Light terminal text */
+  --card: oklch(0.18 0 0);
+  /* Slightly lighter card background */
+  --card-foreground: oklch(0.95 0 0);
+  /* Light card text */
+  --popover: oklch(0.15 0 0);
+  /* Dark popover */
+  --popover-foreground: oklch(0.95 0 0);
+  /* Light popover text */
+  --primary: oklch(0.6 0.2 35);
+  /* Ubuntu Orange remains same */
+  --primary-foreground: oklch(1 0 0);
+  /* White text on orange */
+  --secondary: oklch(0.25 0 0);
+  /* Dark gray secondary */
+  --secondary-foreground: oklch(0.95 0 0);
+  /* Light secondary text */
+  --muted: oklch(0.25 0 0);
+  /* Dark gray muted */
+  --muted-foreground: oklch(0.7 0 0);
+  /* Medium light muted text */
+  --accent: oklch(0.25 0 0);
+  /* Dark gray accent */
+  --accent-foreground: oklch(0.95 0 0);
+  /* Light accent text */
+  --destructive: oklch(0.5 0.2 15);
+  /* Darker red destructive */
+  --destructive-foreground: oklch(0.95 0 0);
+  /* Light destructive text */
+  --border: oklch(0.25 0 0);
+  /* Dark border */
+  --input: oklch(0.25 0 0);
+  /* Dark input */
+  --ring: oklch(0.6 0.2 35);
+  /* Ubuntu Orange ring */
+  --chart-1: oklch(0.6 0.2 35);
+  /* Ubuntu Orange chart */
+  --chart-2: oklch(0.7 0.15 180);
+  /* Blue chart */
+  --chart-3: oklch(0.8 0.15 120);
+  /* Green chart */
+  --chart-4: oklch(0.65 0.2 300);
+  /* Purple chart */
+  --chart-5: oklch(0.7 0.2 60);
+  /* Yellow chart */
+  --sidebar: oklch(0.18 0 0);
+  /* Dark sidebar */
+  --sidebar-foreground: oklch(0.95 0 0);
+  /* Light sidebar text */
+  --sidebar-primary: oklch(0.6 0.2 35);
+  /* Ubuntu Orange sidebar primary */
+  --sidebar-primary-foreground: oklch(1 0 0);
+  /* White sidebar primary text */
+  --sidebar-accent: oklch(0.25 0 0);
+  /* Dark sidebar accent */
+  --sidebar-accent-foreground: oklch(0.95 0 0);
+  /* Light sidebar accent text */
+  --sidebar-border: oklch(0.25 0 0);
+  /* Dark sidebar border */
+  --sidebar-ring: oklch(0.6 0.2 35);
+  /* Ubuntu Orange sidebar ring */
 }
 
 @theme inline {
@@ -124,6 +189,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -141,4 +207,136 @@
     content: "$ ";
     @apply text-primary font-bold;
   }
+}
+
+/* Terminal Styles inspired by fkcodes.com */
+.terminal-container {
+  background: #000;
+  color: #04ff00;
+  font-family: ui-monospace, Consolas, "Cascadia Mono", Menlo, Monaco, "SFMono-Regular", "Liberation Mono", "Courier New", monospace;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.terminal-container .index {
+  color: #04ff00;
+  font-weight: bold;
+}
+
+.terminal-container .color2 {
+  color: #04ff00;
+}
+
+.terminal-container .command {
+  color: #04ff00;
+  font-weight: bold;
+}
+
+.terminal-container .error {
+  color: #ff0000;
+}
+
+.terminal-container .inherit {
+  color: #04ff00;
+}
+
+.terminal-container .margin {
+  margin-left: 20px;
+}
+
+.terminal-container .no-animation {
+  color: #04ff00;
+}
+
+.terminal-container a {
+  color: #04ff00;
+  text-decoration: underline;
+}
+
+.terminal-container a:hover {
+  color: #ffffff;
+}
+
+.terminal-container p {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  /* preserve all spaces exactly as typed */
+  font-variant-ligatures: none;
+  /* avoid ligature width changes */
+  letter-spacing: 0;
+  tab-size: 4;
+}
+
+/* Preserve spacing for ASCII lines rendered as <pre> and tighten vertical rhythm */
+.terminal-container pre {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  line-height: 1.15;
+  font-variant-ligatures: none;
+}
+
+.terminal-container .cursor {
+  position: relative;
+  display: inline-block;
+  width: 10px;
+  height: 20px;
+  background-color: #04ff00;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.terminal-container .password {
+  background-color: #ff0000;
+}
+
+.terminal-container input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #04ff00;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  width: 100%;
+}
+
+.terminal-container input::placeholder {
+  color: #04ff00;
+  opacity: 0.7;
+}
+
+/* Fix scrollbar positioning in terminal */
+.terminal-container .overflow-y-auto {
+  scrollbar-width: thin;
+  scrollbar-color: #666 #000;
+}
+
+.terminal-container .overflow-y-auto::-webkit-scrollbar {
+  width: 8px;
+}
+
+.terminal-container .overflow-y-auto::-webkit-scrollbar-track {
+  background: #000;
+}
+
+.terminal-container .overflow-y-auto::-webkit-scrollbar-thumb {
+  background: #666;
+  border-radius: 4px;
+}
+
+.terminal-container .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: #888;
 }

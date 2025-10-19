@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect, useMemo } from "react"
 import { Button } from "@/components/ui/button"
+import TerminalComponent from "@/components/TerminalComponent"
 import {
   Terminal,
   Folder,
@@ -352,28 +353,15 @@ export default function UbuntuPortfolio() {
       },
     },
     {
-      id: "firefox",
-      name: "Firefox",
+      id: "chrome",
+      name: "Google Chrome",
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
-          <img src="/assets/program-icons/firefox.png" alt="Firefox" className="w-8 h-8 drop-shadow-lg" />
+          <img src="/assets/program-icons/Google_Chrome_icon.png" alt="Chrome" className="w-8 h-8 drop-shadow-lg" />
         </div>
       ),
       position: { x: 0, y: 0 },
-      action: () => openWindow("firefox", "Firefox Web Browser", <FirefoxWindow />),
-    },
-    {
-      id: "software-center",
-      name: "Software Center",
-      icon: (
-        <div className="w-8 h-8 flex items-center justify-center">
-          <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
-            <path fill="#E95420" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-          </svg>
-        </div>
-      ),
-      position: { x: 0, y: 0 },
-      action: () => openWindow("software-center", "Software Center", <SoftwareCenterWindow />),
+      action: () => openWindow("chrome", "Google Chrome", <ChromeWindow />),
     },
     {
       id: "help",
@@ -732,6 +720,7 @@ export default function UbuntuPortfolio() {
           "  date - Show current date and time",
           "  neofetch - Display system information",
           "  fortune - Get a random quote",
+          "  ascii - Display ASCII art of name",
           "",
           "Application Commands:",
           "  open [app] - Open application (about, skills, contact, gallery, settings, projects)",
@@ -839,6 +828,28 @@ export default function UbuntuPortfolio() {
         ]
         const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)]
         setTerminalHistory((prev) => [...prev, `ubuntu-developer@portfolio:~$ ${command}`, randomFortune, ""])
+      } else if (command === "ascii") {
+        setTerminalHistory((prev) => [
+          ...prev,
+          `ubuntu-developer@portfolio:~$ ${command}`,
+          "",
+          "████████╗ █████╗ ███╗   ██╗ █████╗ ██╗   ██╗",
+          "╚══██╔══╝██╔══██╗████╗  ██║██╔══██╗╚██╗ ██╔╝",
+          "   ██║   ███████║██╔██╗ ██║███████║ ╚████╔╝ ",
+          "   ██║   ██╔══██║██║╚██╗██║██╔══██║  ╚██╔╝  ",
+          "   ██║   ██║  ██║██║ ╚████║██║  ██║   ██║   ",
+          "   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝   ╚═╝   ",
+          "",
+          "██╗   ██╗ █████╗ ███████╗██╗██╗  ████████╗██╗  ██╗ █████╗ ",
+          "██║   ██║██╔══██╗██╔════╝██║██║  ╚══██╔══╝██║  ██║██╔══██╗",
+          "██║   ██║███████║███████╗██║██║     ██║   ███████║███████║",
+          "╚██╗ ██╔╝██╔══██║╚════██║██║██║     ██║   ██╔══██║██╔══██║",
+          " ╚████╔╝ ██║  ██║███████║██║██║     ██║   ██║  ██║██║  ██║",
+          "  ╚═══╝  ╚═╝  ╚═╝╚══════╝╚═╝╚═╝     ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝",
+          "",
+          "                    @2025",
+          "",
+        ])
       } else if (command === "tree") {
         setTerminalHistory((prev) => [
           ...prev,
@@ -1222,55 +1233,7 @@ export default function UbuntuPortfolio() {
   }
 
   const TerminalWindow = () => (
-    <div className="h-full bg-[#000000] text-chart-3 font-mono text-sm p-4 overflow-hidden flex flex-col">
-      <div ref={terminalRef} className="flex-1 overflow-y-auto mb-4 space-y-1">
-        {terminalHistory.map((line, index) => (
-          <div
-            key={index}
-            className={
-              line.startsWith("ubuntu-developer@portfolio")
-                ? "text-chart-3"
-                : line.includes("command not found")
-                  ? "text-destructive"
-                  : line.includes("Opening") || line.includes("Launching")
-                    ? "text-chart-5"
-                    : "text-muted-foreground"
-            }
-          >
-            {line}
-          </div>
-        ))}
-      </div>
-      <div className="flex items-center" onClick={() => terminalInputRef.current?.focus()}>
-        <span className="text-chart-3 mr-2">ubuntu-developer@portfolio:~$</span>
-        <input
-          ref={terminalInputRef}
-          type="text"
-          value={currentCommand}
-          onChange={(e) => {
-            console.log('Input changed:', e.target.value)
-            setCurrentCommand(e.target.value)
-          }}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              handleTerminalCommand(e)
-            }
-          }}
-          className="flex-1 bg-transparent text-white outline-none font-mono caret-white border-none"
-          placeholder="Type a command..."
-          autoFocus
-          tabIndex={0}
-          onBlur={(e) => {
-            setTimeout(() => {
-              if (windows.find((w) => w.id === "terminal")) {
-                e.target.focus()
-              }
-            }, 10)
-          }}
-          onClick={() => terminalInputRef.current?.focus()}
-        />
-      </div>
-    </div>
+    <TerminalComponent onClose={() => closeWindow("terminal")} />
   )
 
   const ProjectsWindow = () => (
@@ -1360,39 +1323,45 @@ export default function UbuntuPortfolio() {
         {`# Ubuntu Portfolio Commands Guide
 # Welcome to my interactive portfolio!
 
-## Quick Start Commands:
-Copy and paste these commands into the terminal:
-
-./ecommerce     - View my e-commerce platform project
-./taskmanager   - Explore the task management app
-./apigateway    - Check out the API gateway system
-./portfolio     - About this portfolio website
-
-## Window Commands:
-open projects   - Open projects folder (GUI way)
-open about      - Learn more about me
-open skills     - View my technical skills
-open contact    - Get in touch with me
-open gallery    - View project screenshots
-open settings   - System preferences
-
-## Navigation Commands:
+## Basic Commands:
 help           - Show this help guide
 clear          - Clear terminal history
-ls             - List available projects
-pwd            - Show current directory
-whoami         - Display user information
+banner         - Display the header
+history        - View command history
 
-## Fun Commands:
-neofetch       - Display system information
-fortune        - Get a random quote
-date           - Show current date and time
+## About Commands:
+whois          - Who is Tanay?
+whoami         - Who are you?
+social         - Display social networks
+projects       - View coding projects
+email          - Contact me
+
+## AI & Fun Commands:
+ai             - Ask the AI assistant
+matrix         - Enter the Matrix
+hack           - Hacker mode activated
+love           - Show some love
+sudo           - Only use if you're admin
+
+## Secret Commands:
+secret         - Find the password (hint: try 'tanay2025')
+
+## Social Links:
+github         - Open GitHub profile
+linkedin       - Open LinkedIn profile
+twitter        - Open Twitter profile
+
+## Project Commands:
+darkmodebang   - Open Dark Mode Bang extension
+volumebang     - Open Volume Bang extension
+speedbang      - Open Speed Bang extension
+weloveqr       - Open WeLoveQR web app
 
 ## Tips:
-- Double-click desktop icons for GUI access
-- Use Tab for command completion
 - All commands are case-sensitive
-- Type 'exit' to close terminal
+- Use arrow keys to navigate command history
+- Type 'help' anytime for this guide
+- Some commands have hidden features!
 
 Happy exploring! 🐧`}
       </div>
@@ -1787,29 +1756,6 @@ Happy exploring! 🐧`}
     )
   }
 
-  const SoftwareCenterWindow = () => (
-    <div className="h-full bg-card p-6 overflow-y-auto">
-      <h2 className="text-2xl font-bold text-foreground mb-6">Software Center</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {[
-          { name: "Terminal", description: "Command line interface", icon: <Terminal className="w-8 h-8" /> },
-          { name: "File Manager", description: "Browse and manage files", icon: <Folder className="w-8 h-8" /> },
-          { name: "Text Editor", description: "Edit text files", icon: <FileText className="w-8 h-8" /> },
-          { name: "Settings", description: "System preferences", icon: <Settings className="w-8 h-8" /> },
-        ].map((app, index) => (
-          <div key={index} className="border border-border rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer">
-            <div className="flex items-center space-x-3">
-              {app.icon}
-              <div>
-                <h3 className="font-semibold text-foreground">{app.name}</h3>
-                <p className="text-sm text-card-foreground">{app.description}</p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
 
   const HelpWindow = () => (
     <div className="h-full bg-card p-6 overflow-y-auto">
@@ -2418,14 +2364,13 @@ Happy exploring! 🐧`}
     )
   }
 
-  const FirefoxWindow = () => {
+  const ChromeWindow = () => {
     const [currentUrl, setCurrentUrl] = useState("https://www.google.com")
     const [urlInput, setUrlInput] = useState("https://www.google.com")
     const [isLoading, setIsLoading] = useState(false)
     const [activeTab, setActiveTab] = useState(1)
     const [tabs, setTabs] = useState([
-      { id: 1, title: "Google", url: "https://www.google.com", active: true },
-      { id: 2, title: "New Tab", url: "about:blank", active: false }
+      { id: 1, title: "Google", url: "https://www.google.com", active: true }
     ])
     const [searchQuery, setSearchQuery] = useState("")
     const [realTimeSearch, setRealTimeSearch] = useState("")
@@ -2495,6 +2440,11 @@ Happy exploring! 🐧`}
         const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`
         setCurrentUrl(searchUrl)
         setUrlInput(searchUrl)
+        // Update active tab title
+        setTabs(tabs.map(tab => ({
+          ...tab,
+          title: tab.active ? `Search: ${searchQuery}` : tab.title
+        })))
         setTimeout(() => setIsLoading(false), 1000)
       }
     }
@@ -2515,6 +2465,17 @@ Happy exploring! 🐧`}
 
       setCurrentUrl(targetUrl)
       setUrlInput(targetUrl)
+
+      // Update active tab title
+      const tabTitle = targetUrl.includes('google.com/search')
+        ? `Search: ${urlInput}`
+        : targetUrl.replace(/^https?:\/\//, '').split('/')[0]
+
+      setTabs(tabs.map(tab => ({
+        ...tab,
+        title: tab.active ? tabTitle : tab.title
+      })))
+
       setTimeout(() => setIsLoading(false), 1000)
     }
 
@@ -2528,10 +2489,12 @@ Happy exploring! 🐧`}
     }
 
     const addNewTab = () => {
-      const newTab = { id: Date.now(), title: "New Tab", url: "about:blank", active: true }
+      const newTabId = Date.now()
+      const newTab = { id: newTabId, title: "New Tab", url: "https://www.google.com", active: true }
       setTabs([...tabs.map(tab => ({ ...tab, active: false })), newTab])
-      setCurrentUrl("about:blank")
-      setUrlInput("about:blank")
+      setCurrentUrl("https://www.google.com")
+      setUrlInput("https://www.google.com")
+      setActiveTab(newTabId)
     }
 
     const closeTab = (tabId: number) => {
@@ -2546,41 +2509,49 @@ Happy exploring! 🐧`}
 
     return (
       <div className="w-full h-full bg-white flex flex-col">
-        {/* Firefox Toolbar */}
-        <div className="bg-gray-50 border-b border-gray-200 p-2">
+        {/* Chrome Toolbar */}
+        <div className="bg-gray-100 border-b border-gray-300 px-3 py-2">
           <div className="flex items-center space-x-2">
             {/* Navigation buttons */}
             <div className="flex space-x-1">
               <button
                 onClick={() => navigateTo("https://www.google.com", "Google")}
-                className="p-1 hover:bg-gray-200 rounded text-gray-600 hover:text-gray-800"
+                className="p-2 hover:bg-gray-200 rounded-full text-gray-600 hover:text-gray-800 transition-colors"
                 title="Back"
               >
-                ←
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
+                </svg>
               </button>
               <button
                 onClick={() => navigateTo("https://www.google.com", "Google")}
-                className="p-1 hover:bg-gray-200 rounded text-gray-600 hover:text-gray-800"
+                className="p-2 hover:bg-gray-200 rounded-full text-gray-600 hover:text-gray-800 transition-colors"
                 title="Forward"
               >
-                →
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
               </button>
               <button
                 onClick={() => navigateTo(currentUrl, "Refresh")}
-                className="p-1 hover:bg-gray-200 rounded text-gray-600 hover:text-gray-800"
+                className="p-2 hover:bg-gray-200 rounded-full text-gray-600 hover:text-gray-800 transition-colors"
                 title="Refresh"
               >
-                ↻
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666.666 0 00-1.197.41 5.002 5.002 0 00-8.803 1.83A1 1 0 01 4 8.5V3a1 1 0 01-1-1zm0 8a1 1 0 011-1h2.101a7.002 7.002 0 0011.601 2.566 1 1 0 11-1.885.666.666 0 00-1.197.41 5.002 5.002 0 00-8.803 1.83A1 1 0 01 4 10.5V9a1 1 0 01-1-1z" clipRule="evenodd" />
+                </svg>
               </button>
             </div>
 
             {/* URL Bar */}
-            <form onSubmit={handleUrlSubmit} className="flex-1 flex">
-              <div className="flex-1 flex items-center bg-white border border-gray-300 rounded-md px-3 py-1">
-                <div className="w-4 h-4 mr-2">
+            <form onSubmit={handleUrlSubmit} className="flex-1 flex mx-3">
+              <div className="flex-1 flex items-center bg-white border border-gray-300 rounded-full px-4 py-2 hover:shadow-md transition-all focus-within:shadow-lg focus-within:border-blue-500">
+                <div className="w-4 h-4 mr-3 flex-shrink-0">
                   {currentUrl.includes("https") ? (
                     <div className="w-4 h-4 bg-green-500 rounded-sm flex items-center justify-center">
-                      <span className="text-white text-xs font-bold">🔒</span>
+                      <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+                      </svg>
                     </div>
                   ) : (
                     <div className="w-4 h-4 bg-gray-400 rounded-sm"></div>
@@ -2590,33 +2561,45 @@ Happy exploring! 🐧`}
                   type="text"
                   value={urlInput}
                   onChange={(e) => setUrlInput(e.target.value)}
-                  className="flex-1 text-sm outline-none text-gray-800"
-                  placeholder="Search or enter address"
+                  className="flex-1 text-sm outline-none text-gray-800 bg-transparent placeholder-gray-500"
+                  placeholder="Search Google or type a URL"
                 />
+                <div className="ml-3 text-gray-400">
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </div>
               </div>
             </form>
 
-            {/* Firefox Menu */}
+            {/* Chrome Menu */}
             <div className="flex space-x-1">
               <button
                 onClick={() => {
                   const newBookmark = { title: urlInput, url: currentUrl, favicon: "⭐" }
                   setBookmarks(prev => [...prev, newBookmark])
                 }}
-                className="p-1 hover:bg-gray-200 rounded text-gray-600 hover:text-gray-800"
+                className="p-2 hover:bg-gray-200 rounded-full text-gray-600 hover:text-gray-800 transition-colors"
                 title="Bookmark this page"
               >
-                ⭐
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
               </button>
               <button
                 onClick={() => setShowBookmarks(!showBookmarks)}
-                className="p-1 hover:bg-gray-200 rounded text-gray-600 hover:text-gray-800"
+                className="p-2 hover:bg-gray-200 rounded-full text-gray-600 hover:text-gray-800 transition-colors"
                 title="Bookmarks"
               >
-                📚
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+                  <path fillRule="evenodd" d="M4 5a2 2 0 012-2v1a1 1 0 001 1h6a1 1 0 001-1V3a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3z" clipRule="evenodd" />
+                </svg>
               </button>
-              <button className="p-1 hover:bg-gray-200 rounded text-gray-600 hover:text-gray-800">
-                ⋮
+              <button className="p-2 hover:bg-gray-200 rounded-full text-gray-600 hover:text-gray-800 transition-colors">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+                </svg>
               </button>
             </div>
           </div>
@@ -2630,7 +2613,7 @@ Happy exploring! 🐧`}
                 <button
                   key={index}
                   onClick={() => navigateTo(bookmark.url, bookmark.title)}
-                  className="flex items-center space-x-1 px-2 py-1 hover:bg-gray-200 rounded text-sm"
+                  className="flex items-center space-x-1 px-2 py-1 hover:bg-gray-200 rounded text-sm text-gray-700 hover:text-gray-900 transition-colors"
                 >
                   <span>{bookmark.favicon}</span>
                   <span>{bookmark.title}</span>
@@ -2641,25 +2624,28 @@ Happy exploring! 🐧`}
         )}
 
         {/* Tab Bar */}
-        <div className="bg-gray-100 border-b border-gray-200 flex items-center px-2">
+        <div className="bg-gray-200 border-b border-gray-300 flex items-center px-1">
           {tabs.map((tab) => (
             <div
               key={tab.id}
-              className={`flex items-center px-3 py-2 mr-1 rounded-t-md cursor-pointer ${tab.active ? 'bg-white border-t border-l border-r border-gray-300' : 'hover:bg-gray-200'
+              className={`flex items-center px-4 py-2 mr-0.5 cursor-pointer transition-all duration-200 relative ${tab.active
+                ? 'bg-white border-t-2 border-blue-500 text-gray-900 shadow-sm'
+                : 'hover:bg-gray-100 text-gray-600 hover:text-gray-800'
                 }`}
               onClick={() => {
                 setCurrentUrl(tab.url)
                 setUrlInput(tab.url)
                 setTabs(tabs.map(t => ({ ...t, active: t.id === tab.id })))
+                setActiveTab(tab.id)
               }}
             >
-              <span className="text-xs text-gray-700 mr-2 truncate max-w-20">{tab.title}</span>
+              <span className="text-sm mr-2 truncate max-w-32 font-medium">{tab.title}</span>
               <button
                 onClick={(e) => {
                   e.stopPropagation()
                   closeTab(tab.id)
                 }}
-                className="text-gray-400 hover:text-gray-600 text-xs"
+                className="text-gray-400 hover:text-gray-600 text-sm ml-1 p-1 rounded-full hover:bg-gray-200 transition-colors"
               >
                 ×
               </button>
@@ -2667,224 +2653,133 @@ Happy exploring! 🐧`}
           ))}
           <button
             onClick={addNewTab}
-            className="p-1 hover:bg-gray-200 rounded text-gray-600 hover:text-gray-800 ml-1"
+            className="p-2 hover:bg-gray-100 rounded-full text-gray-600 hover:text-gray-800 ml-1 transition-colors"
             title="New Tab"
           >
-            +
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
+            </svg>
           </button>
         </div>
 
         {/* Browser Content */}
-        <div className="flex-1 bg-white overflow-y-auto">
+        <div className="flex-1 bg-white overflow-hidden">
           {isLoading ? (
-            <div className="flex items-center justify-center h-full">
+            <div className="flex items-center justify-center h-full bg-white">
               <div className="text-center">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500 mx-auto mb-4"></div>
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto mb-4"></div>
                 <p className="text-gray-600">Loading...</p>
               </div>
             </div>
           ) : (
-            <div className="h-full p-4 overflow-y-auto">
+            <div className="h-full w-full">
               {currentUrl.includes("google.com") ? (
-                <div className="text-center">
-                  <img src="/assets/program-icons/firefox.png" alt="Firefox" className="w-16 h-16 mx-auto mb-4" />
-                  <h1 className="text-2xl font-bold text-gray-800 mb-4">Firefox Web Browser</h1>
-                  <div className="max-w-md mx-auto">
-                    <div className="mb-4">
-                      <form onSubmit={handleSearchSubmit}>
-                        <input
-                          type="text"
-                          value={searchQuery}
-                          onChange={(e) => setSearchQuery(e.target.value)}
-                          placeholder="Search Google or type a URL"
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 text-gray-800"
-                        />
-                      </form>
-                    </div>
-
-                    {/* Real-time Search */}
-                    <div className="mb-6">
-                      <h3 className="text-lg font-semibold text-gray-800 mb-3">Real-time Search</h3>
-                      <input
-                        type="text"
-                        value={realTimeSearch}
-                        onChange={(e) => setRealTimeSearch(e.target.value)}
-                        placeholder="Type to search in real-time..."
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800"
-                      />
-                      {isSearching && (
-                        <div className="mt-2 text-sm text-gray-600">Searching...</div>
-                      )}
-                    </div>
-
-                    {/* Real-time Search Results */}
-                    {searchResults.length > 0 && (
-                      <div className="text-left mb-6">
-                        <h4 className="text-md font-semibold text-gray-800 mb-3">Search Results</h4>
-                        <div className="space-y-3">
-                          {searchResults.map((result, index) => (
-                            <div
-                              key={index}
-                              className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors"
-                              onClick={() => navigateTo(result.url, result.title)}
-                            >
-                              <div className="flex items-start space-x-3">
-                                <span className="text-lg">{result.favicon}</span>
-                                <div className="flex-1">
-                                  <h5 className="font-medium text-blue-600 hover:text-blue-800 text-sm">
-                                    {result.title}
-                                  </h5>
-                                  <p className="text-xs text-gray-600 mt-1">{result.url}</p>
-                                  <p className="text-sm text-gray-700 mt-1">{result.description}</p>
-                                </div>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    <div className="grid grid-cols-2 gap-4">
-                      <button
-                        onClick={() => navigateTo("https://github.com", "GitHub")}
-                        className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
-                      >
-                        <div className="text-lg mb-2">🐙</div>
-                        <div className="text-sm font-medium text-gray-800">GitHub</div>
-                      </button>
-                      <button
-                        onClick={() => navigateTo("https://stackoverflow.com", "Stack Overflow")}
-                        className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
-                      >
-                        <div className="text-lg mb-2">📚</div>
-                        <div className="text-sm font-medium text-gray-800">Stack Overflow</div>
-                      </button>
-                      <button
-                        onClick={() => navigateTo("https://developer.mozilla.org", "MDN Web Docs")}
-                        className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
-                      >
-                        <div className="text-lg mb-2">🌐</div>
-                        <div className="text-sm font-medium text-gray-800">MDN Web Docs</div>
-                      </button>
-                      <button
-                        onClick={() => navigateTo("https://ubuntu.com", "Ubuntu")}
-                        className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
-                      >
-                        <div className="text-lg mb-2">🐧</div>
-                        <div className="text-sm font-medium text-gray-800">Ubuntu</div>
-                      </button>
-                    </div>
-                  </div>
+                <div className="h-full w-full">
+                  <iframe
+                    src="https://www.google.com/webhp?igu=1&gws_rd=ssl"
+                    width="100%"
+                    height="100%"
+                    frameBorder="0"
+                    className="border-0"
+                    title="Google Search"
+                  >
+                    Your browser does not support <code>iframe</code>s. Please consider using a <a href="http://browsehappy.com/">modern</a> browser.
+                  </iframe>
                 </div>
               ) : currentUrl.includes("google.com/search") ? (
-                <div className="text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 bg-blue-500 rounded-lg flex items-center justify-center">
-                    <span className="text-white text-2xl">🔍</span>
-                  </div>
-                  <h1 className="text-2xl font-bold mb-4">Google Search Results</h1>
-                  <p className="text-gray-600 mb-4">Search results for: "{urlInput.split('q=')[1]?.replace(/\+/g, ' ') || 'your query'}"</p>
-                  <div className="bg-gray-50 p-4 rounded-lg text-left">
-                    <h3 className="font-semibold mb-2">Search Results</h3>
-                    <div className="space-y-3">
-                      <div className="border-l-4 border-blue-500 pl-3">
-                        <h4 className="font-medium text-blue-600">Example Result 1</h4>
-                        <p className="text-sm text-gray-600">This is a sample search result that would appear in a real Google search...</p>
-                        <p className="text-xs text-green-600">https://example.com</p>
-                      </div>
-                      <div className="border-l-4 border-blue-500 pl-3">
-                        <h4 className="font-medium text-blue-600">Example Result 2</h4>
-                        <p className="text-sm text-gray-600">Another sample search result with relevant information...</p>
-                        <p className="text-xs text-green-600">https://another-example.com</p>
-                      </div>
-                      <div className="border-l-4 border-blue-500 pl-3">
-                        <h4 className="font-medium text-blue-600">Example Result 3</h4>
-                        <p className="text-sm text-gray-600">More search results would appear here in a real browser...</p>
-                        <p className="text-xs text-green-600">https://more-examples.com</p>
-                      </div>
-                    </div>
-                  </div>
+                <div className="h-full w-full">
+                  <iframe
+                    src={currentUrl}
+                    width="100%"
+                    height="100%"
+                    frameBorder="0"
+                    className="border-0"
+                    title="Google Search Results"
+                  >
+                    Your browser does not support <code>iframe</code>s. Please consider using a <a href="http://browsehappy.com/">modern</a> browser.
+                  </iframe>
                 </div>
               ) : currentUrl.includes("github.com") ? (
-                <div className="text-center">
+                <div className="text-center bg-white h-full p-8">
                   <div className="w-16 h-16 mx-auto mb-4 bg-gray-800 rounded-lg flex items-center justify-center">
                     <span className="text-white text-2xl">🐙</span>
                   </div>
-                  <h1 className="text-2xl font-bold mb-4">GitHub</h1>
+                  <h1 className="text-2xl font-bold mb-4 text-gray-900">GitHub</h1>
                   <p className="text-gray-600 mb-4">Welcome to GitHub! This is a simulated browser experience.</p>
                   <div className="bg-gray-50 p-4 rounded-lg">
-                    <h3 className="font-semibold mb-2">Popular Repositories</h3>
+                    <h3 className="font-semibold mb-2 text-gray-900">Popular Repositories</h3>
                     <div className="space-y-2 text-left">
                       <div className="flex items-center space-x-2">
                         <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                        <span className="text-sm">microsoft/vscode</span>
+                        <span className="text-sm text-gray-700">microsoft/vscode</span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                        <span className="text-sm">facebook/react</span>
+                        <span className="text-sm text-gray-700">facebook/react</span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                        <span className="text-sm">vercel/next.js</span>
+                        <span className="text-sm text-gray-700">vercel/next.js</span>
                       </div>
                     </div>
                   </div>
                 </div>
               ) : currentUrl.includes("stackoverflow.com") ? (
-                <div className="text-center">
+                <div className="text-center bg-white h-full p-8">
                   <div className="w-16 h-16 mx-auto mb-4 bg-orange-500 rounded-lg flex items-center justify-center">
                     <span className="text-white text-2xl">📚</span>
                   </div>
-                  <h1 className="text-2xl font-bold mb-4">Stack Overflow</h1>
+                  <h1 className="text-2xl font-bold mb-4 text-gray-900">Stack Overflow</h1>
                   <p className="text-gray-600 mb-4">The world's largest developer community.</p>
                   <div className="bg-gray-50 p-4 rounded-lg">
-                    <h3 className="font-semibold mb-2">Popular Questions</h3>
+                    <h3 className="font-semibold mb-2 text-gray-900">Popular Questions</h3>
                     <div className="space-y-2 text-left">
-                      <div className="text-sm">How to center a div in CSS?</div>
-                      <div className="text-sm">What is the difference between let and var in JavaScript?</div>
-                      <div className="text-sm">How to install npm packages?</div>
+                      <div className="text-sm text-gray-700">How to center a div in CSS?</div>
+                      <div className="text-sm text-gray-700">What is the difference between let and var in JavaScript?</div>
+                      <div className="text-sm text-gray-700">How to install npm packages?</div>
                     </div>
                   </div>
                 </div>
               ) : currentUrl.includes("developer.mozilla.org") ? (
-                <div className="text-center">
+                <div className="text-center bg-white h-full p-8">
                   <div className="w-16 h-16 mx-auto mb-4 bg-blue-500 rounded-lg flex items-center justify-center">
                     <span className="text-white text-2xl">🌐</span>
                   </div>
-                  <h1 className="text-2xl font-bold mb-4">MDN Web Docs</h1>
+                  <h1 className="text-2xl font-bold mb-4 text-gray-900">MDN Web Docs</h1>
                   <p className="text-gray-600 mb-4">Resources for developers, by developers.</p>
                   <div className="bg-gray-50 p-4 rounded-lg">
-                    <h3 className="font-semibold mb-2">Web Technologies</h3>
+                    <h3 className="font-semibold mb-2 text-gray-900">Web Technologies</h3>
                     <div className="grid grid-cols-2 gap-2 text-sm">
-                      <span className="bg-blue-100 px-2 py-1 rounded">HTML</span>
-                      <span className="bg-blue-100 px-2 py-1 rounded">CSS</span>
-                      <span className="bg-blue-100 px-2 py-1 rounded">JavaScript</span>
-                      <span className="bg-blue-100 px-2 py-1 rounded">React</span>
+                      <span className="bg-blue-100 px-2 py-1 rounded text-blue-800">HTML</span>
+                      <span className="bg-blue-100 px-2 py-1 rounded text-blue-800">CSS</span>
+                      <span className="bg-blue-100 px-2 py-1 rounded text-blue-800">JavaScript</span>
+                      <span className="bg-blue-100 px-2 py-1 rounded text-blue-800">React</span>
                     </div>
                   </div>
                 </div>
               ) : currentUrl.includes("ubuntu.com") ? (
-                <div className="text-center">
+                <div className="text-center bg-white h-full p-8">
                   <div className="w-16 h-16 mx-auto mb-4 bg-orange-500 rounded-lg flex items-center justify-center">
                     <span className="text-white text-2xl">🐧</span>
                   </div>
-                  <h1 className="text-2xl font-bold mb-4">Ubuntu</h1>
+                  <h1 className="text-2xl font-bold mb-4 text-gray-900">Ubuntu</h1>
                   <p className="text-gray-600 mb-4">The world's most popular open source operating system.</p>
                   <div className="bg-gray-50 p-4 rounded-lg">
-                    <h3 className="font-semibold mb-2">Ubuntu Features</h3>
+                    <h3 className="font-semibold mb-2 text-gray-900">Ubuntu Features</h3>
                     <div className="space-y-2 text-left">
-                      <div className="text-sm">• Free and open source</div>
-                      <div className="text-sm">• Secure and reliable</div>
-                      <div className="text-sm">• Easy to use</div>
-                      <div className="text-sm">• Great for developers</div>
+                      <div className="text-sm text-gray-700">• Free and open source</div>
+                      <div className="text-sm text-gray-700">• Secure and reliable</div>
+                      <div className="text-sm text-gray-700">• Easy to use</div>
+                      <div className="text-sm text-gray-700">• Great for developers</div>
                     </div>
                   </div>
                 </div>
               ) : (
-                <div className="text-center">
+                <div className="text-center bg-white h-full p-8">
                   <div className="w-16 h-16 mx-auto mb-4 bg-gray-400 rounded-lg flex items-center justify-center">
                     <span className="text-white text-2xl">🌐</span>
                   </div>
-                  <h1 className="text-2xl font-bold mb-4">New Tab</h1>
+                  <h1 className="text-2xl font-bold mb-4 text-gray-900">New Tab</h1>
                   <p className="text-gray-600">Start browsing by entering a URL or searching.</p>
                 </div>
               )}
