@@ -3158,12 +3158,7 @@ Happy exploring! 🐧`}
                   className="w-4 h-4 bg-green-500 rounded-full hover:bg-green-600 transition-colors flex items-center justify-center"
                   onClick={(e) => {
                     e.stopPropagation()
-                    // Toggle maximize/restore functionality
-                    if (window.isMaximized) {
-                      restoreWindow(window.id)
-                    } else {
-                      maximizeWindow(window.id)
-                    }
+                    maximizeWindow(window.id)
                   }}
                   title={window.isMaximized ? "Restore" : "Maximize"}
                   aria-label={window.isMaximized ? "Restore window" : "Maximize window"}
