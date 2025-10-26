@@ -115,14 +115,14 @@ export default function UbuntuPortfolio() {
         <div className="w-10 h-10 flex items-center justify-center">
           <img
             src="/assets/program-icons/terminal-app.png"
-            alt="Terminal"
+            alt={en.icons.terminal}
             className="w-8 h-8 drop-shadow-lg"
           />
         </div>
       ),
       position: { x: 100, y: 100 },
       action: () =>
-        openWindow("terminal", "Terminal", <TerminalWindowWrapper />),
+        openWindow("terminal", en.icons.terminal, <TerminalWindowWrapper />),
     },
     {
       id: "projects",
@@ -355,7 +355,7 @@ export default function UbuntuPortfolio() {
         <div className="w-8 h-8 flex items-center justify-center">
           <img
             src="/assets/program-icons/calculator-app.png"
-            alt="Calculator"
+            alt={en.icons.calculator}
             className="w-8 h-8 drop-shadow-lg"
           />
         </div>
