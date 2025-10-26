@@ -1,3 +1,5 @@
+import { en } from "@/data/en";
+
 interface SettingsWindowProps {
   currentWallpaper: string;
   onWallpaperChange: (wallpaperPath: string) => void;
@@ -7,30 +9,17 @@ const SettingsWindow = ({
   currentWallpaper,
   onWallpaperChange,
 }: SettingsWindowProps) => {
-  const wallpapers = [
-    {
-      name: "Ubuntu Wallpaper",
-      path: "/assets/wallpapers/ubuntu-wallpaper.jpg",
-    },
-    { name: "Clouds", path: "/assets/wallpapers/clouds.jpg" },
-    { name: "Valley", path: "/assets/wallpapers/valley.jpg" },
-    { name: "South France", path: "/assets/wallpapers/south-france.jpg" },
-    { name: "Mountain", path: "/assets/wallpapers/mountain.png" },
-    { name: "Numbat Dark", path: "/assets/wallpapers/numbat-dark.png" },
-    { name: "Numbat Light", path: "/assets/wallpapers/numbat-light.png" },
-    { name: "Crown Dark", path: "/assets/wallpapers/crown-dark.png" },
-    { name: "Crown Light", path: "/assets/wallpapers/crown-light.png" },
-  ];
+  const wallpapers = en.settings.wallpapers;
 
   return (
     <div className="h-full bg-card p-6 overflow-y-auto">
       <h2 className="text-2xl font-bold text-foreground mb-6">
-        System Settings
+        {en.settings.title}
       </h2>
       <div className="space-y-6">
         <div>
           <h3 className="text-lg font-semibold text-foreground mb-3">
-            Wallpaper
+            {en.settings.sections.wallpaper.title}
           </h3>
           <div className="grid grid-cols-3 gap-3">
             {wallpapers.map((wallpaper) => (
@@ -57,16 +46,28 @@ const SettingsWindow = ({
           </div>
         </div>
         <div className="border border-border rounded-lg p-4">
-          <h3 className="font-semibold text-foreground mb-2">Display</h3>
-          <p className="text-card-foreground text-sm">Resolution: 1920x1080</p>
-          <p className="text-card-foreground text-sm">Theme: Ubuntu Default</p>
+          <h3 className="font-semibold text-foreground mb-2">
+            {en.settings.sections.display.title}
+          </h3>
+          <p className="text-card-foreground text-sm">
+            {en.settings.sections.display.resolution}
+          </p>
+          <p className="text-card-foreground text-sm">
+            {en.settings.sections.display.theme}
+          </p>
         </div>
         <div className="border border-border rounded-lg p-4">
-          <h3 className="font-semibold text-foreground mb-2">System Info</h3>
-          <p className="text-card-foreground text-sm">OS: Ubuntu 22.04 LTS</p>
-          <p className="text-card-foreground text-sm">Kernel: 5.15.0-generic</p>
+          <h3 className="font-semibold text-foreground mb-2">
+            {en.settings.sections.systemInfo.title}
+          </h3>
           <p className="text-card-foreground text-sm">
-            Desktop: Portfolio Desktop
+            {en.settings.sections.systemInfo.os}
+          </p>
+          <p className="text-card-foreground text-sm">
+            {en.settings.sections.systemInfo.kernel}
+          </p>
+          <p className="text-card-foreground text-sm">
+            {en.settings.sections.systemInfo.desktop}
           </p>
         </div>
       </div>

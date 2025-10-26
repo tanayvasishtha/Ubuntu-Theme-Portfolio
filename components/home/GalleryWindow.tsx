@@ -1,41 +1,12 @@
+import { en } from "@/data/en";
+
 const GalleryWindow = () => {
-  const projects = [
-    {
-      name: "Dark Mode Bang Screenshot",
-      image: "/assets/project-gallery/DarkModeBangSc.png",
-      description: "Universal dark theme browser extension interface",
-    },
-    {
-      name: "Dark Mode Bang Logo",
-      image: "/assets/project-gallery/DarkModeBangLogo.png",
-      description: "Dark Mode Bang branding and logo design",
-    },
-    {
-      name: "Speed Bang Screenshot",
-      image: "/assets/project-gallery/SpeedBangSc.png",
-      description: "Multiplatform video speed controller interface",
-    },
-    {
-      name: "Speed Bang Logo",
-      image: "/assets/project-gallery/SpeedBangLogo.png",
-      description: "Speed Bang branding and logo design",
-    },
-    {
-      name: "Volume Bang Screenshot",
-      image: "/assets/project-gallery/VolumeBangSc.png",
-      description: "Premium audio booster extension interface",
-    },
-    {
-      name: "Volume Bang Logo",
-      image: "/assets/project-gallery/VolumeBanglogo.png",
-      description: "Volume Bang branding and logo design",
-    },
-  ];
+  const projects = en.gallery.items;
 
   return (
     <div className="h-full bg-card p-6 overflow-y-auto">
       <h2 className="text-2xl font-bold text-foreground mb-6">
-        Project Gallery
+        {en.gallery.title}
       </h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {projects.map((project, index) => (

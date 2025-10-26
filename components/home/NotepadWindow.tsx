@@ -1,53 +1,34 @@
-const NotepadWindow = () => (
-  <div className="h-full bg-card p-4 font-mono text-sm">
-    <div className="h-full overflow-y-auto whitespace-pre-wrap text-foreground">
-      {`# Ubuntu Portfolio Commands Guide
-# Welcome to my interactive portfolio!
+import { en } from "@/data/en";
 
-## Basic Commands:
-help           - Show this help guide
-clear          - Clear terminal history
-banner         - Display the header
-history        - View command history
+const NotepadWindow = () => {
+  // Build the command guide content from en data
+  const buildCommandGuide = () => {
+    let content = `# ${en.commands.title}\n# ${en.commands.subtitle}\n\n`;
 
-## About Commands:
-whois          - Who is Tanay?
-whoami         - Who are you?
-social         - Display social networks
-projects       - View coding projects
-email          - Contact me
-sponsor me     - Support me on Buy Me a Coffee
+    Object.entries(en.commands.categories).forEach(([key, category]) => {
+      content += `## ${category.title}\n`;
+      category.items.forEach((item) => {
+        content += `${item.command.padEnd(15)} - ${item.description}\n`;
+      });
+      content += `\n`;
+    });
 
-## AI & Fun Commands:
-ai             - Ask the AI assistant
-matrix         - Enter the Matrix
-hack           - Hacker mode activated
-love           - Show some love
-sudo           - Only use if you're admin
+    content += `## Tips:\n`;
+    en.commands.tips.forEach((tip) => {
+      content += `- ${tip}\n`;
+    });
 
-## Secret Commands:
-secret         - Find the password (hint: try 'Banger')
+    content += `\n${en.commands.footer}`;
+    return content;
+  };
 
-## Social Links:
-github         - Open GitHub profile
-linkedin       - Open LinkedIn profile
-twitter        - Open Twitter profile
-
-## Project Commands:
-darkmodebang   - Open Dark Mode Bang extension
-volumebang     - Open Volume Bang extension
-speedbang      - Open Speed Bang extension
-weloveqr       - Open WeLoveQR web app
-
-## Tips:
-- All commands are case-sensitive
-- Use arrow keys to navigate command history
-- Type 'help' anytime for this guide
-- Some commands have hidden features!
-
-Happy exploring! 🐧`}
+  return (
+    <div className="h-full bg-card p-4 font-mono text-sm">
+      <div className="h-full overflow-y-auto whitespace-pre-wrap text-foreground">
+        {buildCommandGuide()}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default NotepadWindow;

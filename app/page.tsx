@@ -20,6 +20,7 @@ import {
   ChromeWindow,
   ImageViewerWindow,
 } from "@/components/home";
+import { en } from "@/data/en";
 
 interface Window {
   id: string;
@@ -101,7 +102,7 @@ export default function UbuntuPortfolio() {
       currentWallpaper={currentWallpaper}
       onWallpaperChange={(wallpaperPath: string) => {
         setCurrentWallpaper(wallpaperPath);
-        showNotification("Wallpaper changed successfully!", "success");
+        showNotification(en.ui.notifications.wallpaperChanged, "success");
       }}
     />
   );
@@ -109,7 +110,7 @@ export default function UbuntuPortfolio() {
   const [desktopIcons, setDesktopIcons] = useState<DesktopIcon[]>([
     {
       id: "terminal",
-      name: "Terminal",
+      name: en.icons.terminal,
       icon: (
         <div className="w-10 h-10 flex items-center justify-center">
           <img
@@ -125,7 +126,7 @@ export default function UbuntuPortfolio() {
     },
     {
       id: "projects",
-      name: "Projects",
+      name: en.icons.projects,
       icon: (
         <div className="w-10 h-10 flex items-center justify-center">
           <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
@@ -142,7 +143,7 @@ export default function UbuntuPortfolio() {
     },
     {
       id: "notepad",
-      name: "Commands",
+      name: en.icons.commands,
       icon: (
         <div className="w-10 h-10 flex items-center justify-center">
           <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
@@ -162,7 +163,7 @@ export default function UbuntuPortfolio() {
     },
     {
       id: "about",
-      name: "About Me",
+      name: en.icons.about,
       icon: (
         <div className="w-10 h-10 flex items-center justify-center">
           <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
@@ -180,7 +181,7 @@ export default function UbuntuPortfolio() {
     },
     {
       id: "skills",
-      name: "Skills",
+      name: en.icons.skills,
       icon: (
         <div className="w-10 h-10 flex items-center justify-center">
           <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
@@ -200,7 +201,7 @@ export default function UbuntuPortfolio() {
     },
     {
       id: "contact",
-      name: "Contact",
+      name: en.icons.contact,
       icon: (
         <div className="w-10 h-10 flex items-center justify-center">
           <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
@@ -217,7 +218,7 @@ export default function UbuntuPortfolio() {
     },
     {
       id: "gallery",
-      name: "Gallery",
+      name: en.icons.gallery,
       icon: (
         <div className="w-10 h-10 flex items-center justify-center">
           <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
@@ -230,30 +231,30 @@ export default function UbuntuPortfolio() {
         </div>
       ),
       position: { x: 200, y: 180 },
-      action: () => openWindow("gallery", "Gallery", <GalleryWindow />),
+      action: () => openWindow("gallery", en.icons.gallery, <GalleryWindow />),
     },
     {
       id: "settings",
-      name: "Settings",
+      name: en.icons.settings,
       icon: (
         <div className="w-10 h-10 flex items-center justify-center">
           <img
             src="/assets/program-icons/system-settings.png"
-            alt="Settings"
+            alt={en.icons.settings}
             className="w-8 h-8 drop-shadow-lg"
           />
         </div>
       ),
       position: { x: 200, y: 260 },
       action: () =>
-        openWindow("settings", "Settings", <SettingsWindowWrapper />),
+        openWindow("settings", en.icons.settings, <SettingsWindowWrapper />),
     },
   ]);
 
   const [sidebarIcons, setSidebarIcons] = useState<DesktopIcon[]>([
     {
       id: "home",
-      name: "Home",
+      name: en.icons.home,
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
           <svg
@@ -271,22 +272,22 @@ export default function UbuntuPortfolio() {
     },
     {
       id: "chrome",
-      name: "Google Chrome",
+      name: en.icons.chrome,
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
           <img
             src="/assets/program-icons/Google_Chrome_icon.png"
-            alt="Chrome"
+            alt={en.icons.chrome}
             className="w-8 h-8 drop-shadow-lg"
           />
         </div>
       ),
       position: { x: 0, y: 0 },
-      action: () => openWindow("chrome", "Google Chrome", <ChromeWindow />),
+      action: () => openWindow("chrome", en.icons.chrome, <ChromeWindow />),
     },
     {
       id: "help",
-      name: "Help",
+      name: en.icons.help,
       icon: (
         <div className="w-6 h-6 flex items-center justify-center">
           <svg viewBox="0 0 24 24" className="w-6 h-6 text-blue-400">
@@ -298,16 +299,16 @@ export default function UbuntuPortfolio() {
         </div>
       ),
       position: { x: 0, y: 0 },
-      action: () => openWindow("help", "Help & Support", <HelpWindow />),
+      action: () => openWindow("help", en.help.title, <HelpWindow />),
     },
     {
       id: "files",
-      name: "Files",
+      name: en.icons.files,
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
           <img
             src="/assets/system-icons/filemanager-app.png"
-            alt="Files"
+            alt={en.icons.files}
             className="w-8 h-8 drop-shadow-lg"
           />
         </div>
@@ -317,39 +318,39 @@ export default function UbuntuPortfolio() {
     },
     {
       id: "terminal",
-      name: "Terminal",
+      name: en.icons.terminal,
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
           <img
             src="/assets/program-icons/terminal-app.png"
-            alt="Terminal"
+            alt={en.icons.terminal}
             className="w-8 h-8 drop-shadow-lg"
           />
         </div>
       ),
       position: { x: 0, y: 0 },
       action: () =>
-        openWindow("terminal", "Terminal", <TerminalWindowWrapper />),
+        openWindow("terminal", en.icons.terminal, <TerminalWindowWrapper />),
     },
     {
       id: "settings",
-      name: "Settings",
+      name: en.icons.settings,
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
           <img
             src="/assets/program-icons/system-settings.png"
-            alt="Settings"
+            alt={en.icons.settings}
             className="w-8 h-8 drop-shadow-lg"
           />
         </div>
       ),
       position: { x: 0, y: 0 },
       action: () =>
-        openWindow("settings", "Settings", <SettingsWindowWrapper />),
+        openWindow("settings", en.icons.settings, <SettingsWindowWrapper />),
     },
     {
       id: "calculator",
-      name: "Calculator",
+      name: en.icons.calculator,
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
           <img
@@ -361,38 +362,38 @@ export default function UbuntuPortfolio() {
       ),
       position: { x: 0, y: 0 },
       action: () =>
-        openWindow("calculator", "Calculator", <CalculatorWindow />),
+        openWindow("calculator", en.icons.calculator, <CalculatorWindow />),
     },
     {
       id: "music",
-      name: "Music Player",
+      name: en.icons.music,
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
           <img
             src="/assets/program-icons/spotify-client.png"
-            alt="Music"
+            alt={en.icons.music}
             className="w-8 h-8 drop-shadow-lg"
           />
         </div>
       ),
       position: { x: 0, y: 0 },
-      action: () => openWindow("music", "Music Player", <MusicPlayerWindow />),
+      action: () => openWindow("music", en.icons.music, <MusicPlayerWindow />),
     },
     {
       id: "image-viewer",
-      name: "Image Viewer",
+      name: en.icons.imageViewer,
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
           <img
             src="/assets/program-icons/image-viewer-app.png"
-            alt="Image Viewer"
+            alt={en.icons.imageViewer}
             className="w-8 h-8 drop-shadow-lg"
           />
         </div>
       ),
       position: { x: 0, y: 0 },
       action: () =>
-        openWindow("image-viewer", "Image Viewer", <ImageViewerWindow />),
+        openWindow("image-viewer", en.icons.imageViewer, <ImageViewerWindow />),
     },
   ]);
 
@@ -668,19 +669,23 @@ export default function UbuntuPortfolio() {
           >
             <div className="flex items-center space-x-2">
               <div className="w-2 h-2 bg-white rounded-full"></div>
-              <span className="text-sm font-medium">Activities</span>
+              <span className="text-sm font-medium">
+                {en.ui.desktop.activities}
+              </span>
             </div>
           </Button>
           <div className="h-6 w-px bg-gray-600"></div>
           <div className="text-sm font-medium text-gray-200">
-            Portfolio Desktop
+            {en.ui.desktop.title}
           </div>
         </div>
 
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-2">
             <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-            <span className="text-xs text-gray-300">Online</span>
+            <span className="text-xs text-gray-300">
+              {en.ui.desktop.online}
+            </span>
           </div>
 
           <div className="text-sm text-white font-mono bg-black/20 px-3 py-1 rounded-md">
@@ -692,7 +697,11 @@ export default function UbuntuPortfolio() {
             size="icon"
             className="text-white hover:bg-white/10 h-8 w-8 rounded-md transition-all duration-200"
             onClick={() =>
-              openWindow("settings", "Settings", <SettingsWindowWrapper />)
+              openWindow(
+                "settings",
+                en.icons.settings,
+                <SettingsWindowWrapper />
+              )
             }
           >
             <Settings className="w-4 h-4" />
@@ -802,8 +811,8 @@ export default function UbuntuPortfolio() {
                     e.stopPropagation();
                     minimizeWindow(window.id);
                   }}
-                  title="Minimize"
-                  aria-label="Minimize window"
+                  title={en.ui.window.minimize}
+                  aria-label={`${en.ui.window.minimize} window`}
                 >
                   <Minus className="w-3 h-3 text-white" />
                 </button>
@@ -813,9 +822,15 @@ export default function UbuntuPortfolio() {
                     e.stopPropagation();
                     maximizeWindow(window.id);
                   }}
-                  title={window.isMaximized ? "Restore" : "Maximize"}
+                  title={
+                    window.isMaximized
+                      ? en.ui.window.restore
+                      : en.ui.window.maximize
+                  }
                   aria-label={
-                    window.isMaximized ? "Restore window" : "Maximize window"
+                    window.isMaximized
+                      ? `${en.ui.window.restore} window`
+                      : `${en.ui.window.maximize} window`
                   }
                 >
                   <Square className="w-3 h-3 text-white" />
@@ -826,8 +841,8 @@ export default function UbuntuPortfolio() {
                     e.stopPropagation();
                     closeWindow(window.id);
                   }}
-                  title="Close"
-                  aria-label="Close window"
+                  title={en.ui.window.close}
+                  aria-label={`${en.ui.window.close} window`}
                 >
                   <X className="w-3 h-3 text-white" />
                 </button>
@@ -856,7 +871,9 @@ export default function UbuntuPortfolio() {
               <div className="w-6 h-6 bg-linear-to-br from-[#E95420] to-[#F7A072] rounded-md flex items-center justify-center">
                 <span className="text-xs font-bold text-white">U</span>
               </div>
-              <span className="text-sm font-medium">Show Applications</span>
+              <span className="text-sm font-medium">
+                {en.ui.desktop.showApplications}
+              </span>
             </div>
           </Button>
 
@@ -889,7 +906,9 @@ export default function UbuntuPortfolio() {
         {/* System tray */}
         <div className="flex items-center space-x-2">
           <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-          <span className="text-xs text-gray-300">Connected</span>
+          <span className="text-xs text-gray-300">
+            {en.ui.desktop.connected}
+          </span>
         </div>
       </div>
 
