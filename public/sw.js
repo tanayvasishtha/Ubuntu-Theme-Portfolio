@@ -1,4 +1,3 @@
-// Service Worker for Ubuntu Portfolio PWA
 const CACHE_NAME = 'ubuntu-portfolio-v1';
 const urlsToCache = [
   '/',
