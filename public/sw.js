@@ -1,7 +1,6 @@
 const CACHE_NAME = 'ubuntu-portfolio-v1';
 const urlsToCache = [
   '/',
-  '/globals.css',
   '/ubuntu-logo.png',
   '/ubuntu-logo-circle.png',
 ];
