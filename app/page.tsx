@@ -22,25 +22,8 @@ import {
 } from "@/components/home";
 import { en } from "@/data/en";
 import * as Icon from "@/components/icon";
-
-interface Window {
-  id: string;
-  title: string;
-  component: React.ReactNode;
-  position: { x: number; y: number };
-  size: { width: number; height: number };
-  isMinimized: boolean;
-  isMaximized: boolean;
-  zIndex: number;
-}
-
-interface DesktopIcon {
-  id: string;
-  name: string;
-  icon: React.ReactNode;
-  position: { x: number; y: number };
-  action: () => void;
-}
+import type { DesktopIcon, Window } from "@/types";
+import { checkCollision, snapToGrid } from "@/lib/utils";
 
 export default function UbuntuPortfolio() {
   const [currentTime, setCurrentTime] = useState("");
@@ -334,33 +317,6 @@ export default function UbuntuPortfolio() {
   const memoizedDesktopIcons = useMemo(() => desktopIcons, [desktopIcons]);
   const memoizedWindows = useMemo(() => windows, [windows]);
 
-  const snapToGrid = (x: number, y: number) => {
-    const gridSize = 80;
-    const startX = 100;
-    const startY = 100;
-
-    const gridX = Math.round((x - startX) / gridSize);
-    const gridY = Math.round((y - startY) / gridSize);
-
-    const clampedY = Math.max(0, gridY);
-
-    return {
-      x: startX + gridX * gridSize,
-      y: startY + clampedY * gridSize,
-    };
-  };
-
-  const checkCollision = (iconId: string, newX: number, newY: number) => {
-    const snapPos = snapToGrid(newX, newY);
-
-    return desktopIcons.some(
-      (icon) =>
-        icon.id !== iconId &&
-        Math.abs(icon.position.x - snapPos.x) < 70 &&
-        Math.abs(icon.position.y - snapPos.y) < 70
-    );
-  };
-
   const handleIconMouseDown = (
     e: React.MouseEvent<HTMLDivElement>,
     iconId: string
@@ -406,7 +362,9 @@ export default function UbuntuPortfolio() {
         const snapPos = snapToGrid(constrainedX, constrainedY);
 
         let finalPos = snapPos;
-        if (checkCollision(draggedIcon, constrainedX, constrainedY)) {
+        if (
+          checkCollision(draggedIcon, constrainedX, constrainedY, desktopIcons)
+        ) {
           const gridSize = 80;
           const startX = 100;
           const startY = 100;
@@ -426,7 +384,7 @@ export default function UbuntuPortfolio() {
 
                   if (
                     testY >= 48 &&
-                    !checkCollision(draggedIcon, testX, testY)
+                    !checkCollision(draggedIcon, testX, testY, desktopIcons)
                   ) {
                     finalPos = { x: testX, y: testY };
                     break;
