@@ -21,6 +21,7 @@ import {
   ImageViewerWindow,
 } from "@/components/home";
 import { en } from "@/data/en";
+import * as Icon from "@/components/icon";
 
 interface Window {
   id: string;
@@ -47,14 +48,6 @@ export default function UbuntuPortfolio() {
   const [currentWallpaper, setCurrentWallpaper] = useState(
     "/assets/wallpapers/ubuntu-wallpaper.jpg"
   );
-  const [notifications, setNotifications] = useState<
-    Array<{
-      id: string;
-      message: string;
-      type: "info" | "success" | "warning" | "error";
-    }>
-  >([]);
-
   // Ubuntu-style sound effects (visual feedback)
   const playClickSound = () => {
     const clickEffect = document.createElement("div");
@@ -64,15 +57,13 @@ export default function UbuntuPortfolio() {
     document.body.appendChild(clickEffect);
     setTimeout(() => clickEffect.remove(), 300);
   };
-
-  // const playHoverSound = () => {
-  //   const hoverEffect = document.createElement("div");
-  //   hoverEffect.className = "fixed inset-0 pointer-events-none z-40";
-  //   hoverEffect.innerHTML =
-  //     '<div class="w-1 h-1 bg-white/50 rounded-full animate-pulse absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>';
-  //   document.body.appendChild(hoverEffect);
-  //   setTimeout(() => hoverEffect.remove(), 200);
-  // };
+  const [notifications, setNotifications] = useState<
+    Array<{
+      id: string;
+      message: string;
+      type: "info" | "success" | "warning" | "error";
+    }>
+  >([]);
 
   // Ubuntu-style notification system
   const showNotification = (
@@ -113,11 +104,7 @@ export default function UbuntuPortfolio() {
       name: en.icons.terminal,
       icon: (
         <div className="w-10 h-10 flex items-center justify-center">
-          <img
-            src="/assets/program-icons/terminal-app.png"
-            alt={en.icons.terminal}
-            className="w-8 h-8 drop-shadow-lg"
-          />
+          <Icon.Terminal />
         </div>
       ),
       position: { x: 100, y: 100 },
@@ -129,13 +116,7 @@ export default function UbuntuPortfolio() {
       name: en.icons.projects,
       icon: (
         <div className="w-10 h-10 flex items-center justify-center">
-          <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
-            <path
-              fill="#E95420"
-              d="M10 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2h-8l-2-2z"
-            />
-            <path fill="#FFFFFF" d="M12 8v8l4-4-4-4z" />
-          </svg>
+          <Icon.Projects />
         </div>
       ),
       position: { x: 100, y: 180 },
@@ -146,16 +127,7 @@ export default function UbuntuPortfolio() {
       name: en.icons.commands,
       icon: (
         <div className="w-10 h-10 flex items-center justify-center">
-          <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
-            <path
-              fill="#7C3AED"
-              d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"
-            />
-            <path
-              fill="#FFFFFF"
-              d="M8 12h8v2H8v-2zm0 4h8v2H8v-2zm0-8h5v5H8V8z"
-            />
-          </svg>
+          <Icon.Commands />
         </div>
       ),
       position: { x: 100, y: 260 },
@@ -166,14 +138,7 @@ export default function UbuntuPortfolio() {
       name: en.icons.about,
       icon: (
         <div className="w-10 h-10 flex items-center justify-center">
-          <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
-            <circle fill="#16A34A" cx="12" cy="12" r="10" />
-            <circle fill="#FFFFFF" cx="12" cy="8" r="2" />
-            <path
-              fill="#FFFFFF"
-              d="M12 12c-2.5 0-4.5 2-4.5 4.5h9c0-2.5-2-4.5-4.5-4.5z"
-            />
-          </svg>
+          <Icon.About />
         </div>
       ),
       position: { x: 100, y: 340 },
@@ -184,16 +149,7 @@ export default function UbuntuPortfolio() {
       name: en.icons.skills,
       icon: (
         <div className="w-10 h-10 flex items-center justify-center">
-          <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
-            <path
-              fill="#DC2626"
-              d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
-            />
-            <path
-              fill="#FFFFFF"
-              d="M12 6l1.5 3L17 10l-2.5 2.5L15 17l-3-1.5L9 17l.5-4.5L7 10l3.5-1L12 6z"
-            />
-          </svg>
+          <Icon.Skills />
         </div>
       ),
       position: { x: 100, y: 420 },
@@ -204,13 +160,7 @@ export default function UbuntuPortfolio() {
       name: en.icons.contact,
       icon: (
         <div className="w-10 h-10 flex items-center justify-center">
-          <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
-            <path
-              fill="#0891B2"
-              d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
-            />
-            <path fill="#FFFFFF" d="M12 11l8-5H4l8 5z" />
-          </svg>
+          <Icon.Contact />
         </div>
       ),
       position: { x: 200, y: 100 },
@@ -221,13 +171,7 @@ export default function UbuntuPortfolio() {
       name: en.icons.gallery,
       icon: (
         <div className="w-10 h-10 flex items-center justify-center">
-          <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-lg">
-            <path
-              fill="#9333EA"
-              d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"
-            />
-            <circle fill="#FFFFFF" cx="8.5" cy="8.5" r="1.5" />
-          </svg>
+          <Icon.Gallery />
         </div>
       ),
       position: { x: 200, y: 180 },
@@ -238,11 +182,7 @@ export default function UbuntuPortfolio() {
       name: en.icons.settings,
       icon: (
         <div className="w-10 h-10 flex items-center justify-center">
-          <img
-            src="/assets/program-icons/system-settings.png"
-            alt={en.icons.settings}
-            className="w-8 h-8 drop-shadow-lg"
-          />
+          <Icon.Settings />
         </div>
       ),
       position: { x: 200, y: 260 },
@@ -257,12 +197,7 @@ export default function UbuntuPortfolio() {
       name: en.icons.home,
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
-          <svg
-            viewBox="0 0 24 24"
-            className="w-8 h-8 text-white drop-shadow-lg"
-          >
-            <path fill="currentColor" d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-          </svg>
+          <Icon.Home />
         </div>
       ),
       position: { x: 0, y: 0 },
@@ -275,11 +210,7 @@ export default function UbuntuPortfolio() {
       name: en.icons.chrome,
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
-          <img
-            src="/assets/program-icons/Google_Chrome_icon.png"
-            alt={en.icons.chrome}
-            className="w-8 h-8 drop-shadow-lg"
-          />
+          <Icon.Chrome />
         </div>
       ),
       position: { x: 0, y: 0 },
@@ -290,12 +221,7 @@ export default function UbuntuPortfolio() {
       name: en.icons.help,
       icon: (
         <div className="w-6 h-6 flex items-center justify-center">
-          <svg viewBox="0 0 24 24" className="w-6 h-6 text-blue-400">
-            <path
-              fill="currentColor"
-              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"
-            />
-          </svg>
+          <Icon.Help />
         </div>
       ),
       position: { x: 0, y: 0 },
@@ -306,11 +232,7 @@ export default function UbuntuPortfolio() {
       name: en.icons.files,
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
-          <img
-            src="/assets/system-icons/filemanager-app.png"
-            alt={en.icons.files}
-            className="w-8 h-8 drop-shadow-lg"
-          />
+          <Icon.Files />
         </div>
       ),
       position: { x: 0, y: 0 },
@@ -321,11 +243,7 @@ export default function UbuntuPortfolio() {
       name: en.icons.terminal,
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
-          <img
-            src="/assets/program-icons/terminal-app.png"
-            alt={en.icons.terminal}
-            className="w-8 h-8 drop-shadow-lg"
-          />
+          <Icon.Terminal />
         </div>
       ),
       position: { x: 0, y: 0 },
@@ -337,11 +255,7 @@ export default function UbuntuPortfolio() {
       name: en.icons.settings,
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
-          <img
-            src="/assets/program-icons/system-settings.png"
-            alt={en.icons.settings}
-            className="w-8 h-8 drop-shadow-lg"
-          />
+          <Icon.Settings />
         </div>
       ),
       position: { x: 0, y: 0 },
@@ -353,11 +267,7 @@ export default function UbuntuPortfolio() {
       name: en.icons.calculator,
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
-          <img
-            src="/assets/program-icons/calculator-app.png"
-            alt={en.icons.calculator}
-            className="w-8 h-8 drop-shadow-lg"
-          />
+          <Icon.Calculator />
         </div>
       ),
       position: { x: 0, y: 0 },
@@ -369,11 +279,7 @@ export default function UbuntuPortfolio() {
       name: en.icons.music,
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
-          <img
-            src="/assets/program-icons/spotify-client.png"
-            alt={en.icons.music}
-            className="w-8 h-8 drop-shadow-lg"
-          />
+          <Icon.Music />
         </div>
       ),
       position: { x: 0, y: 0 },
@@ -384,11 +290,7 @@ export default function UbuntuPortfolio() {
       name: en.icons.imageViewer,
       icon: (
         <div className="w-8 h-8 flex items-center justify-center">
-          <img
-            src="/assets/program-icons/image-viewer-app.png"
-            alt={en.icons.imageViewer}
-            className="w-8 h-8 drop-shadow-lg"
-          />
+          <Icon.ImageViewer />
         </div>
       ),
       position: { x: 0, y: 0 },
